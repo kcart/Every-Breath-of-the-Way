@@ -1,0 +1,5 @@
+- find a weather API
+- ask Cythia etc. which goole map api to use
+- request keys for API
+- draw out the flow to prepare for meeting with ANA @ 16:30
+- backreference where to put api key info- reference markov
