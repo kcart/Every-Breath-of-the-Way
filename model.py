@@ -51,7 +51,7 @@ class Attack(db.Model):
 			self.attack_id, self.attack_location, self.attack_possible_triggers, self.user_id)
 
 class Attack_Symptom(db.Model):
-		""" This is the bridge between the Asthma Attack and the list of associated systems."""
+		""" The Asthma Attack and the list of symptoms associated with the attack."""
 
 	__tablename__ = "attack_symptom"
 
@@ -62,13 +62,14 @@ class Attack_Symptom(db.Model):
 	# TO DO: define the relationship ###############################################
 
 	def __repr__(self):
-		""" Providing some helpful representation when printed for attacks and related symptom."""
+		""" Providing some helpful representation when printed for attacks and related 
+		symptom."""
 
 		return "<Attack_Symptom attack_symptom_id=%s attack_id=%s symptom_id=%s>" % (
 			self.attack_symptom_id, self.attack_id, self.symptom_id)
 
 class Symptom(db.Model):
-	"""A symptom associated with an attack. """
+	"""A symptom associated with an attack by type. """
 
 	__tablename__  = "symptom"
 
@@ -77,11 +78,61 @@ class Symptom(db.Model):
 	attack_id = db.Column(db.Integer, db.ForeignKey('attack.attack_id'))
 
 	def __repr__(self):
-		""" Providing some helpful representation when printed for symptom type name, and attack"""
+		""" Providing some helpful representation when printed for symptom type name,
+		 and attack"""
 
-		return "<Symptom symptom_id=%s symptom_type_name=%s attack_id=%s" % (
+		return "<Symptom symptom_id=%s symptom_type_name=%s attack_id=%s>" % (
 			self.symptom_id, self.symptom_type_name, self.attack_id)
+
 	#To do- define relationships		
+class Attack_Trigger(db.Model):
+	""" The Asthma attack and the list of id's of possible triggers associated with the attack."""
+
+	__tablename__ = "attack_trigger"
+
+	attack_triggger_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+	attack_id = db.Column(db.Integer, db.ForeignKey('attack.attack_id'))
+	trigger_id = db.Column(db.Integer, db.ForeignKey('possible_trigger.trigger_id'))
+
+
+	def __repr__(self):
+		"""Providing some helpful representation when printed for attacks and related list of
+		 possible triggers."""
+
+		return "<Attack_Trigger attack_triggger_id=%s attack_id=%s trigger_id=%s>" % (
+			self.attack_triggger_id, self.attack_id, self.trigger_id)
+
+		#define relationships 
+
+class Possible_Trigger(db.Model):
+	""" Possible trigger associated with the Asthma attack by name."""
+
+	__tablename__ = "possible_trigger"
+
+	trigger_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+	trigger_name = db.Column(db.String(64))
+	trigger_type_id = db.Column(db.Integer, db.ForeignKey('trigger_type.trigger_type_id'))
+
+	def __repr__(self):
+		"""Providing some helpful representation when printed for attacks and the names of triggers."""
+
+		return "<Possible_Trigger trigger_id=%s  trigger_name=%s trigger_type_id=%s>" % (
+			self.trigger_id, self.trigger_name, self.trigger_type_id)
+		###### RELATIONSHIP
+
+class Trigger_Type(db.Model):	
+	""" The name of the types of possible triggers"""
+
+	__tablename__ = "trigger_type"
+
+	trigger_type_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+	trigger_type_name = db.Column(db.String(64))
+
+	def _repr__(self):
+		""" Possible trigger associated with the Asthma attack by  trigger name. """
+
+		return "<Trigger_Type trigger_type_id=%s  trigger_type_name=%s>" % (
+			self.trigger_type_id, self.trigger_type_name)
 
 
 
