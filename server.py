@@ -4,19 +4,9 @@ from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, flash, redirect, session
 
-
 app = Flask(__name__)
 
-app.secret_key = "Wheezy"
-
 app.jinja_env.undefined = StrictUndefined
-
-@app.route('/')
-def index():
-	"""Site Homepage."""
-
-	return render_template("homepage.html")
-
 
  # Running into  template rendering issue for the registration form 
 @app.route('/register', methods=['GET'])
@@ -35,11 +25,7 @@ def register_process():
 	password = request.form["password"]
 	age = int(request.form["age"])
 	
-	new_user = User(email=email, 
-					fname=fname,
-					lname=lname,
-					password=password,
-					age=age)
+	new_user = User(email=email, fname=fname, lname=lname, password=password, age=age)
 
 	db.session.add(new_user)
 	db.session.commit()
@@ -47,9 +33,12 @@ def register_process():
 	flash("User Profile %s added." % email)
 	return redirect("/")
 
+ #alphabetized routes for good practice 
+@app.route('/')
+def index():
+	"""Site Homepage."""
 
-
-
+	return render_template("homepage.html")
 
 
 
