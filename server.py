@@ -10,6 +10,7 @@ from model import connect_to_db, db, User, Attack, Attack_Symptom, Symptom, Atta
 app = Flask(__name__)
 
 app.jinja_env.undefined = StrictUndefined
+ 
 
 
 @app.route('/')
@@ -26,7 +27,7 @@ def register_form():
 
 @app.route('/register', methods=['POST'])
 def register_process():
-	"""Process Registration"""
+	"""Process Registration."""
 
 	email = request.form["email"]
 	first_name = request.form["first"]
@@ -42,15 +43,42 @@ def register_process():
 	flash("User Profile %s added." % email)
 	return redirect("/")
 
+@app.route('/login', methods=['GET'])
+def login_form():
+	"""Show login form"""
+
+	return render_template("login_form.html")
+
+@app.route('/login', method=['POST'])
+def login_process():
+	"""Process the User's login."""
+
+	email = request.form["email"]
+	password = request.form["password"]
+
+	user = User.query.filter_by(email=email).first()
+
+	if not user:
+	    flash("No such user")
+	    return redirect("/login")
+
+	if user.password != password:
+	    flash("Incorrect password")
+	    return redirect("/login")
+
+	session["user_id"] = user.user_id
+
+	flash("Logged in")
+	return redirect("/users/%s" % user.user_id)
 
 
+@app.route('/logout')
+def logout():
+    """Log out."""
 
-
-
-
-
-
-
+    del session["user_id"]
+    flash("Logged Out.")
+    return redirect("/")
 
 
 
