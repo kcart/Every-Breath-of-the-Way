@@ -61,7 +61,7 @@ def login_process():
 	print user
 
 	if not user:
-	    flash("No such user, please register")
+	    flash("No such user")
 	    return redirect("/login")
 
 	if user.password != password:
@@ -71,7 +71,15 @@ def login_process():
 	session["user_id"] = user.user_id
 
 	flash("Logged in")
-	return redirect("/users/%s" % user.user_id)
+	return redirect("/user/%s" % user.user_id)
+
+
+@app.route("/user/<int:user_id>")
+def user_detail(user_id):
+    """Show info about user."""
+
+    user = User.query.get(user_id)
+    return render_template("user.html", user=user)
 
 
 @app.route('/logout')

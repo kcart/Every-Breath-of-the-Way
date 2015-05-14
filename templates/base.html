@@ -2,6 +2,8 @@
 <html lang="en">
 	<head>
 
+	<div id="map-canvas"></div>
+
 	<title>Every Breath of the Way</title>
 	
 	 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -75,34 +77,41 @@ function loadScript() {
 }
 
 window.onload = loadScript;
+
  </script>
 
 	</head>
 	
 	<body>
+			<div>
+				<ul>
+					<li><a href="/user">View All Users</a></li>
+					<li><a href="/attacks">View All Attacks</a></li>
+				</ul>
+				<ul>
+					{% if "user_id" in session %}
+						<li><a href="/user/{{ session['user_id'] }}">Profile</a></li>
+						<li><a href="/logout">Logout</a></li>
+					{% else %}
+						<li><a href="/register">Register</a></li>
+						<li><a href="/login">Login</a></li>
+					{% endif %}
+			</div>
+		<hr>
 
+		{% for flash in get_flashed_messages() %}
+		  {{ flash }}
+		{% endfor %}
 
-	
-		 {% if "user_id" in session %}
-                  <li><a href="/users/{{ session['user_id'] }}">Profile</a></li>
-                  <li><a href="/logout">Logout</a></li>
-              {% else %}
-                  <li><a href="/register">Register</a></li>
-                  <li><a href="/login">Login</a></li>
-              {% endif %}
-	
-	<hr>
+		
+			{% block fullpage %}
+			
+			  {% block content %}
+			      
+			  {% endblock %}
+			
+			{% endblock %}
 
-	{% for flash in get_flashed_messages() %}
-	  {{ flash }}
-	{% endfor %}
-	{% block fullpage %}
-		{% block content %}
-	    	Put your body here.
-		{% endblock %}
-	{% endblock %}
-
-	<div id="map-canvas"></div>
 
 	</body>
 	</html>

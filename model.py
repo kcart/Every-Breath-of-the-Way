@@ -13,10 +13,10 @@ class User(db.Model):
 	__tablename__ = "user"
 
 	user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-	email = db.Column(db.String(64), nullable=False)
-	password = db.Column(db.String(64), nullable=False)
-	first_name = db.Column(db.String(64), nullable=False)
-	last_name = db.Column(db.String(64), nullable=False)
+	email = db.Column(db.String(200), nullable=False)
+	password = db.Column(db.String(90), nullable=False)
+	first_name = db.Column(db.String(200), nullable=False)
+	last_name = db.Column(db.String(200), nullable=False)
 	age = db.Column(db.String(15), nullable=False)
 
 	def __repr__(self):
@@ -32,8 +32,8 @@ class Attack(db.Model):
 
 	attack_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	attack_date = db.Column(db.DateTime, nullable=False)
-	attack_location = db.Column(db.String(64), nullable=False)
-	attack_possible_triggers = db.Column(db.String(64), nullable=False)
+	attack_location = db.Column(db.String(200), nullable=False)
+	attack_possible_triggers = db.Column(db.String(200), nullable=False)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
 	user = db.relationship("User",
@@ -74,7 +74,7 @@ class Symptom(db.Model):
 	__tablename__  = "symptom"
 
 	symptom_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-	symptom_type_name = db.Column(db.String(64))
+	symptom_type_name = db.Column(db.String(200))
 	attack_id = db.Column(db.Integer, db.ForeignKey('attack.attack_id'))
 
 	attack = db.relationship("Attack",
@@ -118,7 +118,7 @@ class Possible_Trigger(db.Model):
 	__tablename__ = "possible_trigger"
 
 	possible_trigger_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-	possible_trigger_name = db.Column(db.String(64))
+	possible_trigger_name = db.Column(db.String(200))
 	possible_trigger_type_id = db.Column(db.Integer, db.ForeignKey('trigger_type.trigger_type_id'))
 
 	trigger_type = db.relationship("Trigger_Type", 
@@ -138,7 +138,7 @@ class Trigger_Type(db.Model):
 	__tablename__ = "trigger_type"
 
 	trigger_type_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-	trigger_type_name = db.Column(db.String(64))
+	trigger_type_name = db.Column(db.String(200))
 
 	def _repr__(self):
 		""" Possible trigger associated with the Asthma attack by  trigger name. """
