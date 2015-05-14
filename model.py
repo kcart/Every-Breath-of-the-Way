@@ -153,7 +153,7 @@ def connect_to_db(app):
     """Connect the database to my Flask app."""
 
     # Configure to use our SQLite database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///breathe.db' #have to put my db name
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///breathe.db' 
     db.app = app
     db.init_app(app)
 
