@@ -46,8 +46,9 @@ def register_process():
 @app.route('/login', methods=['GET'])
 def login_form():
 	"""Show login form"""
-
+	print "hi"
 	return render_template("login_form.html")
+
 
 @app.route('/login', methods=['POST'])
 def login_process():
@@ -70,16 +71,16 @@ def login_process():
 
 	session["user_id"] = user.user_id
 
-	flash("Logged in")
+	flash("Logged in")	
 	return redirect("/user/%s" % user.user_id)
-
+	
 
 @app.route("/user/<int:user_id>")
 def user_detail(user_id):
     """Show info about user."""
-
+    
     user = User.query.get(user_id)
-    return render_template("user.html", user=user)
+    return render_template("user_detail.html", user=user)
 
 
 @app.route('/logout')
