@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 app.jinja_env.undefined = StrictUndefined
  
-
+app.secret_key = "wheezer"
 
 @app.route('/')
 def index():
@@ -35,7 +35,7 @@ def register_process():
 	password = request.form["password"]
 	age = int(request.form["age"])
 	
-	new_user = User(email=email, first_name=fname, last_name=lname, password=password, age=age)
+	new_user = User(email=email, first_name=first_name, last_name=last_name, password=password, age=age)
 
 	db.session.add(new_user)
 	db.session.commit()
@@ -49,7 +49,7 @@ def login_form():
 
 	return render_template("login_form.html")
 
-@app.route('/login', method=['POST'])
+@app.route('/login', methods=['POST'])
 def login_process():
 	"""Process the User's login."""
 
@@ -58,8 +58,10 @@ def login_process():
 
 	user = User.query.filter_by(email=email).first()
 
+	print user
+
 	if not user:
-	    flash("No such user")
+	    flash("No such user, please register")
 	    return redirect("/login")
 
 	if user.password != password:
@@ -85,7 +87,7 @@ def logout():
 
 
 if __name__ == "__main__":
-	app.debug = True
+	app.debug = False
 
 	connect_to_db(app)
 

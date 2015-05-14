@@ -8,18 +8,19 @@
 	</head>
 	<body>
 		
-<!-- 
-	{% if "user_id" in session %}
-		<a href="/logout">Logout</a>
-	{% else %}
-		<a href="/login">Login</a>
-	{% endif %} -->
-
+		 {% if "user_id" in session %}
+                  <li><a href="/users/{{ session['user_id'] }}">Profile</a></li>
+                  <li><a href="/logout">Logout</a></li>
+              {% else %}
+                  <li><a href="/register">Register</a></li>
+                  <li><a href="/login">Login</a></li>
+              {% endif %}
+	
 	<hr>
 
-	<!-- {% for flash in get_flashed_messages() %}
+	{% for flash in get_flashed_messages() %}
 	  {{ flash }}
-	{% endfor %} -->
+	{% endfor %}
 	{% block fullpage %}
 		{% block content %}
 	    	Put your body here.
