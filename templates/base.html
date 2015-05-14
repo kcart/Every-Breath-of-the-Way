@@ -84,9 +84,7 @@ window.onload = loadScript;
 	
 	<body>
 			<div>
-				<ul>
-					<li><a href="/attacks">View All Attacks</a></li>
-				</ul>
+
 				<ul>
 					{% if "user_id" in session %}
 						<li><a href="/user/{{ session['user_id'] }}">Profile</a></li>
