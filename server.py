@@ -85,7 +85,24 @@ def user_detail(user_id):
 # I need to create an attack before I can see a list of attacks for the user    
 
 @app.route("/attacks", methods=['POST']) 
+	"""Attack incident creation"""
 
+	attack_date = request.form["attack_date"]
+	attack_location = request.form["attack_location"]
+	attack_possible_triggers = request.form["attack_possible_triggers"]
+	symptom_type_name = request.form["symptom_type_name"]
+
+	new_attack = Attack(attack_date=attack_date, attack_location=attack_location, attack_possible_triggers= attack_possible_triggers)
+	new_attack_symptom = Symptom(symptom_type_name=symptom_type_name)
+
+	db.session.add(new_attack)
+	db.session.commit()
+
+	db.session.add(new_attack_symptom)
+	db.session.commit()
+
+	flash("Attack added.")
+	return redirect("user_detail.html")
 
 @app.route("/list")
 	"""Show list of Asthma Attacks"""
