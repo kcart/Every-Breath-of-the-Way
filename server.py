@@ -76,10 +76,9 @@ def login_process():
 	
 @app.route("/user/<int:user_id>")
 def user_detail(user_id):
-    """Show info about user."""
-
-    user = User.query.get(user_id)
-    return render_template("user_detail.html", user=user)
+     """Show info about user."""
+     user = User.query.get(user_id)
+     return render_template("user_detail.html", user=user)
 
 # I need to create an attack before I can see a list of attacks for the user    
 

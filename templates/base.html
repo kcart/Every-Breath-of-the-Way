@@ -84,7 +84,6 @@ window.onload = loadScript;
 	
 	<body>
 			<div>
-
 				<ul>
 					{% if "user_id" in session %}
 						<li><a href="/user/{{ session['user_id'] }}">Profile</a></li>
@@ -104,12 +103,10 @@ window.onload = loadScript;
 			{% block fullpage %}
 			
 			  {% block content %}
-			      
-			  {% endblock %}
-			
+
+        {% endblock %}	
+        	
 			{% endblock %}
-
-
 	</body>
 	</html>
 
