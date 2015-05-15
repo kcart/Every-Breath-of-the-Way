@@ -1,14 +1,62 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Registration</h1>
+<h1>Attack Registration</h1>
 
-<form action="/attacks" method="POST">
-
-
-
-
-
+<form action="/attack" method="POST">
+	<label> Date:
+		<input type="text" name="date">
+	</label>
+	<br>
+	<label> Location:
+		<input type="text" name="location">
+	</label>
+	<br>
+	<br>
+	Please select all triggers that apply:
+	<br>
+	<input type="checkbox" name="triggers" value="ragweed">Ragweed
+	<br>
+	<input type="checkbox" name="triggers" value="pollen">Pollen
+	<br>
+	<input type="checkbox" name="triggers" value="pethair">Pet Hair
+	<br>
+	<input type="checkbox" name="triggers" value="dustmites">Dustmites
+	<br>
+	<input type="checkbox" name="triggers" value="smoke">Smoke
+	<br>
+	<input type="checkbox" name="triggers" value="grass">Grass
+	<br>
+	<input type="checkbox" name="triggers" value="chemicalfumes">Chemical Fumes
+	<br>
+	<input type="checkbox" name="triggers" value="odors">Odors
+	<br>
+	<input type="checkbox" name="triggers" value="exercise">Exercise
+	<br>
+	<input type="checkbox" name="triggers" value="shouting">Shouting
+	<br>
+	<input type="checkbox" name="triggers" value="laughing">Laughing
+	<br>
+	<input type="checkbox" name="triggers" value="angry">Angry
+	<br>
+	<input type="checkbox" name="triggers" value="illness">Illness
+	<br>
+	<input type="checkbox" name="triggers" value="drugs">Drugs
+	<br>
+	<br>
+	Enviromental Triggers:
+	<select name="Enviromental Triggers">
+		<option value="ragweed">Ragweed</option>
+		<option value="pollen">Pollen</option>
+		<option value="pethair">Pet Hair</option>
+		<option value="dustmites">Dust Mites</option>
+		<option value="smoke">Smoke</option>
+		<option value="grass">grass</option>
+		<option value="chemicalfumes">Chemical Fumes</option>
+		<option value="odors">Odors</option>
+	</select>
 
 </form>
+
+
 {% endblock %}

@@ -76,7 +76,7 @@ def login_process():
 	
 
 @app.route("/user/<int:user_id>")
-def user_detail(user_id):
+def user_detail():
     """Show info about user."""
 
     user = User.query.get(user_id)
@@ -84,33 +84,35 @@ def user_detail(user_id):
 
 # I need to create an attack before I can see a list of attacks for the user    
 
-@app.route("/attacks", methods=['POST']) 
+@app.route("/attack", methods=['POST']) 
+def attack_creation():
 	"""Attack incident creation"""
 
-	attack_date = request.form["attack_date"]
-	attack_location = request.form["attack_location"]
-	attack_possible_triggers = request.form["attack_possible_triggers"]
-	symptom_type_name = request.form["symptom_type_name"]
+	# attack_date = request.form["attack_date"]
+	# attack_location = request.form["attack_location"]
+	# attack_possible_triggers = request.form["attack_possible_triggers"]
+	# symptom_type_name = request.form["symptom_type_name"]
 
-	new_attack = Attack(attack_date=attack_date, attack_location=attack_location, attack_possible_triggers= attack_possible_triggers)
-	new_attack_symptom = Symptom(symptom_type_name=symptom_type_name)
+	# new_attack = Attack(attack_date=attack_date, attack_location=attack_location, attack_possible_triggers= attack_possible_triggers)
+	# new_attack_symptom = Symptom(symptom_type_name=symptom_type_name)
 
-	db.session.add(new_attack)
-	db.session.commit()
+	# db.session.add(new_attack)
+	# db.session.commit()
 
-	db.session.add(new_attack_symptom)
-	db.session.commit()
+	# db.session.add(new_attack_symptom)
+	# db.session.commit()
 
-	flash("Attack added.")
-	return redirect("user_detail.html")
+	# flash("Attack added.")
+	return render_template("attack_submission.html")
 
 @app.route("/list")
+def attack_list():
 	"""Show list of Asthma Attacks"""
 
 	attacks= Attack.query.orderby("attack_id").all()
 	return render_template("list_user_attacks.html", attacks=attacks)
 
-@app.route("")
+
 
 @app.route('/logout')
 def logout():
