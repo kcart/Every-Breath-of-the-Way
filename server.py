@@ -82,6 +82,18 @@ def user_detail(user_id):
     user = User.query.get(user_id)
     return render_template("user_detail.html", user=user)
 
+# I need to create an attack before I can see a list of attacks for the user    
+
+@app.route("/attacks", methods=['POST']) 
+
+
+@app.route("/list")
+	"""Show list of Asthma Attacks"""
+
+	attacks= Attack.query.orderby("attack_id").all()
+	return render_template("list_user_attacks.html", attacks=attacks)
+
+@app.route("")
 
 @app.route('/logout')
 def logout():

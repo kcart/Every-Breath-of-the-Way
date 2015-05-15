@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block fullpage %}
+
+<h1> List of {{user.user_id}}'s Attacks: </h1>
+
+<ul>
+{% for attack in attack %}
+	<li>
+		<a href="/attacks/{{ attack.attack_id }}"> {{attack.attack.id}}
+	</li>		
+{% end for %}
+</ul>
+
+<img src="https://flic.kr/p/sMFkzk">
+{% endblock %}
