@@ -46,7 +46,7 @@ def register_process():
 @app.route('/login', methods=['GET'])
 def login_form():
 	"""Show login form"""
-	print "hi"
+	
 	return render_template("login_form.html")
 
 
@@ -59,7 +59,7 @@ def login_process():
 
 	user = User.query.filter_by(email=email).first()
 
-	print user
+	print "testing"
 
 	if not user:
 	    flash("Password not found. Please Register.")
@@ -71,12 +71,11 @@ def login_process():
 
 	session["user_id"] = user.user_id
 
-	flash("Logged in")	
+	flash("Logged in")
 	return redirect("/user/%s" % user.user_id)
 	
-
 @app.route("/user/<int:user_id>")
-def user_detail():
+def user_detail(user_id):
     """Show info about user."""
 
     user = User.query.get(user_id)
@@ -84,9 +83,9 @@ def user_detail():
 
 # I need to create an attack before I can see a list of attacks for the user    
 
-@app.route("/attack", methods=['POST']) 
-def attack_creation():
-	"""Attack incident creation"""
+# @app.route('/attack', methods=['POST']) 
+# def attack_creation():
+# 	"""Attack incident creation"""
 
 	# attack_date = request.form["attack_date"]
 	# attack_location = request.form["attack_location"]
@@ -103,14 +102,14 @@ def attack_creation():
 	# db.session.commit()
 
 	# flash("Attack added.")
-	return render_template("attack_submission.html")
+	# return render_template("attack_submission.html")
 
-@app.route("/list")
-def attack_list():
-	"""Show list of Asthma Attacks"""
+# @app.route('/list')
+# def attack_list():
+# 	"""Show list of Asthma Attacks."""
 
-	attacks= Attack.query.orderby("attack_id").all()
-	return render_template("list_user_attacks.html", attacks=attacks)
+# 	attack = Attack.query.orderby("attack_id").all()
+# 	return render_template("list_user_attacks.html", attacks=attacks)
 
 
 
