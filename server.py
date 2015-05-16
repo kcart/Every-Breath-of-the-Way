@@ -10,12 +10,13 @@ from model import connect_to_db, db, User, Attack, Attack_Symptom, Symptom, Atta
 app = Flask(__name__)
 
 app.jinja_env.undefined = StrictUndefined
- 
+
 app.secret_key = "wheezer"
 
 @app.route('/')
 def index():
 	"""Site Homepage."""
+
 
 	return render_template("homepage.html")
 
@@ -29,12 +30,13 @@ def register_form():
 def register_process():
 	"""Process Registration."""
 
-	email = request.form["email"]
+	unprocessed_email = request.form["email"]
+	email = unprocessed_email.lower()
 	first_name = request.form["first"]
 	last_name = request.form["last"]
 	password = request.form["password"]
 	age = int(request.form["age"])
-	
+
 	new_user = User(email=email, first_name=first_name, last_name=last_name, password=password, age=age)
 
 	db.session.add(new_user)
@@ -46,7 +48,7 @@ def register_process():
 @app.route('/login', methods=['GET'])
 def login_form():
 	"""Show login form"""
-	
+
 	return render_template("login_form.html")
 
 
@@ -73,18 +75,18 @@ def login_process():
 
 	flash("Logged in")
 	return redirect("/user/%s" % user.user_id)
-	
+
 @app.route("/user/<int:user_id>")
 def user_detail(user_id):
-     """Show info about user."""
-     user = User.query.get(user_id)
-     return render_template("user_detail.html", user=user)
+    """Show info about user."""
+    user = User.query.get(user_id)
+    return render_template("user_detail.html", user=user)
 
-# I need to create an attack before I can see a list of attacks for the user    
+# I need to create an attack before I can see a list of attacks for the user
 
-# @app.route('/attack', methods=['POST']) 
-# def attack_creation():
-# 	"""Attack incident creation"""
+@app.route("/attack", methods=['POST'])
+def attack_creation():
+	"""Attack incident creation"""
 
 	# attack_date = request.form["attack_date"]
 	# attack_location = request.form["attack_location"]
@@ -101,16 +103,16 @@ def user_detail(user_id):
 	# db.session.commit()
 
 	# flash("Attack added.")
-	# return render_template("attack_submission.html")
-
-# @app.route('/list')
-# def attack_list():
-# 	"""Show list of Asthma Attacks."""
-
-# 	attack = Attack.query.orderby("attack_id").all()
-# 	return render_template("list_user_attacks.html", attacks=attacks)
+	return render_template("attack_submission.html")
 
 
+
+@app.route('/list')
+def attack_list():
+	"""Show list of Asthma Attacks."""
+
+	attack = Attack.query.orderby("attack_id").all()
+	return render_template("list_user_attacks.html", attacks=attacks)
 
 @app.route('/logout')
 def logout():
@@ -129,8 +131,3 @@ if __name__ == "__main__":
 	DebugToolbarExtension(app)
 
 	app.run()
-
-
-
-
-

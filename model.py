@@ -25,6 +25,7 @@ class User(db.Model):
 		return "<User user_id=%s email=%s password=%s first_name=%s last_name=%s age=%s>" % (
 			self.user_id, self.email, self.password, self.first_name, self.last_name, self.age)
 
+
 class Attack(db.Model):
 	""" An instance of a User's asthma attack"""
 
@@ -37,8 +38,7 @@ class Attack(db.Model):
 	user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
 	user = db.relationship("User",
-							backref=db.backref("attack", order_by=attack_id))
-
+							 backref=db.backref("attack", order_by=attack_id))
 
 	def __repr__(self):
 		"""Providing some helpful representation when printed for asthma attacks."""
@@ -56,13 +56,13 @@ class Attack_Symptom(db.Model):
 	symptom_id = db.Column(db.Integer, db.ForeignKey('symptom.symptom_id'))
 
 	attack = db.relationship("Attack",
-								backref=db.backref("attack_symptom", order_by=attack_symptom_id))
+								 backref=db.backref("attack_symptom", order_by=attack_symptom_id))
 
 	symptom = db.relationship("Symptom",
 								backref=db.backref("attack_symptom", order_by=attack_symptom_id))
 
 	def __repr__(self):
-		""" Providing some helpful representation when printed for attacks and related 
+		""" Providing some helpful representation when printed for attacks and related
 		symptom."""
 
 		return "<Attack_Symptom attack_symptom_id=%s attack_id=%s symptom_id=%s>" % (
@@ -71,7 +71,7 @@ class Attack_Symptom(db.Model):
 class Symptom(db.Model):
 	"""A symptom associated with an attack by type. """
 
-	__tablename__  = "symptom"
+	__tablename__ = "symptom"
 
 	symptom_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	symptom_type_name = db.Column(db.String(200))
@@ -87,7 +87,7 @@ class Symptom(db.Model):
 		return "<Symptom symptom_id=%s symptom_type_name=%s attack_id=%s>" % (
 			self.symptom_id, self.symptom_type_name, self.attack_id)
 
-			
+
 class Attack_Trigger(db.Model):
 	""" The Asthma attack and the list of id's of possible triggers associated with the attack."""
 
@@ -97,10 +97,10 @@ class Attack_Trigger(db.Model):
 	attack_id = db.Column(db.Integer, db.ForeignKey('attack.attack_id'))
 	possible_trigger_id = db.Column(db.Integer, db.ForeignKey('possible_trigger.possible_trigger_id'))
 
-	attack = db.relationship("Attack", 
+	attack = db.relationship("Attack",
 									backref=db.backref("attack_trigger", order_by=attack_triggger_id))
 
-	possible_trigger = db.relationship("Possible_Trigger", 
+	possible_trigger = db.relationship("Possible_Trigger",
 										backref=db.backref("attack_trigger", order_by=attack_triggger_id))
 
 	def __repr__(self):
@@ -110,7 +110,7 @@ class Attack_Trigger(db.Model):
 		return "<Attack_Trigger attack_triggger_id=%s attack_id=%s trigger_id=%s>" % (
 			self.attack_triggger_id, self.attack_id, self.trigger_id)
 
-		
+
 
 class Possible_Trigger(db.Model):
 	""" Possible trigger associated with the Asthma attack by name."""
@@ -121,7 +121,7 @@ class Possible_Trigger(db.Model):
 	possible_trigger_name = db.Column(db.String(200))
 	possible_trigger_type_id = db.Column(db.Integer, db.ForeignKey('trigger_type.trigger_type_id'))
 
-	trigger_type = db.relationship("Trigger_Type", 
+	trigger_type = db.relationship("Trigger_Type",
 											backref=db.backref("possible_trigger", order_by=possible_trigger_id))
 
 
@@ -130,9 +130,9 @@ class Possible_Trigger(db.Model):
 
 		return "<Possible_Trigger possible_trigger_id=%s  possible_trigger_name=%s possible_trigger_type_id=%s>" % (
 			self.possible_trigger_id, self.possible_trigger_name, self.possible_trigger_type_id)
-		
+	
 
-class Trigger_Type(db.Model):	
+class Trigger_Type(db.Model):
 	""" The name of the types of possible triggers"""
 
 	__tablename__ = "trigger_type"
@@ -153,17 +153,12 @@ def connect_to_db(app):
     """Connect the database to my Flask app."""
 
     # Configure to use our SQLite database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///breathe.db' 
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///breathe.db'
     db.app = app
     db.init_app(app)
 
 if __name__ == "__main__":
-   
 
 	from server import app
 	connect_to_db(app)
 	print "Connected to DB."
-
-
-
-
