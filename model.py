@@ -119,7 +119,7 @@ class Possible_Trigger(db.Model):
 
 	possible_trigger_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	possible_trigger_name = db.Column(db.String(200))
-	possible_trigger_type_id = db.Column(db.Integer, db.ForeignKey('trigger_type.trigger_type_id'))
+	trigger_type_id = db.Column(db.Integer, db.ForeignKey('trigger_type.trigger_type_id'))
 
 	trigger_type = db.relationship("Trigger_Type",
 											backref=db.backref("possible_trigger", order_by=possible_trigger_id))
