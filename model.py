@@ -74,7 +74,7 @@ class Symptom(db.Model):
 	__tablename__ = "symptom"
 
 	symptom_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-	symptom_type_name = db.Column(db.String(200), nullable=False)
+	symptom_name = db.Column(db.String(200), nullable=False)
 	attack_id = db.Column(db.Integer, db.ForeignKey('attack.attack_id'))
 
 	attack = db.relationship("Attack",
@@ -85,7 +85,7 @@ class Symptom(db.Model):
 		 and attack"""
 
 		return "<Symptom symptom_id=%s symptom_type_name=%s attack_id=%s>" % (
-			self.symptom_id, self.symptom_type_name, self.attack_id)
+			self.symptom_id, self.symptom_name, self.attack_id)
 
 
 class AttackTrigger(db.Model):
