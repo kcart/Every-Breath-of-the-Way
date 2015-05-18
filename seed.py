@@ -2,7 +2,7 @@
 
 import datetime
  
-from model import User, Attack, AttackSymptom, Symptom, AttackTrigger, PossibleTrigger, TriggerType, connect_to_db, db
+from model import User, Attack, AttackSymptom, Symptom, AttackTrigger, PossibleTrigger, connect_to_db, db
 from server import app
 
 def load_triggers():
@@ -13,7 +13,7 @@ def load_triggers():
 	for row in triggers_file:
 		possible_trigger_name, possible_trigger_type = row.split("|")
 
-		trigger = PossibleTrigger(possible_trigger_name=possible_trigger_name
+		trigger = PossibleTrigger(possible_trigger_name=possible_trigger_name,
 									possible_trigger_type=possible_trigger_type)
 		db.session.add(trigger)
 	db.session.commit()		
