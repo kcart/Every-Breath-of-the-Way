@@ -74,7 +74,7 @@ class Symptom(db.Model):
 	__tablename__ = "symptom"
 
 	symptom_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-	symptom_type_name = db.Column(db.String(200))
+	symptom_type_name = db.Column(db.String(200), nullable=False)
 	attack_id = db.Column(db.Integer, db.ForeignKey('attack.attack_id'))
 
 	attack = db.relationship("Attack",
@@ -118,33 +118,17 @@ class PossibleTrigger(db.Model):
 	__tablename__ = "possible_trigger"
 
 	possible_trigger_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-	possible_trigger_name = db.Column(db.String(200))
-	trigger_type_id = db.Column(db.Integer, db.ForeignKey('trigger_type.trigger_type_id'))
-
-	trigger_type = db.relationship("TriggerType",
-											backref=db.backref("possible_trigger", order_by=possible_trigger_id))
+	possible_trigger_name = db.Column(db.String(200), nullable=False)
+	possible_trigger_type = db.Column(db.String(200), nullable=False)
 
 
 	def __repr__(self):
 		"""Providing some helpful representation when printed for attacks and the names of triggers."""
 
 		return "<PossibleTrigger possible_trigger_id=%s  possible_trigger_name=%s possible_trigger_type_id=%s>" % (
-			self.possible_trigger_id, self.possible_trigger_name, self.possible_trigger_type_id)
+			self.possible_trigger_id, self.possible_trigger_name, self.possible_trigger_type)
 	
 
-class TriggerType(db.Model):
-	""" The name of the types of possible triggers"""
-
-	__tablename__ = "trigger_type"
-
-	trigger_type_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-	trigger_type_name = db.Column(db.String(200))
-
-	def _repr__(self):
-		""" Possible trigger associated with the Asthma attack by  trigger name. """
-
-		return "<TriggerType trigger_type_id=%s  trigger_type_name=%s>" % (
-			self.trigger_type_id, self.trigger_type_name)
 
 
 
