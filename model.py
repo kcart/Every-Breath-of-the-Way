@@ -34,7 +34,7 @@ class Attack(db.Model):
 	attack_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	attack_date = db.Column(db.DateTime, nullable=False)
 	attack_location = db.Column(db.String(200), nullable=False)
-	attack_possible_triggers = db.Column(db.String(200), nullable=False)
+	# attack_possible_triggers = db.Column(db.String(200), nullable=False)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
 	user = db.relationship("User",

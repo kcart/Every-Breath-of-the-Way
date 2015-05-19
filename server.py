@@ -56,7 +56,8 @@ def login_form():
 def login_process():
 	"""Process the User's login."""
 
-	email = request.form["email"]
+	unprocessed_email = request.form["email"]
+	email = unprocessed_email.lower()
 	password = request.form["password"]
 
 	user = User.query.filter_by(email=email).first()
@@ -87,20 +88,24 @@ def user_detail(user_id):
 @app.route("/attack", methods=['POST'])
 def attack_creation():
 	"""Attack incident creation"""
-
+	print request.form.getlist("trigger_name")
+	print request.form.getlist("symptom")
 	date = request.form["date"]
-	location = request.form["location"]
-	attack_possible_triggers = request.form["trigger_name"]
-	symptom_type_name = request.form["symptom"]
+	location = request.form["location"]	
+	attack_possible_triggers = request.form.getlist("trigger_name")
+	symptom_type_name = request.form.getlist("symptom")
+	new_attack = Attack(date=date, location=location, attack_possible_triggers= attack_possible_triggers)
+	new_attack_symptoms = Symptom(symptom=symptom_name)
+	new_attack_triggers = PossibleTrigger(trigger_name=possible_trigger_name)
 
-	# new_attack = Attack(date=date, location=location, attack_possible_triggers= attack_possible_triggers)
-	# new_attack_symptom = Symptom(symptom=symptom_name)
+	print new_attack_triggers
+	print new_attack_symptoms
+	print new_attack
 
-	# db.session.add(new_attack)
-	# db.session.commit()
-
-	# db.session.add(new_attack_symptom)
-	# db.session.commit()
+	db.session.add(new_attack)
+	db.session.add(new_attack_symptom)
+	db.session.add(new_attack_triggers)
+	db.session.commit()
 
 	flash("Attack added.")
 	return render_template("attack_submission.html")
