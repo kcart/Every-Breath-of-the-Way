@@ -6,6 +6,7 @@ from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Attack, AttackSymptom, Symptom, AttackTrigger, PossibleTrigger
+import datetime
 
 app = Flask(__name__)
 
@@ -62,8 +63,6 @@ def login_process():
 
 	user = User.query.filter_by(email=email).first()
 
-	print "testing"
-
 	if not user:
 	    flash("Password not found. Please Register.")
 	    return redirect("/login")
@@ -90,17 +89,14 @@ def attack_creation():
 	"""Attack incident creation"""
 	print request.form.getlist("trigger_name")
 	print request.form.getlist("symptom")
-	date = request.form["date"]
+	today = datetime.date.today()
 	location = request.form["location"]	
 	attack_possible_triggers = request.form.getlist("trigger_name")
 	symptom_type_name = request.form.getlist("symptom")
-	new_attack = Attack(date=date, location=location, attack_possible_triggers= attack_possible_triggers)
+	new_attack = Attack(date=date, location=location)
 	new_attack_symptoms = Symptom(symptom=symptom_name)
 	new_attack_triggers = PossibleTrigger(trigger_name=possible_trigger_name)
 
-	print new_attack_triggers
-	print new_attack_symptoms
-	print new_attack
 
 	db.session.add(new_attack)
 	db.session.add(new_attack_symptom)
