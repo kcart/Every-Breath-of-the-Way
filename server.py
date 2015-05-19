@@ -88,12 +88,12 @@ def user_detail(user_id):
 def attack_creation():
 	"""Attack incident creation"""
 
-	# attack_date = request.form["attack_date"]
-	# attack_location = request.form["attack_location"]
+	# date = request.form["date"]
+	# location = request.form["location"]
 	# attack_possible_triggers = request.form["attack_possible_triggers"]
 	# symptom_type_name = request.form["symptom_type_name"]
 
-	# new_attack = Attack(attack_date=attack_date, attack_location=attack_location, attack_possible_triggers= attack_possible_triggers)
+	# new_attack = Attack(date=date, location=location, attack_possible_triggers= attack_possible_triggers)
 	# new_attack_symptom = Symptom(symptom_type_name=symptom_type_name)
 
 	# db.session.add(new_attack)
