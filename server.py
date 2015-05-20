@@ -83,35 +83,40 @@ def user_detail(user_id):
     return render_template("user_detail.html", user=user)
 
 @app.route("/attack", methods=["GET"])
-def show_page():
+def attack_form():
+	""" Show attack input form."""
 	return render_template("attack_submission.html")
+
 @app.route("/attack", methods=['POST'])
-def attack_creation():
-	"""Attack incident creation"""
-	
-
-	# today = datetime.date.today()
-	date = request.form["date"]
+def attack_process():
+	"""Process the User's attack."""
 	
 	
 
-	print request.form.getlist("trigger_name")
+
+
+
+
+	# today = datetime.date.now()
+	# date = request.form["date"]
+	
+	
+	# use
+	print request.form.getlist("trigger")
 	print request.form.getlist("symptom")
-	location = request.form["location"]	
-	attack_possible_triggers = request.form.getlist("trigger_name")
+	# dont
+	# print location
+
+	# location = request.form["location"]
+	# works with this	
+	attack_possible_triggers = request.form.getlist("trigger")
 	symptom_type_name = request.form.getlist("symptom")
-	new_attack = Attack(attack_location=location)
-	new_attack_symptoms = Symptom(symptom_name=symptom_type_name)
-	new_attack_triggers = PossibleTrigger(possible_trigger_name=attack_possible_triggers)
-
-
-
-	db.session.add(new_attack)
-	db.session.add(new_attack_symptoms)
-	db.session.add(new_attack_triggers)
-	db.session.commit()
-
-	flash("Attack added.")
+	# do not uncomment
+	# new_attack_triggers = PossibleTrigger(trigger=attack_possible_triggers)
+	# new_attack = Attack(attack_location=location)
+	# new_attack_symptoms = Symptom(symptom=symptom_type_name)
+	# use
+	# flash("Attack added.")
 	return render_template("attack_submission.html")
 
 

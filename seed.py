@@ -26,10 +26,22 @@ def load_symptoms():
 	symptoms_file = open("seed_data/u.symptoms")
 
 	for row in symptoms_file:
-		symptom_name =row.rstrip()
+		symptom_name = row.rstrip()
 
 		symptom = Symptom(symptom_name=symptom_name)
 		db.session.add(symptom)
+	db.session.commit()
+
+def load_location():
+	"""Load locations from u.locations into database."""
+
+	locations_file = open("seed_data/u.locations")
+
+	for row in locations_file:
+		attack_location = row.rstrip()
+
+		location = Attack(attack_location=attack_location)
+		db.session.add(location)
 	db.session.commit()
 
 if __name__ == "__main__":
@@ -38,7 +50,7 @@ if __name__ == "__main__":
 
     load_triggers()
     load_symptoms()
-	
+    load_location()
 
 
 

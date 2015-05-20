@@ -30,11 +30,11 @@ class Attack(db.Model):
 	""" An instance of a User's asthma attack"""
 
 	__tablename__ = "attack"
-
+	# (db.DateTime)
 	attack_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-	attack_date = db.Column(db.DateTime, nullable=False)
-	attack_location = db.Column(db.String(200), nullable=False)
-	# attack_possible_triggers = db.Column(db.String(200), nullable=False)
+	attack_date = db.Column(db.String(200))
+	attack_location = db.Column(db.String(200))
+	
 	user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
 	user = db.relationship("User",
@@ -74,7 +74,7 @@ class Symptom(db.Model):
 	__tablename__ = "symptom"
 
 	symptom_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-	symptom_name = db.Column(db.String(200), nullable=False)
+	symptom_name = db.Column(db.String(200))
 	
 
 	def __repr__(self):
@@ -115,8 +115,8 @@ class PossibleTrigger(db.Model):
 	__tablename__ = "possible_trigger"
 
 	possible_trigger_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-	possible_trigger_name = db.Column(db.String(200), nullable=False)
-	possible_trigger_type = db.Column(db.String(200), nullable=False)
+	possible_trigger_name = db.Column(db.String(200))
+	possible_trigger_type = db.Column(db.String(200))
 
 
 	def __repr__(self):
