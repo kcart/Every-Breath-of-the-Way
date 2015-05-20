@@ -91,28 +91,30 @@ def attack_form():
 def attack_process():
 	"""Process the User's attack."""
 	
-	date = request.form["date"]
-	location = request.form["location"]
+	attack_date = request.form["date"]
+	attack_location = request.form["location"]
 	user_info = User.query.get(session["user_id"])
-	actual_user = user_info.user_id
+	user_id = user_info.user_id
 
+	new_attack = Attack(attack_date=attack_date, attack_location=attack_location, user_id=user_id)
+
+	db.session.add(new_attack)
+	db.session.commit()
 
 	print request.form.getlist("trigger")
 	print request.form.getlist("symptom")
-	print location
-	print date
-	print actual_user
+	print attack_location
+	print attack_date
+	print user_id
 
 	# today = datetime.date.now()
-	# attack_possible_triggers = request.form.getlist("trigger")
-	# symptom_type_name = request.form.getlist("symptom")
 	# do not uncomment
 	# new_attack_triggers = PossibleTrigger(trigger=attack_possible_triggers)
 	# new_attack = Attack(attack_location=location)
 	# new_attack_symptoms = Symptom(symptom=symptom_type_name)
-	# use
+	
 	flash("Attack added.")
-	return render_template("attack_info.html",  )
+	return render_template("attack_info.html")
 
 
 
