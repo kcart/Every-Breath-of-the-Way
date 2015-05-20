@@ -1,5 +1,0 @@
-- find a weather API( might have just realized that the google maps js version has a weather layer, and that might be better to use than a separate api)
-- ask Cythia etc. which goole map api to use (asked - she mentioned either would be useful)
-- request keys for API (have a client id, and public api key for the google maps API, must remember create browser key and confirgure allowed referrers)
-- draw out the flow to prepare for meeting with ANA @ 16:30
-- backreference where to put api key info- reference markov
