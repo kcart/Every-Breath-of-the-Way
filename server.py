@@ -82,24 +82,32 @@ def user_detail(user_id):
     user = User.query.get(user_id)
     return render_template("user_detail.html", user=user)
 
-# I need to create an attack before I can see a list of attacks for the user
-
+@app.route("/attack", methods=["GET"])
+def show_page():
+	return render_template("attack_submission.html")
 @app.route("/attack", methods=['POST'])
 def attack_creation():
 	"""Attack incident creation"""
+	
+
+	# today = datetime.date.today()
+	date = request.form["date"]
+	
+	
+
 	print request.form.getlist("trigger_name")
 	print request.form.getlist("symptom")
-	today = datetime.date.today()
 	location = request.form["location"]	
 	attack_possible_triggers = request.form.getlist("trigger_name")
 	symptom_type_name = request.form.getlist("symptom")
-	new_attack = Attack(date=date, location=location)
-	new_attack_symptoms = Symptom(symptom=symptom_name)
-	new_attack_triggers = PossibleTrigger(trigger_name=possible_trigger_name)
+	new_attack = Attack(attack_location=location)
+	new_attack_symptoms = Symptom(symptom_name=symptom_type_name)
+	new_attack_triggers = PossibleTrigger(possible_trigger_name=attack_possible_triggers)
+
 
 
 	db.session.add(new_attack)
-	db.session.add(new_attack_symptom)
+	db.session.add(new_attack_symptoms)
 	db.session.add(new_attack_triggers)
 	db.session.commit()
 
@@ -125,7 +133,7 @@ def logout():
 
 
 if __name__ == "__main__":
-	app.debug = False
+	app.debug = True
 
 	connect_to_db(app)
 
