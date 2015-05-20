@@ -104,10 +104,11 @@ def attack_process():
 	# use
 	print request.form.getlist("trigger")
 	print request.form.getlist("symptom")
+	print request.form["location"]
 	# dont
 	# print location
 
-	# location = request.form["location"]
+	location = request.form["location"]
 	# works with this	
 	attack_possible_triggers = request.form.getlist("trigger")
 	symptom_type_name = request.form.getlist("symptom")

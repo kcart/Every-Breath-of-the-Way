@@ -32,25 +32,13 @@ def load_symptoms():
 		db.session.add(symptom)
 	db.session.commit()
 
-def load_location():
-	"""Load locations from u.locations into database."""
-
-	locations_file = open("seed_data/u.locations")
-
-	for row in locations_file:
-		attack_location = row.rstrip()
-
-		location = Attack(attack_location=attack_location)
-		db.session.add(location)
-	db.session.commit()
-
 if __name__ == "__main__":
     connect_to_db(app)
     db.create_all()
 
     load_triggers()
     load_symptoms()
-    load_location()
+   
 
 
 
