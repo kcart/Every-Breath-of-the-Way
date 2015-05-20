@@ -93,13 +93,15 @@ def attack_process():
 	
 	date = request.form["date"]
 	location = request.form["location"]
-	user = User.query.get(user_id)
+	user_info = User.query.get(session["user_id"])
+	actual_user = user_info.user_id
 
 
 	print request.form.getlist("trigger")
 	print request.form.getlist("symptom")
-	print request.form["location"]
-	print request.form["date"]
+	print location
+	print date
+	print actual_user
 
 	# today = datetime.date.now()
 	# attack_possible_triggers = request.form.getlist("trigger")
