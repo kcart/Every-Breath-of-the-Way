@@ -96,9 +96,9 @@ def attack_process():
 	user_info = User.query.get(session["user_id"])
 	user_id = user_info.user_id
 
-	new_attack = Attack(attack_date=attack_date, attack_location=attack_location, user_id=user_id)
+	attack = Attack(attack_date=attack_date, attack_location=attack_location, user_id=user_id)
 
-	db.session.add(new_attack)
+	db.session.add(attack)
 	db.session.commit()
 
 	print request.form.getlist("trigger")
@@ -108,7 +108,19 @@ def attack_process():
 	print user_id
 
 	# today = datetime.date.now()
-	# do not uncomment
+
+	attack_id = attack.attack_id
+	print attack_id
+
+	symptoms = request.form.getlist("symptoms")
+
+	for symptom in symptoms:
+		symptom_id = int(symptom)
+
+		attack_symptom = AttackSymptom(symptom_id=symptom_id, attack_id=attack_id)
+
+
+
 	# new_attack_triggers = PossibleTrigger(trigger=attack_possible_triggers)
 	# new_attack = Attack(attack_location=location)
 	# new_attack_symptoms = Symptom(symptom=symptom_type_name)
