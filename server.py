@@ -109,21 +109,7 @@ def attack_process():
 
 	# today = datetime.date.now()
 
-	attack_id = attack.attack_id
-	print attack_id
-
-	symptoms = request.form.getlist("symptoms")
-
-	for symptom in symptoms:
-		symptom_id = int(symptom)
-
-		attack_symptom = AttackSymptom(symptom_id=symptom_id, attack_id=attack_id)
-
-
-
-	# new_attack_triggers = PossibleTrigger(trigger=attack_possible_triggers)
-	# new_attack = Attack(attack_location=location)
-	# new_attack_symptoms = Symptom(symptom=symptom_type_name)
+	
 	
 	flash("Attack added.")
 	return render_template("attack_info.html")
