@@ -90,7 +90,8 @@ def attack_form():
 @app.route("/attack", methods=['POST'])
 def attack_process():
 	"""Process the User's attack."""
-	
+
+	# today = datetime.date.now()
 	attack_date = request.form["date"]
 	attack_location = request.form["location"]
 	user_info = User.query.get(session["user_id"])
@@ -99,17 +100,36 @@ def attack_process():
 	attack = Attack(attack_date=attack_date, attack_location=attack_location, user_id=user_id)
 
 	db.session.add(attack)
-	db.session.commit()
+	db.session.flush()
+
+	print attack.attack_id
+	attack_id = attack.attack_id
 
 	print request.form.getlist("trigger")
 	print request.form.getlist("symptom")
 	print attack_location
 	print attack_date
-	print user_id
 
-	# today = datetime.date.now()
-
+	symptoms = request.form.getlist("symptom")
 	
+	for symptom in symptoms:
+		symptom_id = int(symptom)
+		new_attack_symptom = AttackSymptom(attack_id=attack_id, symptom_id=symptom_id)		
+		db.session.add(new_attack_symptom)
+
+	triggers = request.form.getlist("trigger")
+	
+	for trigger in triggers:
+		possible_trigger_id = int(trigger)
+		new_attack_trigger = AttackTrigger(attack_id=attack_id, possible_trigger_id=possible_trigger_id)		
+		db.session.add(new_attack_trigger)
+
+	db.session.commit()
+
+		
+
+
+
 	
 	flash("Attack added.")
 	return render_template("attack_info.html")
@@ -133,7 +153,7 @@ def logout():
 
 
 if __name__ == "__main__":
-	app.debug = False
+	app.debug = True
 
 	connect_to_db(app)
 

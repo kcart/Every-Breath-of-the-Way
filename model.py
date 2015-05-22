@@ -43,8 +43,8 @@ class Attack(db.Model):
 	def __repr__(self):
 		"""Providing some helpful representation when printed for asthma attacks."""
 
-		return "<Attack attack_id=%s attack_location=%s attack_possible_triggers=%s  user_id=%s>" % (
-			self.attack_id, self.attack_location, self.attack_possible_triggers, self.user_id)
+		return "<Attack attack_id=%s attack_location=%s user_id=%s>" % (
+			self.attack_id, self.attack_location, self.user_id)
 
 class AttackSymptom(db.Model):
 	""" The Asthma Attack and the list of symptoms associated with the attack."""
