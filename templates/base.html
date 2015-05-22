@@ -84,13 +84,15 @@ window.onload = loadScript;
 	
 	<body>
 			<div>
-				<ul>
+				
 					{% if "user_id" in session %}
-						<li><a href="/user/{{ session['user_id'] }}">Profile</a></li>
-						<li><a href="/logout">Logout</a></li>
+						<a href="/user/{{ session['user_id'] }}">Profile</a>
+            <br>
+						<a href="/logout">Logout</a>
 					{% else %}
-						<li><a href="/register">Register</a></li>
-						<li><a href="/login">Login</a></li>
+						<a href="/register">Register</a>
+            <br>
+						<a href="/login">Login</a>
 					{% endif %}
 			</div>
 		<hr>
