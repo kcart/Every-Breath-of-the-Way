@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<img src="http://cutestlife.com/wp-content/uploads/2011/12/hedgehog_baby_with_mother-600x400.jpg">
+
 <h1>Attack Registration</h1>
 
 <form action="/attack", method="POST">
@@ -14,13 +16,13 @@
       <script>
          $(function() {
             $( "#datepicker-3" ).datepicker({
-               appendText:"(yy-mm-dd)",
+               // appendText:"(yy-mm-dd)",
                dateFormat:"yy-mm-dd"               
             });
          });
       </script>
      <label> Attack Date:
-       <input type="text" name="date" id="datepicker-3">
+       <input type="text" name="date" id="datepicker-3" placeholder="yyyy/mm/dd">
 	<br>
 	<br>
 	<label>Attack Location:</label>
@@ -59,8 +61,9 @@
 		<input type= "checkbox" name="symptom" value="8">Trouble Walking, or Moving
 	<br>
 	<br>
-		<input type="submit">
-
+		<input type="submit" value="Please submit your attack">
+	<br>
+	<br>	
 </form>
 
 

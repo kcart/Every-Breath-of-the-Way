@@ -51,8 +51,8 @@ class AttackSymptom(db.Model):
 
 	__tablename__ = "attack_symptom"
 
-	attack_symptom_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	attack_id = db.Column(db.Integer, db.ForeignKey('attack.attack_id'))
+	attack_symptom_id = db.Column(db.Integer, autoincrement=True, primary_key=True)	
 	symptom_id = db.Column(db.Integer, db.ForeignKey('symptom.symptom_id'))
 
 	attack = db.relationship("Attack",
@@ -90,8 +90,8 @@ class AttackTrigger(db.Model):
 
 	__tablename__ = "attack_trigger"
 
-	attack_triggger_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	attack_id = db.Column(db.Integer, db.ForeignKey('attack.attack_id'))
+	attack_triggger_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	possible_trigger_id = db.Column(db.Integer, db.ForeignKey('possible_trigger.possible_trigger_id'))
 
 	attack = db.relationship("Attack",

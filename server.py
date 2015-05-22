@@ -73,7 +73,7 @@ def login_process():
 
 	session["user_id"] = user.user_id
 
-	flash("Logged in")
+	flash("%s, you are logged in." % user.first_name)
 	return redirect("/user/%s" % user.user_id)
 
 @app.route("/user/<int:user_id>")
@@ -91,7 +91,6 @@ def attack_form():
 def attack_process():
 	"""Process the User's attack."""
 
-	# today = datetime.date.now()
 	attack_date = request.form["date"]
 	attack_location = request.form["location"]
 	user_info = User.query.get(session["user_id"])
@@ -143,12 +142,12 @@ def logout():
     """Log out."""
 
     del session["user_id"]
-    flash("Logged Out.")
+    flash("You have successfully logged out.")
     return redirect("/")
 
 
 if __name__ == "__main__":
-	app.debug = True
+	app.debug = False
 
 	connect_to_db(app)
 

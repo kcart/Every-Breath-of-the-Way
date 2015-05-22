@@ -1,42 +1,47 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Registration</h1>
+<h1>Join Breathe today.</h1>
 
 <form action="/register" method="POST">
 
     <div class="form-user">
         <label>
-            Email
-            <input type="email" name="email" class="form-control">
+            <!-- Email -->
+            <input type="email" name="email" class="form-control" placeholder="Email">
         </label>
     </div>
+    <br>   
        <div class="form-user">
         <label>
-            First Name
-            <input type="text" name="first" class="form-control">
+            <!-- First Name -->
+            <input type="text" name="first" class="form-control"placeholder="First Name">
         </label>
     </div>
+    <br>   
        <div class="form-user">
         <label>
-            Last Name
-            <input type="text" name="last" class="form-control">
+           <!--  Last Name -->
+            <input type="text" name="last" class="form-control" placeholder="Last Name">
         </label>
     </div>
+    <br>
     <div class="form-user">
         <label>
-            Password
-            <input type="password" name="password" class="form-control">
+          <!--   Password -->
+            <input type="password" name="password" class="form-control" placeholder="Password">
         </label>
     </div>
+    <br>
     <div class="form-user">
         <label>
-            Age
-            <input type="number" name="age" class="form-control">
+          <!--   Age -->
+            <input type="number" name="age" class="form-control" placeholder="Age">
         </label>
     </div>
+    <br>
     <div class="form-user">
-        <input type="submit" value="Register" class="btn btn-register">
+        <input type="submit" value="Sign up" class="btn btn-register">
     </div>
 </form>
 
