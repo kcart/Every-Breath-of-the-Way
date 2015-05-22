@@ -126,11 +126,6 @@ def attack_process():
 
 	db.session.commit()
 
-		
-
-
-
-	
 	flash("Attack added.")
 	return render_template("attack_info.html")
 

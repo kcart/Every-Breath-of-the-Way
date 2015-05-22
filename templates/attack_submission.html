@@ -4,9 +4,23 @@
 <h1>Attack Registration</h1>
 
 <form action="/attack", method="POST">
-	<label>Attack Date:
+	<!-- <label>Attack Date:
 		<input type="text" name="date">
-	</label>
+	</label> -->
+	<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+      <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      <!-- Javascript -->
+      <script>
+         $(function() {
+            $( "#datepicker-3" ).datepicker({
+               appendText:"(yy-mm-dd)",
+               dateFormat:"yy-mm-dd"               
+            });
+         });
+      </script>
+     <label> Attack Date:
+       <input type="text" name="date" id="datepicker-3">
 	<br>
 	<br>
 	<label>Attack Location:</label>
