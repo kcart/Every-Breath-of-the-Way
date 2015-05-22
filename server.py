@@ -80,7 +80,8 @@ def login_process():
 def user_detail(user_id):
     """Show info about user."""
     user = User.query.get(user_id)
-    return render_template("user_detail.html", user=user)
+    attacks = Attack.query.filter_by(user_id=session.get("user_id")).all()
+    return render_template("user_detail.html", user=user, attacks=attacks)
 
 @app.route("/attack", methods=["GET"])
 def attack_form():
@@ -128,14 +129,6 @@ def attack_process():
 	flash("Your attack has been added.")
 	return render_template("attack_info.html")
 
-
-
-@app.route('/list')
-def attack_list():
-	"""Show list of Asthma Attacks."""
-
-	attack = Attack.query.orderby("attack_id").all()
-	return render_template("list_user_attacks.html", attacks=attacks)
 
 @app.route('/logout')
 def logout():
