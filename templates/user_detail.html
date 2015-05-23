@@ -6,9 +6,9 @@
 <img src="https://placekitten.com/g/200/300">
 
 {% for attack in attacks%}
-	<li>
+	<ul>
 		<a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a>
-	</li>  
+	</ul>  
 {% endfor %}
 <form action="/attack" method="GET">
     	<input type="submit" value="Please Log an attack">
