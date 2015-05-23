@@ -30,7 +30,7 @@ class Attack(db.Model):
 	""" An instance of a User's asthma attack"""
 
 	__tablename__ = "attack"
-	# (db.DateTime)
+	
 	attack_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	attack_date = db.Column(db.String(200))
 	attack_location = db.Column(db.String(200))
@@ -55,12 +55,6 @@ class AttackSymptom(db.Model):
 	attack_symptom_id = db.Column(db.Integer, autoincrement=True, primary_key=True)	
 	symptom_id = db.Column(db.Integer, db.ForeignKey('symptom.symptom_id'))
 
-	attack = db.relationship("Attack",
-								 backref=db.backref("attack_symptom", order_by=attack_symptom_id))
-
-	symptom = db.relationship("Symptom",
-								backref=db.backref("attack_symptom", order_by=attack_symptom_id))
-
 	def __repr__(self):
 		""" Providing some helpful representation when printed for attacks and related
 		symptom."""
@@ -75,6 +69,8 @@ class Symptom(db.Model):
 
 	symptom_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	symptom_name = db.Column(db.String(200))
+	attack = db.relationship("Attack",
+								 backref=db.backref("symptom", order_by=symptom_id), secondary="attack_symptom") 
 	
 
 	def __repr__(self):
@@ -94,11 +90,7 @@ class AttackTrigger(db.Model):
 	attack_triggger_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	possible_trigger_id = db.Column(db.Integer, db.ForeignKey('possible_trigger.possible_trigger_id'))
 
-	attack = db.relationship("Attack",
-									backref=db.backref("attack_trigger", order_by=attack_triggger_id))
 
-	possible_trigger = db.relationship("PossibleTrigger",
-										backref=db.backref("attack_trigger", order_by=attack_triggger_id))
 
 	def __repr__(self):
 		"""Providing some helpful representation when printed for attacks and related list of
@@ -117,7 +109,8 @@ class PossibleTrigger(db.Model):
 	possible_trigger_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	possible_trigger_name = db.Column(db.String(200))
 	possible_trigger_type = db.Column(db.String(200))
-
+	attack = db.relationship("Attack",
+									backref=db.backref("possible_trigger", order_by=possible_trigger_id), secondary="attack_trigger")
 
 	def __repr__(self):
 		"""Providing some helpful representation when printed for attacks and the names of triggers."""

@@ -7,11 +7,10 @@
 
 {% for attack in attacks%}
 	<li>
-		<a href="/list/{{ attack.attack_id }}">{{ attack.attack_date }}</a>
+		<a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a>
 	</li>  
 {% endfor %}
 <form action="/attack" method="GET">
     	<input type="submit" value="Please Log an attack">
 </form>
-<br>
 {% endblock %}

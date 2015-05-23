@@ -79,6 +79,7 @@ def login_process():
 @app.route("/user/<int:user_id>")
 def user_detail(user_id):
     """Show info about user."""
+
     user = User.query.get(user_id)
     attacks = Attack.query.filter_by(user_id=session.get("user_id")).all()
     return render_template("user_detail.html", user=user, attacks=attacks)
@@ -128,6 +129,15 @@ def attack_process():
 
 	flash("Your attack has been added.")
 	return render_template("attack_info.html")
+
+@app.route("/info/<int:attack_id>")
+def show_info_about_attack(attack_id):
+	"""Showing information about a specific attack"""
+
+	attack = Attack.query.get(attack_id)
+
+
+	return render_template("attack_detail.html", attack=attack)
 
 
 @app.route('/logout')

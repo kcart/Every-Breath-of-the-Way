@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block fullpage %}
+
+<h1>Attack Details: </h1>
+<br>
+<p> Attack Date: {{attack.attack_date}}</p>
+<p> Attack Location: {{attack.attack_location}} </p>
+	<br>
+	<br>
+	<p> Attack Symptoms: </p>
+	{% for s in attack.symptom %}
+	<p> {{s.symptom_name}}  </p>
+	{% endfor %}
+	<br>
+	<br>
+	<p> Attack Triggers: </p>
+	{% for a in attack.possible_trigger %}
+	<p> {{a.possible_trigger_name}} </p>
+	<p> {{a.possible_trigger_type}}
+	{% endfor %}
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTr_i4rhhQRcTrwJSgFu15xIlDXOatYbcbVjLtv3z7lMw8Obw-gsw">
+
+{% endblock %}
