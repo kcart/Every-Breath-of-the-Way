@@ -2,7 +2,7 @@
 
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, url_for
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Attack, AttackSymptom, Symptom, AttackTrigger, PossibleTrigger
@@ -91,7 +91,7 @@ def attack_form():
 
 @app.route("/attack", methods=['POST'])
 def attack_process():
-	"""Process the User's attack."""
+	"""Process the User's new attack."""
 
 	attack_date = request.form["date"]
 	attack_location = request.form["location"]
@@ -115,15 +115,15 @@ def attack_process():
 	
 	for symptom in symptoms:
 		symptom_id = int(symptom)
-		new_attack_symptom = AttackSymptom(attack_id=attack_id, symptom_id=symptom_id)		
-		db.session.add(new_attack_symptom)
+		attack_symptom = AttackSymptom(attack_id=attack_id, symptom_id=symptom_id)		
+		db.session.add(attack_symptom)
 
 	triggers = request.form.getlist("trigger")
 	
 	for trigger in triggers:
 		possible_trigger_id = int(trigger)
-		new_attack_trigger = AttackTrigger(attack_id=attack_id, possible_trigger_id=possible_trigger_id)		
-		db.session.add(new_attack_trigger)
+		attack_trigger = AttackTrigger(attack_id=attack_id, possible_trigger_id=possible_trigger_id)		
+		db.session.add(attack_trigger)
 
 	db.session.commit()
 

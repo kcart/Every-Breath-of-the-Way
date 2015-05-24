@@ -83,10 +83,11 @@ window.onload = loadScript;
 	</head>
 	
 	<body>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 			<div>
 				
 					{% if "user_id" in session %}
-						<a href="/user/{{ session['user_id'] }}">Profile</a>
+						<a href="/user/{{ session['user_id'] }}">Personal Attack Log</a>
             <br>
 						<a href="/logout">Logout</a>
 					{% else %}
