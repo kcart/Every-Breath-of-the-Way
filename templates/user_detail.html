@@ -7,7 +7,7 @@
 
 {% for attack in attacks%}
 	<ul>
-		<a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a>
+		<a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a>	
 	</ul>  
 {% endfor %}
 <form action="/attack" method="GET">
