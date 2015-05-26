@@ -18,10 +18,9 @@
 	<p> {{a.possible_trigger_name}} : {{a.possible_trigger_type}} </p>
 	{% endfor %}
 <br>
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTr_i4rhhQRcTrwJSgFu15xIlDXOatYbcbVjLtv3z7lMw8Obw-gsw">
 
 <!-- fix this button -->
-<form action="/user/<int:user_id>" method="GET">
+<form action="/user/{{user_id}}" method="GET">
     	<input type="submit" value="Go Back">
 </form>
 
