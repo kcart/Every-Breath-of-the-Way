@@ -87,7 +87,11 @@ def user_detail(user_id):
 @app.route("/attack", methods=["GET"])
 def attack_form():
 	""" Show attack input form."""
-	return render_template("attack_submission.html")
+
+	user_info = User.query.get(session["user_id"])
+	user_id = user_info.user_id
+
+	return render_template("attack_submission.html", user_id=user_id)
 
 @app.route("/attack", methods=['POST'])
 def attack_process():
@@ -135,9 +139,11 @@ def show_info_about_attack(attack_id):
 	"""Showing information about a specific attack"""
 
 	attack = Attack.query.get(attack_id)
+	user_info = User.query.get(session["user_id"])
+	user_id = user_info.user_id
 
 
-	return render_template("attack_detail.html", attack=attack)
+	return render_template("attack_detail.html", attack=attack, user_id=user_id)
 
 
 @app.route('/logout')
