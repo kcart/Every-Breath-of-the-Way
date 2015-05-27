@@ -16,80 +16,81 @@ app.secret_key = "wheeze89798ew7hjyas98798798sdhui7987s987bhghjg987r"
 
 @app.route('/')
 def index():
-	"""Site Homepage."""
+    """Site Homepage."""
 
-	return render_template("homepage.html")
+    return render_template("homepage.html")
 
 
 @app.route('/register', methods=['GET'])
 def register_form():
-	"""Show form for profile creation."""
+    """Show form for profile creation."""
 
-	return render_template("register_form.html")
+    return render_template("register_form.html")
 
 
 @app.route('/register', methods=['POST'])
 def register_process():
-	"""Process Registration."""
+    """Process Registration."""
 
-	# existing_user = User.query.filter_by(email=email).first()
-	# print existing_user
+    # existing_user = User.query.filter_by(email=email).first()
+    # print existing_user
 
-	# if existing_user == user.email:
-	# 	flash("You are already a user")
-	# 	return redirect("/login")
+    # if existing_user == user.email:
+    #   flash("You are already a user")
+    #   return redirect("/login")
 
-	# else:
-	unprocessed_email = request.form["email"]
-	email = unprocessed_email.lower()
-	first_name = request.form["first"]
-	last_name = request.form["last"]
-	password = request.form["password"]
-	age = int(request.form["age"])
+    # else:
+    unprocessed_email = request.form["email"]
+    email = unprocessed_email.lower()
+    first_name = request.form["first"]
+    last_name = request.form["last"]
+    password = request.form["password"]
+    age = int(request.form["age"])
 
-	if User.query.filter_by(email=email).first():
-		flash("You are already a user. Sign in.")
-		return redirect("/login")
+    if User.query.filter_by(email=email).first():
+        flash("You are already a user. Sign in.")
+        return redirect("/login")
 
-	else:
-		new_user = User(email=email, first_name=first_name, last_name=last_name, password=password, age=age)
+    else:
+        print "hi"
+        new_user = User(email=email, first_name=first_name, last_name=last_name, password=password, age=age)
 
-		db.session.add(new_user)
-		db.session.commit()
+        db.session.add(new_user)
+        db.session.commit()
 
-		flash("User Profile %s added." % email)
-		return redirect("/")
+        flash("User Profile %s added." % email)
+        return redirect("/")
 
 
 @app.route('/login', methods=['GET'])
 def login_form():
-	"""Show login form"""
+    """Show login form"""
 
-	return render_template("login_form.html")
+    return render_template("login_form.html")
 
 
 @app.route('/login', methods=['POST'])
 def login_process():
-	"""Process the User's login."""
+    """Process the User's login."""
 
-	unprocessed_email = request.form["email"]
-	email = unprocessed_email.lower()
-	password = request.form["password"]
+    unprocessed_email = request.form["email"]
+    email = unprocessed_email.lower()
+    password = request.form["password"]
 
-	user = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(email=email).first()
 
-	if not user:
-	    flash("Password not found. Please Register.")
-	    return redirect("/login")
+    if not user:
+        flash("Password not found. Please Register.")
+        return redirect("/login")
 
-	if user.password != password:
-	    flash("Incorrect password")
-	    return redirect("/login")
+    if user.password != password:
+        flash("Incorrect password")
+        return redirect("/login")
 
-	session["user_id"] = user.user_id
+    session["user_id"] = user.user_id
 
-	flash("%s, you are logged in." % user.first_name)
-	return redirect("/user/%s" % user.user_id)
+    flash("%s, you are logged in." % user.first_name)
+    return redirect("/user/%s" % user.user_id)
 
 
 @app.route("/user/<int:user_id>")
@@ -103,71 +104,71 @@ def user_detail(user_id):
 
 @app.route("/attack", methods=["GET"])
 def attack_form():
-	""" Show attack input form."""
+    """ Show attack input form."""
 
-	user_info = User.query.get(session["user_id"])
-	user_id = user_info.user_id
+    user_info = User.query.get(session["user_id"])
+    user_id = user_info.user_id
 
-	return render_template("attack_submission.html", user_id=user_id)
+    return render_template("attack_submission.html", user_id=user_id)
 
 
 @app.route("/attack", methods=['POST'])
 def attack_process():
-	"""Process the User's new attack."""
+    """Process the User's new attack."""
 
-	attack_date = request.form["date"]
-	attack_location = request.form["location"]
-	user_info = User.query.get(session["user_id"])
-	user_id = user_info.user_id
+    attack_date = request.form["date"]
+    attack_location = request.form["location"]
+    user_info = User.query.get(session["user_id"])
+    user_id = user_info.user_id
 
-	attack = Attack(attack_date=attack_date, attack_location=attack_location, user_id=user_id)
+    attack = Attack(attack_date=attack_date, attack_location=attack_location, user_id=user_id)
 
-	db.session.add(attack)
-	db.session.flush()
+    db.session.add(attack)
+    db.session.flush()
 
-	print attack.attack_id
-	attack_id = attack.attack_id
+    print attack.attack_id
+    attack_id = attack.attack_id
 
-	print request.form.getlist("trigger")
-	print request.form.getlist("symptom")
-	print attack_location
-	print attack_date
+    print request.form.getlist("trigger")
+    print request.form.getlist("symptom")
+    print attack_location
+    print attack_date
 
-	symptoms = request.form.getlist("symptom")
+    symptoms = request.form.getlist("symptom")
 
-	for symptom in symptoms:
-		symptom_id = int(symptom)
-		attack_symptom = AttackSymptom(attack_id=attack_id, symptom_id=symptom_id)
-		db.session.add(attack_symptom)
+    for symptom in symptoms:
+        symptom_id = int(symptom)
+        attack_symptom = AttackSymptom(attack_id=attack_id, symptom_id=symptom_id)
+        db.session.add(attack_symptom)
 
-	triggers = request.form.getlist("trigger")
+    triggers = request.form.getlist("trigger")
 
-	for trigger in triggers:
-		possible_trigger_id = int(trigger)
-		attack_trigger = AttackTrigger(attack_id=attack_id, possible_trigger_id=possible_trigger_id)
-		db.session.add(attack_trigger)
+    for trigger in triggers:
+        possible_trigger_id = int(trigger)
+        attack_trigger = AttackTrigger(attack_id=attack_id, possible_trigger_id=possible_trigger_id)
+        db.session.add(attack_trigger)
 
-	db.session.commit()
+    db.session.commit()
 
-	flash("Your attack has been added.")
-	return render_template("attack_info.html", user_id=user_id)
+    flash("Your attack has been added.")
+    return render_template("attack_info.html", user_id=user_id)
 
 
 @app.route("/attack/edit", methods="POST")
 def edit_attack(attack_id):
-	""" Edit and existing attack"""
+    """ Edit and existing attack"""
 
-	return
+    return
 
 
 @app.route("/info/<int:attack_id>")
 def show_info_about_attack(attack_id):
-	"""Showing information about a specific attack"""
+    """Showing information about a specific attack"""
 
-	attack = Attack.query.get(attack_id)
-	user_info = User.query.get(session["user_id"])
-	user_id = user_info.user_id
-	return render_template("attack_detail.html", attack=attack, user_id=user_id)
+    attack = Attack.query.get(attack_id)
+    user_info = User.query.get(session["user_id"])
+    user_id = user_info.user_id
+    return render_template("attack_detail.html", attack=attack, user_id=user_id)
 
 
 @app.route('/logout')
@@ -180,10 +181,10 @@ def logout():
 
 
 if __name__ == "__main__":
-	app.debug = True
+    app.debug = False
 
-	connect_to_db(app)
+    connect_to_db(app)
 
-	DebugToolbarExtension(app)
+    DebugToolbarExtension(app)
 
-	app.run()
+    app.run()
