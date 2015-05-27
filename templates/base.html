@@ -1,28 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<title>Every Breath of the Way</title>
 		{% block head %}
 		{% endblock %}
-	<title>Every Breath of the Way</title>
+
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
       html, body, #map-canvas {
-        height: 100px;
+        height: 60%;
         margin: 0px;
-        padding: 0px
+        padding: 50px
       }
     </style>
-    
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
 
-  <script src="https://maps.googleapis.com/maps/api/js"></script>
-  <script src="/static/js/maps.js"></script>
-  
 	</head>
 
 	<body>
-    
+    	<div id="map-canvas"></div> 
 			<div>
 				
 					{% if "user_id" in session %}
@@ -40,14 +36,17 @@
 		{% for flash in get_flashed_messages() %}
 		  {{ flash }}
 		{% endfor %}
+		 
+		{% block body %}
 
-		 <div id="map-canvas"></div>  
-			{% block body %}
-			
+		{% endblock %}
 
-			{% endblock %}
 	</body>
- 
 
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script src="/static/js/maps.js"></script>
+  
 </html>
 

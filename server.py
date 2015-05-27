@@ -47,13 +47,18 @@ def register_process():
 	password = request.form["password"]
 	age = int(request.form["age"])
 
-	new_user = User(email=email, first_name=first_name, last_name=last_name, password=password, age=age)
+	if User.query.filter_by(email=email).first():
+		flash("You are already a user. Sign in.")
+		return redirect("/login")
 
-	db.session.add(new_user)
-	db.session.commit()
+	else:
+		new_user = User(email=email, first_name=first_name, last_name=last_name, password=password, age=age)
 
-	flash("User Profile %s added." % email)
-	return redirect("/")
+		db.session.add(new_user)
+		db.session.commit()
+
+		flash("User Profile %s added." % email)
+		return redirect("/")
 
 
 @app.route('/login', methods=['GET'])
