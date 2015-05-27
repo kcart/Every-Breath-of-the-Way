@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 app.jinja_env.undefined = StrictUndefined
 
-app.secret_key = "wheezer"
+app.secret_key = "wheeze89798ew7hjyas98798798sdhui7987s987bhghjg987r"
 
 
 @app.route('/')
@@ -32,6 +32,14 @@ def register_form():
 def register_process():
 	"""Process Registration."""
 
+	# existing_user = User.query.filter_by(email=email).first()
+	# print existing_user
+
+	# if existing_user == user.email:
+	# 	flash("You are already a user")
+	# 	return redirect("/login")
+
+	# else:
 	unprocessed_email = request.form["email"]
 	email = unprocessed_email.lower()
 	first_name = request.form["first"]

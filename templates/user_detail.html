@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block fullpage %}
+{% block body %}
 
 <h1> {{user.first_name}}'s Log </h1>
 
@@ -14,5 +14,5 @@
 {% endfor %}
 <form action="/attack" method="GET">
     	<input type="submit" value="Please Log an attack">
-</form>
+</form>s
 {% endblock %}

@@ -13,7 +13,7 @@ class User(db.Model):
 	__tablename__ = "user"
 
 	user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-	email = db.Column(db.String(200), nullable=False)
+	email = db.Column(db.String(200), nullable=False, unique=True)
 	password = db.Column(db.String(90), nullable=False)
 	first_name = db.Column(db.String(200), nullable=False)
 	last_name = db.Column(db.String(200), nullable=False)

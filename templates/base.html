@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-
-	<div id="map-canvas"></div>
-
+		{% block head %}
+		{% endblock %}
 	<title>Every Breath of the Way</title>
-	
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 100px;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script src="/static/js/maps.js"></script>
+  
 	</head>
-	
+
 	<body>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
 			<div>
 				
 					{% if "user_id" in session %}
@@ -28,87 +41,13 @@
 		  {{ flash }}
 		{% endfor %}
 
-		
-			{% block fullpage %}
+		 <div id="map-canvas"></div>  
+			{% block body %}
 			
-			  {% block content %}
-
-        {% endblock %}	
 
 			{% endblock %}
 	</body>
-     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <style>
-      html, body, #map-canvas {
-        height: 60%;
-        margin: 0px;
-        padding: 50px
-      }
-    </style>
-     <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script> -->
+ 
 
-    <script>
-  var map;
-
-function initialize() {
-  var mapOptions = {
-    zoom: 6
-  };
-  map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
-
-
-  // Try HTML5 geolocation
-  if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = new google.maps.LatLng(position.coords.latitude,
-                                       position.coords.longitude);
-
-      var infowindow = new google.maps.InfoWindow({
-        map: map,
-        position: pos,
-        content: 'Your Location.'
-      });
-
-      map.setCenter(pos);
-    }, function() {
-      handleNoGeolocation(true);
-    });
-  } else {
-    // Browser doesn't support Geolocation
-    handleNoGeolocation(false);
-  }
-}
-
-function handleNoGeolocation(errorFlag) {
-  if (errorFlag) {
-    var content = 'Error: The Geolocation service failed.';
-  } else {
-    var content = 'Error: Your browser doesn\'t support geolocation.';
-  }
-
-  var options = {
-    map: map,
-    position: new google.maps.LatLng(60, 105),
-    content: content
-  };
-
-  var infowindow = new google.maps.InfoWindow(options);
-  map.setCenter(options.position);
-}
-
-// google.maps.event.addDomListener(window, 'load', initialize);
-function loadScript() {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
-      '&signed_in=true&callback=initialize';
-  document.body.appendChild(script);
-}
-
-window.onload = loadScript;
-
- </script>
 </html>
 
