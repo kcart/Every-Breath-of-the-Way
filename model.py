@@ -30,15 +30,15 @@ class Attack(db.Model):
 	""" An instance of a User's asthma attack"""
 
 	__tablename__ = "attack"
-	
+
 	attack_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	attack_date = db.Column(db.String(200))
 	attack_location = db.Column(db.String(200))
-	
+
 	user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
 	user = db.relationship("User",
-							 backref=db.backref("attack", order_by=attack_id))
+							backref=db.backref("attack", order_by=attack_id))
 
 	def __repr__(self):
 		"""Providing some helpful representation when printed for asthma attacks."""
@@ -46,13 +46,14 @@ class Attack(db.Model):
 		return "<Attack attack_id=%s attack_location=%s user_id=%s>" % (
 			self.attack_id, self.attack_location, self.user_id)
 
+
 class AttackSymptom(db.Model):
 	""" The Asthma Attack and the list of symptoms associated with the attack."""
 
 	__tablename__ = "attack_symptom"
 
 	attack_id = db.Column(db.Integer, db.ForeignKey('attack.attack_id'))
-	attack_symptom_id = db.Column(db.Integer, autoincrement=True, primary_key=True)	
+	attack_symptom_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	symptom_id = db.Column(db.Integer, db.ForeignKey('symptom.symptom_id'))
 
 	def __repr__(self):
@@ -62,6 +63,7 @@ class AttackSymptom(db.Model):
 		return "<AttackSymptom attack_symptom_id=%s attack_id=%s symptom_id=%s>" % (
 			self.attack_symptom_id, self.attack_id, self.symptom_id)
 
+
 class Symptom(db.Model):
 	"""A symptom associated with an attack by type. """
 
@@ -70,8 +72,7 @@ class Symptom(db.Model):
 	symptom_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	symptom_name = db.Column(db.String(200))
 	attack = db.relationship("Attack",
-								 backref=db.backref("symptom", order_by=symptom_id), secondary="attack_symptom") 
-	
+								 backref=db.backref("symptom", order_by=symptom_id), secondary="attack_symptom")
 
 	def __repr__(self):
 		""" Providing some helpful representation when printed for symptom type name,
@@ -90,15 +91,12 @@ class AttackTrigger(db.Model):
 	attack_triggger_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	possible_trigger_id = db.Column(db.Integer, db.ForeignKey('possible_trigger.possible_trigger_id'))
 
-
-
 	def __repr__(self):
 		"""Providing some helpful representation when printed for attacks and related list of
 		 possible triggers."""
 
 		return "<AttackTrigger attack_triggger_id=%s trigger_id=%s>" % (
 			self.attack_triggger_id, self.attack_id, self.trigger_id)
-
 
 
 class PossibleTrigger(db.Model):
@@ -117,9 +115,6 @@ class PossibleTrigger(db.Model):
 
 		return "<PossibleTrigger possible_trigger_id=%s  possible_trigger_name=%s> possible_trigger_type=%s" % (
 			self.possible_trigger_id, self.possible_trigger_name, self.possible_trigger_type)
-	
-
-
 
 
 ####################################################################

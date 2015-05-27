@@ -2,13 +2,15 @@
 {% block fullpage %}
 
 <!-- information about an User's attack location, date, id -->
-<h1>Attack</h1>
 
-<img src="http://placekitten.com.s3.amazonaws.com/homepage-samples/200/140.jpg">
+<br>
+<img src="http://www.allfree-clipart.com/Medical/stethoscope.jpg">
+
 <form action="/attack", methods=["POST"]>
 	<input type="Submit" value="Log another attack">
 </form>
 
-<!-- fix the path for the button later...and add a button to route the list of user attacks
- -->
+<form action="/user/{{user_id}}" method="GET">
+    	<input type="submit" value="Return to your profile">
+</form>
 {% endblock %}

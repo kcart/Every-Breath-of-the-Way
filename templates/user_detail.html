@@ -7,7 +7,9 @@
 
 {% for attack in attacks%}
 	<ul>
-		<a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a>	
+		<p>
+			<a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a> : Number of Symptoms in attack: <b>{{attack.symptom|count}}</b>,   Number of Triggers in attack: <b>{{attack.possible_trigger|count}} </b>
+		</p>
 	</ul>  
 {% endfor %}
 <form action="/attack" method="GET">
