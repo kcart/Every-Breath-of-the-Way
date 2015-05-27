@@ -81,7 +81,7 @@ def user_detail(user_id):
     """Show info about user."""
 
     user = User.query.get(user_id)
-    attacks = Attack.query.filter_by(user_id=session.get("user_id")).all()
+    attacks = Attack.query.filter_by(user_id=session.get("user_id")).order_by(Attack.attack_date).all() 
     return render_template("user_detail.html", user=user, attacks=attacks)
 
 @app.route("/attack", methods=["GET"])
@@ -133,6 +133,12 @@ def attack_process():
 
 	flash("Your attack has been added.")
 	return render_template("attack_info.html")
+
+@app.route("/attack/edit", methods= "POST")
+def edit_attack(attack_id):
+	""" Edit and existing attack"""
+
+	return
 
 @app.route("/info/<int:attack_id>")
 def show_info_about_attack(attack_id):
