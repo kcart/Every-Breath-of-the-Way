@@ -6,7 +6,38 @@
 
 	<title>Every Breath of the Way</title>
 	
-	 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	</head>
+	
+	<body>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+			<div>
+				
+					{% if "user_id" in session %}
+						<a href="/user/{{ session['user_id'] }}">Personal Attack Log</a>
+            <br>
+						<a href="/logout">Logout</a>
+					{% else %}
+						<a href="/register">Register</a>
+            <br>
+						<a href="/login">Login</a>
+					{% endif %}
+			</div>
+		<hr>
+
+		{% for flash in get_flashed_messages() %}
+		  {{ flash }}
+		{% endfor %}
+
+		
+			{% block fullpage %}
+			
+			  {% block content %}
+
+        {% endblock %}	
+
+			{% endblock %}
+	</body>
+     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
       html, body, #map-canvas {
@@ -18,7 +49,7 @@
      <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script> -->
 
     <script>
-	var map;
+  var map;
 
 function initialize() {
   var mapOptions = {
@@ -79,37 +110,5 @@ function loadScript() {
 window.onload = loadScript;
 
  </script>
-
-	</head>
-	
-	<body>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-			<div>
-				
-					{% if "user_id" in session %}
-						<a href="/user/{{ session['user_id'] }}">Personal Attack Log</a>
-            <br>
-						<a href="/logout">Logout</a>
-					{% else %}
-						<a href="/register">Register</a>
-            <br>
-						<a href="/login">Login</a>
-					{% endif %}
-			</div>
-		<hr>
-
-		{% for flash in get_flashed_messages() %}
-		  {{ flash }}
-		{% endfor %}
-
-		
-			{% block fullpage %}
-			
-			  {% block content %}
-
-        {% endblock %}	
-
-			{% endblock %}
-	</body>
-	</html>
+</html>
 
