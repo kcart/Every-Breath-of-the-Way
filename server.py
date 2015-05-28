@@ -4,7 +4,7 @@ from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
-
+from datetime import datetime
 from model import connect_to_db, db, User, Attack, AttackSymptom, Symptom, AttackTrigger, PossibleTrigger
 
 app = Flask(__name__)
@@ -32,14 +32,6 @@ def register_form():
 def register_process():
     """Process Registration."""
 
-    # existing_user = User.query.filter_by(email=email).first()
-    # print existing_user
-
-    # if existing_user == user.email:
-    #   flash("You are already a user")
-    #   return redirect("/login")
-
-    # else:
     unprocessed_email = request.form["email"]
     email = unprocessed_email.lower()
     first_name = request.form["first"]
@@ -52,7 +44,6 @@ def register_process():
         return redirect("/login")
 
     else:
-        print "hi"
         new_user = User(email=email, first_name=first_name, last_name=last_name, password=password, age=age)
 
         db.session.add(new_user)
@@ -133,6 +124,11 @@ def attack_process():
     print request.form.getlist("symptom")
     print attack_location
     print attack_date
+
+    # s_attack_date = attack_date
+    # if s_attack_date:
+    #     s_attack_date = datetime.strptime(s_attack_date, '%Y-%B-%d')
+    # print s_attack_date
 
     symptoms = request.form.getlist("symptom")
 

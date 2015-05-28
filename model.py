@@ -38,7 +38,7 @@ class Attack(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
     user = db.relationship("User",
-                            backref=db.backref("attack", order_by=attack_id))
+                           backref=db.backref("attack", order_by=attack_id))
 
     def __repr__(self):
         """Providing some helpful representation when printed for asthma attacks."""
