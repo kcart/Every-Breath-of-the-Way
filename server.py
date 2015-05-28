@@ -145,13 +145,16 @@ def attack_process():
     # print attack_month
 
     attacks = Attack.query.filter_by(user_id=session.get("user_id")).all()
+    attack_months = {}
 
-    attack_months = []
-    for attack_date in range(attacks):
+    for attack in attacks:
         attack_month = attack.attack_date[5:7]
-    attack_months.append(attack_month)
-
+        if attack_month not in attack_months:
+            attack_months[attack_month] = []
+        attack_months[attack_month].append(attack_month)
     print attack_months
+
+    months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
 
     flash("Your attack has been added.")
     return render_template("attack_info.html", user_id=user_id)
