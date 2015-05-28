@@ -4,7 +4,6 @@ from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
-from datetime import datetime
 from model import connect_to_db, db, User, Attack, AttackSymptom, Symptom, AttackTrigger, PossibleTrigger
 
 app = Flask(__name__)
@@ -50,7 +49,7 @@ def register_process():
         db.session.commit()
 
         flash("User Profile %s added." % email)
-        return redirect("/")
+        return redirect("/login")
 
 
 @app.route('/login', methods=['GET'])
@@ -125,11 +124,6 @@ def attack_process():
     print attack_location
     print attack_date
 
-    # s_attack_date = attack_date
-    # if s_attack_date:
-    #     s_attack_date = datetime.strptime(s_attack_date, '%Y-%B-%d')
-    # print s_attack_date
-
     symptoms = request.form.getlist("symptom")
 
     for symptom in symptoms:
@@ -145,6 +139,19 @@ def attack_process():
         db.session.add(attack_trigger)
 
     db.session.commit()
+
+    # attack_month = attack_date[5:7]
+    # print "this is the" + attack_month
+    # print attack_month
+
+    attacks = Attack.query.filter_by(user_id=session.get("user_id")).all()
+
+    attack_months = []
+    for attack_date in range(attacks):
+        attack_month = attack.attack_date[5:7]
+    attack_months.append(attack_month)
+
+    print attack_months
 
     flash("Your attack has been added.")
     return render_template("attack_info.html", user_id=user_id)
@@ -177,7 +184,7 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.debug = False
+    app.debug = True
 
     connect_to_db(app)
 
