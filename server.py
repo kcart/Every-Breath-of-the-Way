@@ -145,14 +145,13 @@ def attack_process():
     # print attack_month
 
     attacks = Attack.query.filter_by(user_id=session.get("user_id")).all()
-    attack_months = {}
 
+    attack_count = [0]*12
     for attack in attacks:
-        attack_month = attack.attack_date[5:7]
-        if attack_month not in attack_months:
-            attack_months[attack_month] = []
-        attack_months[attack_month].append(attack_month)
-    print attack_months
+        attack_month = int(attack.attack_date[5:7])
+        attack_count[attack_month-1] += 1
+    print attack_count
+
 
     months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
 
