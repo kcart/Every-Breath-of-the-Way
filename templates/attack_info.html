@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
-
-<!-- information about an User's attack location, date, id -->
-
+<script src="/static/js/Chart.js"></script>
 <br>
 <img src="http://www.allfree-clipart.com/Medical/stethoscope.jpg">
 
@@ -13,4 +11,14 @@
 <form action="/user/{{user_id}}" method="GET">
     	<input type="submit" value="Return to your profile">
 </form>
+<!--  Trying to use Chart.js below: -->
+<canvas id="myChart" width="400" height="400"></canvas>
+<script>
+var ctx = document.getElementById("myChart").getContext("2d");
+var myNewChart = new Chart(ctx).PolarArea(data);
+</script>
+
+
+
+
 {% endblock %}
