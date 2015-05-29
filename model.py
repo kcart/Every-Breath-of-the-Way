@@ -23,7 +23,8 @@ class User(db.Model):
         """Providing some helpful representation when printed for user profile."""
 
         return "<User user_id=%s email=%s password=%s first_name=%s last_name=%s age=%s>" % (
-            self.user_id, self.email, self.password, self.first_name, self.last_name, self.age)
+            self.user_id, self.email, self.password, self.first_name,
+            self.last_name, self.age)
 
 
 class Attack(db.Model):
@@ -41,19 +42,20 @@ class Attack(db.Model):
                            backref=db.backref("attack", order_by=attack_id))
 
     def __repr__(self):
-        """Providing some helpful representation when printed for asthma attacks."""
+        """Providing some helpful representation for asthma attacks."""
 
         return "<Attack attack_id=%s attack_location=%s user_id=%s>" % (
             self.attack_id, self.attack_location, self.user_id)
 
 
 class AttackSymptom(db.Model):
-    """ The Asthma Attack and the list of symptoms associated with the attack."""
+    """Asthma Attack and list of symptoms associated with the attack."""
 
     __tablename__ = "attack_symptom"
 
     attack_id = db.Column(db.Integer, db.ForeignKey('attack.attack_id'))
-    attack_symptom_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    attack_symptom_id = db.Column(db.Integer, autoincrement=True,
+                                                 primary_key=True)
     symptom_id = db.Column(db.Integer, db.ForeignKey('symptom.symptom_id'))
 
     def __repr__(self):
@@ -72,7 +74,8 @@ class Symptom(db.Model):
     symptom_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     symptom_name = db.Column(db.String(200))
     attack = db.relationship("Attack",
-                                 backref=db.backref("symptom", order_by=symptom_id), secondary="attack_symptom")
+                                 backref=db.backref("symptom", order_by=symptom_id),
+                                 secondary="attack_symptom")
 
     def __repr__(self):
         """ Providing some helpful representation when printed for symptom type name,
@@ -83,17 +86,16 @@ class Symptom(db.Model):
 
 
 class AttackTrigger(db.Model):
-    """ The Asthma attack and the list of id's of possible triggers associated with the attack."""
-
+    """ The Asthma attack and the list of id's of possible triggers."""
     __tablename__ = "attack_trigger"
 
     attack_id = db.Column(db.Integer, db.ForeignKey('attack.attack_id'))
-    attack_triggger_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    attack_triggger_id = db.Column(db.Integer, autoincrement=True,
+                                             primary_key=True)
     possible_trigger_id = db.Column(db.Integer, db.ForeignKey('possible_trigger.possible_trigger_id'))
 
     def __repr__(self):
-        """Providing some helpful representation when printed for attacks and related list of
-         possible triggers."""
+        """Providing some helpful representation for attacks and triggers."""
 
         return "<AttackTrigger attack_triggger_id=%s trigger_id=%s>" % (
             self.attack_triggger_id, self.attack_id, self.trigger_id)
@@ -104,17 +106,21 @@ class PossibleTrigger(db.Model):
 
     __tablename__ = "possible_trigger"
 
-    possible_trigger_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    possible_trigger_id = db.Column(db.Integer, autoincrement=True,
+                                                 primary_key=True)
     possible_trigger_name = db.Column(db.String(200))
     possible_trigger_type = db.Column(db.String(200))
     attack = db.relationship("Attack",
-                                    backref=db.backref("possible_trigger", order_by=possible_trigger_id), secondary="attack_trigger")
+                                    backref=db.backref("possible_trigger",
+                                    order_by=possible_trigger_id),
+                                    secondary="attack_trigger")
 
     def __repr__(self):
-        """Providing some helpful representation when printed for attacks and the names of triggers."""
+        """Providing some helpful representation for the names of triggers."""
 
         return "<PossibleTrigger possible_trigger_id=%s  possible_trigger_name=%s> possible_trigger_type=%s" % (
-            self.possible_trigger_id, self.possible_trigger_name, self.possible_trigger_type)
+            self.possible_trigger_id, self.possible_trigger_name,
+            self.possible_trigger_type)
 
 
 ####################################################################

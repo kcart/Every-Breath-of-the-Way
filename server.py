@@ -43,7 +43,8 @@ def register_process():
         return redirect("/login")
 
     else:
-        new_user = User(email=email, first_name=first_name, last_name=last_name, password=password, age=age)
+        new_user = User(email=email, first_name=first_name, last_name=last_name,
+                        password=password, age=age)
 
         db.session.add(new_user)
         db.session.commit()
@@ -111,7 +112,8 @@ def attack_process():
     user_info = User.query.get(session["user_id"])
     user_id = user_info.user_id
 
-    attack = Attack(attack_date=attack_date, attack_location=attack_location, user_id=user_id)
+    attack = Attack(attack_date=attack_date,
+                    attack_location=attack_location, user_id=user_id)
 
     db.session.add(attack)
     db.session.flush()
@@ -128,14 +130,16 @@ def attack_process():
 
     for symptom in symptoms:
         symptom_id = int(symptom)
-        attack_symptom = AttackSymptom(attack_id=attack_id, symptom_id=symptom_id)
+        attack_symptom = AttackSymptom(attack_id=attack_id,
+                                     symptom_id=symptom_id)
         db.session.add(attack_symptom)
 
     triggers = request.form.getlist("trigger")
 
     for trigger in triggers:
         possible_trigger_id = int(trigger)
-        attack_trigger = AttackTrigger(attack_id=attack_id, possible_trigger_id=possible_trigger_id)
+        attack_trigger = AttackTrigger(attack_id=attack_id,
+                                    possible_trigger_id=possible_trigger_id)
         db.session.add(attack_trigger)
 
     db.session.commit()
@@ -152,8 +156,8 @@ def attack_process():
         attack_count[attack_month-1] += 1
     print attack_count
 
-
-    months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+    months = ["01", "02", "03", "04", "05", "06", "07", "08", "09",
+             "10", "11", "12"]
 
     flash("Your attack has been added.")
     return render_template("attack_info.html", user_id=user_id)
