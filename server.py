@@ -183,11 +183,11 @@ def logout():
 
     del session["user_id"]
     flash("You have successfully logged out.")
-    return redirect("/")
+    return redirect("/login")
 
 
 if __name__ == "__main__":
-    app.debug = True
+    app.debug = False
 
     connect_to_db(app)
 
