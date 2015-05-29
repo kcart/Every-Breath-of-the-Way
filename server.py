@@ -144,10 +144,6 @@ def attack_process():
 
     db.session.commit()
 
-    # attack_month = attack_date[5:7]
-    # print "this is the" + attack_month
-    # print attack_month
-
     attacks = Attack.query.filter_by(user_id=session.get("user_id")).all()
 
     attack_count = [0]*12
@@ -160,7 +156,8 @@ def attack_process():
              "10", "11", "12"]
 
     flash("Your attack has been added.")
-    return render_template("attack_info.html", user_id=user_id)
+    return render_template("attack_info.html", user_id=user_id, attack=attack,
+                                            attack_count=attack_count)
 
 
 @app.route("/attack/edit", methods="POST")
