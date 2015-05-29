@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
-<script src="/static/js/Chart.js"></script>
+
 <br>
 <img src="http://www.allfree-clipart.com/Medical/stethoscope.jpg">
 
@@ -11,14 +11,28 @@
 <form action="/user/{{user_id}}" method="GET">
     	<input type="submit" value="Return to your profile">
 </form>
-<!--  Trying to use Chart.js below: -->
-<canvas id="myChart" width="400" height="400"></canvas>
+
+<canvas id="canvas" height="450" width="600"></canvas>
 <script>
-var ctx = document.getElementById("myChart").getContext("2d");
-var myNewChart = new Chart(ctx).PolarArea(data);
+var myLineChart = new Chart(document.getElementById("canvas").getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
+
+
+var LineChart = {
+    labels: ["Ruby", "jQuery", "Java", "ASP.Net", "PHP"],
+    datasets: [{
+        fillColor: "rgba(151,249,190,0.5)",
+        strokeColor: "rgba(255,255,255,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        data: [10, 20, 30, 40, 50]
+    }, {
+        fillColor: "rgba(252,147,65,0.5)",
+        strokeColor: "rgba(255,255,255,1)",
+        pointColor: "rgba(173,173,173,1)",
+        pointStrokeColor: "#fff",
+        data: [28, 68, 40, 19, 96]
+    }]
+}
 </script>
-
-
-
 
 {% endblock %}
