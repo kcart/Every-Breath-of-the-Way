@@ -89,9 +89,7 @@ def user_detail(user_id):
     """Show info about user."""
 
     user = User.query.get(user_id)
-    attacks = Attack.query.filter_by(user_id=session.get("user_id"))\
-                          .order_by(Attack.attack_date)\
-                          .all()
+    attacks = Attack.query.filter_by(user_id=session.get("user_id")).order_by(Attack.attack_date).all()
 
     triggers = []
     for attack in attacks:
@@ -100,6 +98,11 @@ def user_detail(user_id):
     triggers = [trigger.possible_trigger_name for trigger in triggers]
     triggers_count = Counter(triggers)
     print triggers_count
+
+    data = []
+    for trigger in triggers_count:
+        data.append({label: trigger, value: triggers_count[trigger]})
+    print data
 
     return render_template("user_detail.html", user=user, attacks=attacks)
 
@@ -129,13 +132,13 @@ def attack_process():
     db.session.add(attack)
     db.session.flush()
 
-    print attack.attack_id
+    # print attack.attack_id
     attack_id = attack.attack_id
 
-    print request.form.getlist("trigger")
-    print request.form.getlist("symptom")
-    print attack_location
-    print attack_date
+    # print request.form.getlist("trigger")
+    # print request.form.getlist("symptom")
+    # print attack_location
+    # print attack_date
 
     symptoms = request.form.getlist("symptom")
 
