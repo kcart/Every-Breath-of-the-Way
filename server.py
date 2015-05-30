@@ -101,10 +101,14 @@ def user_detail(user_id):
 
     data = []
     for trigger in triggers_count:
-        data.append({label: trigger, value: triggers_count[trigger]})
+        data.append({"label": trigger, "value": triggers_count[trigger]})
     print data
 
-    return render_template("user_detail.html", user=user, attacks=attacks)
+
+
+
+    return render_template("user_detail.html", user=user, attacks=attacks,
+                                            data=data)
 
 
 @app.route("/attack", methods=["GET"])
