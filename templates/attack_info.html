@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block body %}
-
+<h2> Your cumulative attack results: <h2>
 <br>
-<canvas id="canvas" height="450" width="600" data-attackcounts="{{ attack_count }}"></canvas>
-<form action="/attack", methods=["POST"]>
+<canvas id="canvas" height="600" width="750" data-attackcounts="{{ attack_count }}"></canvas>
+<form action="/attack", methods0=["POST"]>
 	<input type="Submit" value="Log another attack">
 </form>
 
@@ -11,13 +11,12 @@
     	<input type="submit" value="Return to your profile">
 </form>
 
-
 <script>
 
 var canvas = document.getElementById("canvas");
 
 var LineChart = {
-    labels: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10","11", "12"],
+    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"],
     datasets: [{
         fillColor: "rgba(151,249,190,0.5)",
         strokeColor: "rgba(255,255,255,1)",

@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block body %}
 
+
+
 <h1>Attack Details: </h1>
 <br>
 
@@ -19,7 +21,6 @@
 	<p> {{a.possible_trigger_name}} : {{a.possible_trigger_type}} </p>
 	{% endfor %}
 <br>
-
 
 <form action="/user/{{user_id}}" method="GET">
     	<input type="submit" value="Go Back">

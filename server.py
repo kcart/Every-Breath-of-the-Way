@@ -5,7 +5,7 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, Attack, AttackSymptom, Symptom, AttackTrigger, PossibleTrigger
-
+from collections import Counter
 app = Flask(__name__)
 
 app.jinja_env.undefined = StrictUndefined
@@ -89,7 +89,18 @@ def user_detail(user_id):
     """Show info about user."""
 
     user = User.query.get(user_id)
-    attacks = Attack.query.filter_by(user_id=session.get("user_id")).order_by(Attack.attack_date).all()
+    attacks = Attack.query.filter_by(user_id=session.get("user_id"))\
+                          .order_by(Attack.attack_date)\
+                          .all()
+
+    triggers = []
+    for attack in attacks:
+        triggers.extend(attack.possible_trigger)
+
+    triggers = [trigger.possible_trigger_name for trigger in triggers]
+    triggers_count = Counter(triggers)
+    print triggers_count
+
     return render_template("user_detail.html", user=user, attacks=attacks)
 
 
@@ -155,7 +166,7 @@ def attack_process():
     months = ["01", "02", "03", "04", "05", "06", "07", "08", "09",
              "10", "11", "12"]
 
-    flash("Your attack has been added.")
+    flash("Your attack has been added to your log.")
     return render_template("attack_info.html", user_id=user_id, attack=attack,
                                             attack_count=attack_count)
 
@@ -187,7 +198,7 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.debug = False
+    app.debug = True
 
     connect_to_db(app)
 

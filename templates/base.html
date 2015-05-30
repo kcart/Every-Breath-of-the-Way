@@ -4,8 +4,10 @@
 		<title>Every Breath of the Way</title>
 		{% block head %}
 		{% endblock %}
+<!-- for charts -->
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
@@ -15,7 +17,10 @@
         padding: 50px
       }
     </style>
+<!-- weather widget -->
+	<a href="http://www.accuweather.com/en/us/new-york-ny/10007/weather-forecast/349727" class="aw-widget-legal">
 
+	</a><div id="awcc1432939079786" class="aw-widget-current"  data-locationkey="" data-unit="f" data-language="en-us" data-useip="false" data-uid="awcc1432939079786"></div><script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
 	</head>
 
 	<body>
@@ -43,10 +48,9 @@
 		{% endblock %}
 
 	</body>
-
+<!--  for google map  -->
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
 
- 
   <script src="/static/js/maps.js"></script>
 
 </html>
