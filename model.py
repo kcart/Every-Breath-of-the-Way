@@ -89,9 +89,9 @@ class AttackTrigger(db.Model):
     """ The Asthma attack and the list of id's of possible triggers."""
     __tablename__ = "attack_trigger"
 
-    attack_id = db.Column(db.Integer, db.ForeignKey('attack.attack_id'))
     attack_triggger_id = db.Column(db.Integer, autoincrement=True,
                                              primary_key=True)
+    attack_id = db.Column(db.Integer, db.ForeignKey('attack.attack_id'))
     possible_trigger_id = db.Column(db.Integer, db.ForeignKey('possible_trigger.possible_trigger_id'))
 
     def __repr__(self):

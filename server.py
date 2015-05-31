@@ -99,13 +99,15 @@ def user_detail(user_id):
     triggers_count = Counter(triggers)
     print triggers_count
 
+    # narrowing down the triggers
+    for k, v in triggers_count.items():
+        print k, v
+    # end
+
     data = []
     for trigger in triggers_count:
         data.append({"label": trigger, "value": triggers_count[trigger]})
     print data
-
-
-
 
     return render_template("user_detail.html", user=user, attacks=attacks,
                                             data=data)
@@ -170,9 +172,6 @@ def attack_process():
         attack_count[attack_month-1] += 1
     print attack_count
 
-    months = ["01", "02", "03", "04", "05", "06", "07", "08", "09",
-             "10", "11", "12"]
-
     flash("Your attack has been added to your log.")
     return render_template("attack_info.html", user_id=user_id, attack=attack,
                                             attack_count=attack_count)
@@ -192,7 +191,19 @@ def show_info_about_attack(attack_id):
     attack = Attack.query.get(attack_id)
     user_info = User.query.get(session["user_id"])
     user_id = user_info.user_id
-    return render_template("attack_detail.html", attack=attack, user_id=user_id)
+
+    attacks = Attack.query.filter_by(user_id=session.get("user_id")).all()
+
+    attack_count = [0]*12
+    for attack in attacks:
+        attack_month = int(attack.attack_date[5:7])
+        attack_count[attack_month-1] += 1
+    print attack_count
+
+
+    return render_template("attack_detail.html", attack=attack,
+                                                 user_id=user_id,
+                                                 attack_count=attack_count)
 
 
 @app.route('/logout')

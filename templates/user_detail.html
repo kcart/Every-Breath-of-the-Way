@@ -5,45 +5,24 @@
 
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkIdo-iCXlnfp1EIWlcJRajxdKk9jIB1waEnl1nuorXWDG5A2phw">
 
-<canvas id="doughnut" width="400" height="400" data-triggercounts="{{ data }}"></canvas>
+<a class="twitter-timeline" href="https://twitter.com/search?q=%40BreatheCAGGPHP" data-widget-id="605076832891731968">Tweets about @BreatheCAGGPHP</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>   
+
 
 <script>
 
 var canvas = document.getElementById("doughnut");
-var myDoughnutChart = new Chart(canvas.getContext("2d")).Doughnut(data,options); 
-
-var data = JSON.parse(canvas.dataset.triggercounts)
-
-</script>
-
-<canvas id="myChart" width="400" height="400"></canvas>
-<script>
-
-
-var ctx = document.getElementById("myChart").getContext("2d");
-var myDoughnutChart = new Chart(ctx[1]).Doughnut(data,options);
 
 var data = [
-    {
-        value: 300,
-        color:"#F7464A",
+        {
+        value: JSON.parse(doughnut.dataset.triggercounts),
+        color: "#F7464A",
         highlight: "#FF5A5E",
-        label: "Red"
-    },
-    {
-        value: 50,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-    },
-    {
-        value: 100,
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Yellow"
-    }
-]
+        label: "Triggers"
+     }
+     ]
 
+var myDoughnutChart = new Chart(dough.getContext("2d")).Doughnut(data,{segmentStrokeColor : "#000000"});
 </script>
 
 
@@ -54,7 +33,8 @@ var data = [
 			<a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a> : Number of Symptoms in attack: <b>{{attack.symptom|count}}</b>,   Number of Triggers in attack: <b>{{attack.possible_trigger|count}} </b>
 		</p>
 	</ul>  
-{% endfor %}
+{% endfor %}  
+
 <form action="/attack" method="GET">
     	<input type="submit" value="Please Log an attack">
 </form>
