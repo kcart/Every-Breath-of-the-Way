@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
 
-<h1>Log your attack:</h1>
+<h1>Please log your incident:</h1>
 
 <form action="/attack", method="POST">
 
@@ -18,19 +18,16 @@
       </script>
      <label> Attack Date:
        <input type="text" name="date" id="datepicker-3" placeholder="yyyy/mm/dd">
-	<br>
-	<br>
+
 	<label>Attack Location:</label>
 		<input type="radio" name="location" value="Home">Home
 		<input type="radio" name="location" value="Outdoors">Outdoors
 		<input type="radio" name="location" value="School">School
 		<input type="radio" name="location" value="Indoor">Indoors
 		<input type="radio" name="location" value="Work">Work
-	<br>
-	<br>
+
 	<label>Triggers:</label>
-	<br>
-	<br>
+
 		<input type="checkbox" name="trigger" value="1">Changes in the Weather
 		<input type="checkbox" name="trigger" value="2">Emotional Exertion
 		<input type="checkbox" name="trigger" value="3">Physical Exertion
@@ -41,11 +38,9 @@
 		<input type="checkbox" name="trigger" value="8">Medication
 		<input type="checkbox" name="trigger" value="9">Dust Mites
 		<input type="checkbox" name="trigger" value="10">Stress
-	<br>
-	<br>		
+		
 	<label>Symptoms:</label>
-	<br>
-	<br>
+
 		<input type= "checkbox" name="symptom" value="1">Loss of Breath
 		<input type= "checkbox" name="symptom" value="2">Lower Peak Flow
 		<input type= "checkbox" name="symptom" value="3">Whistling While Breathing
@@ -54,12 +49,10 @@
 		<input type= "checkbox" name="symptom" value="6">Pale Sweaty Face
 		<input type= "checkbox" name="symptom" value="7">Coughing
 		<input type= "checkbox" name="symptom" value="8">Trouble Walking, or Moving
-	<br>
-	<br>
-		<input type="submit" value="submit">
-	<br>
-	<br>	
+
+		<input type="submit" value="submit">	
 </form>
+
 <form action="/user/{{user_id}}" method="GET">
     	<input type="submit" value="Return to your profile">
 </form>

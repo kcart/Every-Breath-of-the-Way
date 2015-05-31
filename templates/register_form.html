@@ -1,45 +1,47 @@
-{% extends 'base.html' %}
-{% block body %}
+{% extends 'base.html' %} {% block body %}
 
 <h1>Join Breathe today.</h1>
 
-<form action="/register" method="POST">
+
+<form action="/register" method="post">
+    <div class="form-group">
+        <label><input class="form-control" name="email" placeholder=
+        "Email*" type="email"></label>
+    </div>
+
 
     <div class="form-group">
-        <label>
-            <input type="email" name="email" class="form-control" placeholder="Email">
-        </label>
+        <label><input class="form-control" name="first" placeholder=
+        "First Name*" type="text"></label>
     </div>
-    <br>   
-       <div class="form-group">
-        <label>
-            <input type="text" name="first" class="form-control"placeholder="First Name">
-        </label>
-    </div>
-    <br>   
-       <div class="form-group">
-        <label>
-            <input type="text" name="last" class="form-control" placeholder="Last Name">
-        </label>
-    </div>
-    <br>
+
+
     <div class="form-group">
-        <label>
-            <input type="password" name="password" class="form-control" placeholder="Password">
-        </label>
+        <label><input class="form-control" name="last" placeholder=
+        "Last Name*" type="text"></label>
     </div>
-    <br>
+
+
     <div class="form-group">
-        <label>
-            <input type="number" name="age" class="form-control" placeholder="Age">
-        </label>
+        <label><input class="form-control" name="password" placeholder=
+        "Password*" type="password"></label>
     </div>
-    <br>
+
+
     <div class="form-group">
-        <input type="submit" value="Sign up" class="btn btn-register">
-    </div> 
+        <label><input class="form-control" name="age" placeholder="Age*"
+        type="number"></label>
+    </div>
+
+
+    <div class="form-group">
+        <input class="btn btn-register" type="submit" value="Sign up">
+    </div>
+
+    
 </form>
 
-<h6> All fields required.</h6>
+
+<h6>All fields(*) required.</h6>
 
 {% endblock %}

@@ -1,26 +1,31 @@
 {% extends 'base.html' %}
 {% block body %}
 
-    <h1>Already have an account?</h1>
-    <form action="/login" method="POST">
+<h1>Already have an account?</h1>
 
-        <div class="form-group">
-            <label>
-                <input type="email" name="email" required class="form-control" placeholder="Email">    
-            </label>
-        </div>
 
-        <div class="form-group">
-            <label>
-                <input type="password" name="password" required class="form-control"placeholder="Password">
-            </label>
-        </div>
+<form action="/login" method="post">
+    <div class="form-group">
+        <label><input class="form-control" name="email" placeholder=
+        "Email*" required="" type="email"></label>
+    </div>
 
-        <div class="form-group">
-            <input type="submit" value="Log In" class="btn btn-danger">
-        </div>
-    <h5> New to the site? Sign up! <a href="/register">Register</a></h5>
-    </form>
+
+    <div class="form-group">
+        <label><input class="form-control" name="password" placeholder=
+        "Password*" required="" type="password"></label>
+    </div>
+
+
+    <div class="form-group">
+        <input class="btn btn-danger" type="submit" value="Log In">
+    </div>
+
+
+    <h5>New to the site? Sign up! <a href="/register">Register</a></h5>
+</form>
+
     <a class="twitter-timeline" href="https://twitter.com/search?q=%40BreatheCAGGPHP" data-widget-id="605076832891731968">Tweets about @BreatheCAGGPHP</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>   
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+
 {% endblock %}

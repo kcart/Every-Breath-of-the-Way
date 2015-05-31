@@ -1,57 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>Every Breath of the Way</title>
-		{% block head %}
-		{% endblock %}
-<!-- for charts -->
-		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
 
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<html lang="en">
+<head>
+    <title>Every Breath of the Way</title>
+</head>
+
+<body>
+
+    {% block head %}
+    {% endblock %} 
+    
+     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script> 
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script> 
+     <script src="/static/js/maps.js"></script> 
+    <meta content="initial-scale=1.0, user-scalable=no" name="viewport">
     <meta charset="utf-8">
+    s
     <style>
-      html, body, #map-canvas {
+html, body, #map-canvas {
         height: 60%;
         margin: 0px;
         padding: 50px
       }
+
+
+
+    <div id="map-canvas">
+    </div>
+
+
+    <div>
+        {% if "user_id" in session %} <a href=
+        "/user/{{% session['user_id'] }}">Personal Attack Log</a><br>
+        <a href="/logout">Logout</a> {% else %} 
+        <a href="/register">Register</a><br>
+        <a href="/login">Login</a> {% endif %}
+    </div>
+
+    <hr>
+    {% for flash in get_flashed_messages() %} 
+    {{ flash }} 
+    {% endfor %}
+    
+    {% block body %} 
+    {% endblock %}
+    
+    
+    </body>
+    </html>
     </style>
-<!-- weather widget -->
-<!-- 	<a href="http://www.accuweather.com/en/us/new-york-ny/10007/weather-forecast/349727" class="aw-widget-legal">
-
-	</a><div id="awcc1432939079786" class="aw-widget-current"  data-locationkey="" data-unit="f" data-language="en-us" data-useip="false" data-uid="awcc1432939079786"></div><script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script> -->
-	</head>
-
-	<body>
-    	<div id="map-canvas"></div> 
-			<div>
-				
-					{% if "user_id" in session %}
-						<a href="/user/{{ session['user_id'] }}">Personal Attack Log</a>
-            <br>
-						<a href="/logout">Logout</a>
-					{% else %}
-						<a href="/register">Register</a>
-            <br>
-						<a href="/login">Login</a>
-					{% endif %}
-			</div>
-		<hr>
-
-		{% for flash in get_flashed_messages() %}
-		  {{ flash }}
-		{% endfor %}
-		 
-		{% block body %}
-
-		{% endblock %}
-	</body>
-
-<!--  for google map  -->
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
-
-  <script src="/static/js/maps.js"></script>
-
+</body>
 </html>
 
