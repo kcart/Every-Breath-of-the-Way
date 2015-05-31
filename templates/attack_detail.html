@@ -1,27 +1,25 @@
 {% extends 'base.html' %}
 {% block body %}
 
-
-
 <h1>Attack Details: </h1>
-<br>
 
 <p> <b>Attack Date:</b> {{attack.attack_date}}</p>
 <p> <b>Attack Location:</b> {{attack.attack_location}} </p>
-	<br>
-	<br>
-	<p><b> Attack Symptoms:</b></p>
-	{% for s in attack.symptom %}
+
+<p><b> Attack Symptoms:</b></p>
+
+{% for s in attack.symptom %}
 	<p> {{s.symptom_name}}  </p>
-	{% endfor %}
-	<br>
-	<br>
-	<p><b> Attack Triggers:</b></p>
-	{% for a in attack.possible_trigger %}
+{% endfor %}
+
+<p><b> Attack Triggers:</b></p>
+
+{% for a in attack.possible_trigger %}
 	<p> {{a.possible_trigger_name}} : {{a.possible_trigger_type}} </p>
-	{% endfor %}
-<br>
+{% endfor %}
+
 <p>Personal attack frequency:</p>
+
 <canvas id="canvas" height="600" width="750" data-attackcounts="{{ attack_count }}"></canvas>
 
 <script>
@@ -41,13 +39,11 @@ var LineChart = {
 
 var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
 
-
-
 </script>
 
 
 <form action="/user/{{user_id}}" method="GET">
-    	<input type="submit" value="Go Back">
+    <input type="submit" value="Go Back">
 </form>
 
 {% endblock %}

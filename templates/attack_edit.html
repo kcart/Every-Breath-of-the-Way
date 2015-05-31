@@ -2,28 +2,24 @@
 {% block body %}
 
 <h1>Attack Details: </h1>
-<br>
+
 
 <p> Attack Date: {{attack.attack_date}}</p>
 <p> Attack Location: {{attack.attack_location}} </p>
-	<br>
-	<br>
-	<p> Attack Symptoms: </p>
+<p> Attack Symptoms: </p>
+
 	{% for s in attack.symptom %}
-	<p> {{s.symptom_name}}  </p>
+		<p> {{s.symptom_name}}  </p>
 	{% endfor %}
-	<br>
-	<br>
-	<p> Attack Triggers: </p>
+
+<p> Attack Triggers: </p>
+
 	{% for a in attack.possible_trigger %}
-	<p> {{a.possible_trigger_name}} : {{a.possible_trigger_type}} </p>
+		<p> {{a.possible_trigger_name}} : {{a.possible_trigger_type}} </p>
 	{% endfor %}
-<br>
 
 <form action="/user/{{user_id}}" method="GET">
-    	<input type="submit" value="Go Back">
+    <input type="submit" value="Go Back">
 </form>
-
- <!--  <script src="../static/js/jeditable.js"></script> -->
   
 {% endblock %}

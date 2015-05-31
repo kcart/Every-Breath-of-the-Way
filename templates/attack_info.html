@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block body %}
+
 <h2> Your cumulative attack results: <h2>
-<br>
+
 <canvas id="canvas" height="600" width="750" data-attackcounts="{{ attack_count }}"></canvas>
 
 <form action="/attack", methods0=["POST"]>
@@ -9,7 +10,7 @@
 </form>
 
 <form action="/user/{{user_id}}" method="GET">
-    	<input type="submit" value="Return to your profile">
+    <input type="submit" value="Return to your profile">
 </form>
 
 <script>
@@ -28,8 +29,6 @@ var LineChart = {
 }
 
 var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
-
-
 
 </script>
 

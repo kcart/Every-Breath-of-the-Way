@@ -4,7 +4,7 @@ from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
-from model import connect_to_db, db, User, Attack, AttackSymptom, Symptom, AttackTrigger, PossibleTrigger
+from model import connect_to_db, db, User, Attack, AttackSymptom, AttackTrigger
 from collections import Counter
 app = Flask(__name__)
 
@@ -89,7 +89,9 @@ def user_detail(user_id):
     """Show info about user."""
 
     user = User.query.get(user_id)
-    attacks = Attack.query.filter_by(user_id=session.get("user_id")).order_by(Attack.attack_date).all()
+    attacks = Attack.query.filter_by(user_id=session.get("user_id"))\
+                                                    .order_by(Attack.attack_date)\
+                                                    .all()
 
     triggers = []
     for attack in attacks:
@@ -109,8 +111,18 @@ def user_detail(user_id):
         data.append({"label": trigger, "value": triggers_count[trigger]})
     print data
 
-    return render_template("user_detail.html", user=user, attacks=attacks,
-                                            data=data)
+    attacks = Attack.query.filter_by(user_id=session.get("user_id")).all()
+
+    attack_count = [0]*12
+    for attack in attacks:
+        attack_month = int(attack.attack_date[5:7])
+        attack_count[attack_month-1] += 1
+    print attack_count
+
+    return render_template("user_detail.html", user=user,
+                                             attacks=attacks,
+                                            data=data,
+                                            attack_count=attack_count)
 
 
 @app.route("/attack", methods=["GET"])
@@ -138,13 +150,7 @@ def attack_process():
     db.session.add(attack)
     db.session.flush()
 
-    # print attack.attack_id
     attack_id = attack.attack_id
-
-    # print request.form.getlist("trigger")
-    # print request.form.getlist("symptom")
-    # print attack_location
-    # print attack_date
 
     symptoms = request.form.getlist("symptom")
 
@@ -176,12 +182,6 @@ def attack_process():
     return render_template("attack_info.html", user_id=user_id, attack=attack,
                                             attack_count=attack_count)
 
-
-@app.route("/attack/edit", methods="POST")
-def edit_attack(attack_id):
-    """ Edit and existing attack"""
-
-    return
 
 
 @app.route("/info/<int:attack_id>")

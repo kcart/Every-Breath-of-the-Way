@@ -1,55 +1,53 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
-    <title>Every Breath of the Way</title>
-</head>
+    <head>
+        <title>Every Breath of the Way</title>
 
-<body>
+        {% block head %}
+        {% endblock %}
 
-    {% block head %}
-    {% endblock %} 
-    
-     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script> 
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
-     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script> 
-     <script src="/static/js/maps.js"></script> 
-    <meta content="initial-scale=1.0, user-scalable=no" name="viewport">
+        <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+
+        <script src="/static/js/maps.js"></script>
+
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    s
+
     <style>
-html, body, #map-canvas {
+      html, body, #map-canvas {
         height: 60%;
         margin: 0px;
         padding: 50px
       }
-
-
-
-    <div id="map-canvas">
-    </div>
-
-
-    <div>
-        {% if "user_id" in session %} <a href=
-        "/user/{{% session['user_id'] }}">Personal Attack Log</a><br>
-        <a href="/logout">Logout</a> {% else %} 
-        <a href="/register">Register</a><br>
-        <a href="/login">Login</a> {% endif %}
-    </div>
-
-    <hr>
-    {% for flash in get_flashed_messages() %} 
-    {{ flash }} 
-    {% endfor %}
-    
-    {% block body %} 
-    {% endblock %}
-    
-    
-    </body>
-    </html>
     </style>
-</body>
+
+    </head>
+    <body>
+
+        <div id="map-canvas"></div> 
+            <div>
+                    {% if "user_id" in session %}
+                        <a href="/user/{{ session['user_id'] }}">Personal Attack Log</a>
+                        <a href="/logout">Logout</a>
+                    {% else %}
+                        <a href="/register">Register</a>           
+                        <a href="/login">Login</a>
+                    {% endif %}
+            </div>
+        <hr>
+
+        {% for flash in get_flashed_messages() %}
+          {{ flash }}
+        {% endfor %}
+         
+        {% block body %}
+
+        {% endblock %}
+
+    </body>
 </html>
 

@@ -1,8 +1,6 @@
 """ Models and database function for Every Breath of the Way Project"""
 
-
 from flask_sqlalchemy import SQLAlchemy
-
 
 db = SQLAlchemy()
 
@@ -20,7 +18,7 @@ class User(db.Model):
     age = db.Column(db.String(15), nullable=False)
 
     def __repr__(self):
-        """Providing some helpful representation when printed for user profile."""
+        """Provide helpful representation when printed."""
 
         return "<User user_id=%s email=%s password=%s first_name=%s last_name=%s age=%s>" % (
             self.user_id, self.email, self.password, self.first_name,
@@ -42,7 +40,7 @@ class Attack(db.Model):
                            backref=db.backref("attack", order_by=attack_id))
 
     def __repr__(self):
-        """Providing some helpful representation for asthma attacks."""
+        """Provide helpful representation when printed."""
 
         return "<Attack attack_id=%s attack_location=%s user_id=%s>" % (
             self.attack_id, self.attack_location, self.user_id)
@@ -59,8 +57,7 @@ class AttackSymptom(db.Model):
     symptom_id = db.Column(db.Integer, db.ForeignKey('symptom.symptom_id'))
 
     def __repr__(self):
-        """ Providing some helpful representation when printed for attacks and related
-        symptom."""
+        """Provide helpful representation when printed."""
 
         return "<AttackSymptom attack_symptom_id=%s attack_id=%s symptom_id=%s>" % (
             self.attack_symptom_id, self.attack_id, self.symptom_id)
@@ -78,8 +75,7 @@ class Symptom(db.Model):
                                  secondary="attack_symptom")
 
     def __repr__(self):
-        """ Providing some helpful representation when printed for symptom type name,
-         and attack"""
+        """Provide helpful representation when printed."""
 
         return "<Symptom symptom_id=%s symptom_type_name=%s>" % (
             self.symptom_id, self.symptom_name)
@@ -95,7 +91,7 @@ class AttackTrigger(db.Model):
     possible_trigger_id = db.Column(db.Integer, db.ForeignKey('possible_trigger.possible_trigger_id'))
 
     def __repr__(self):
-        """Providing some helpful representation for attacks and triggers."""
+        """Provide helpful representation when printed."""
 
         return "<AttackTrigger attack_triggger_id=%s trigger_id=%s>" % (
             self.attack_triggger_id, self.attack_id, self.trigger_id)
@@ -116,7 +112,7 @@ class PossibleTrigger(db.Model):
                                     secondary="attack_trigger")
 
     def __repr__(self):
-        """Providing some helpful representation for the names of triggers."""
+        """Provide helpful representation when printed."""
 
         return "<PossibleTrigger possible_trigger_id=%s  possible_trigger_name=%s> possible_trigger_type=%s" % (
             self.possible_trigger_id, self.possible_trigger_name,
@@ -127,7 +123,6 @@ class PossibleTrigger(db.Model):
 def connect_to_db(app):
     """Connect the database to my Flask app."""
 
-    # Configure to use our SQLite database
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///breathe.db'
     db.app = app
     db.init_app(app)
