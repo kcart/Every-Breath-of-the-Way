@@ -102,14 +102,16 @@ def user_detail(user_id):
     # print triggers_count
 
     # narrowing down the triggers
-    for k, v in triggers_count.items():
-        print k, v
-    # end
+    # my_list = []
 
-    data = []
-    for trigger in triggers_count:
-        data.append([ trigger, triggers_count[trigger]])
-    print data
+    # for k, v in triggers_count.items():
+    #     m =  [k,v]
+    #     my_list.append(m)
+
+    # data = []
+    # for trigger in triggers_count:
+    #     data.append(triggers_count[trigger])
+    # print data
 
     attacks = Attack.query.filter_by(user_id=session.get("user_id")).all()
 
