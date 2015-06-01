@@ -1,42 +1,48 @@
 <!DOCTYPE html>
-
 <html lang="en">
     <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+
         <title>Every Breath of the Way</title>
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstra
+        <p.min.css" rel="stylesheet"> <!-- link href="/static/project.css" -->
+        <rel="stylesheet">
 
         {% block head %}
         {% endblock %}
 
+
         <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
-
         <script src="/static/js/maps.js"></script>
 
 
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-
-    <style>
-      html, body, #map-canvas {
-        height: 60%;
-        margin: 0px;
-        padding: 50px
-      }
-    </style>
+        <style>
+          html, body, #map-canvas {
+            height: 60%;
+            margin: 0px;
+            padding: 50px
+          }
+        </style>
 
     </head>
-    <body>
 
+    <body>
         <div id="map-canvas"></div> 
             <div>
-                    {% if "user_id" in session %}
-                        <a href="/user/{{ session['user_id'] }}">Personal Attack Log</a>
-                        <a href="/logout">Logout</a>
-                    {% else %}
-                        <a href="/register">Register</a>           
-                        <a href="/login">Login</a>
-                    {% endif %}
+                
+                {% if "user_id" in session %}
+                    <a href="/user/{{ session['user_id'] }}">Personal Attack Log</a>
+                <br>
+                    <a href="/logout">Logout</a>
+                {% else %}
+                    <a href="/register">Register</a>
+                 <br>
+                    <a href="/login">Login</a>
+                {% endif %}
             </div>
         <hr>
 
@@ -45,9 +51,8 @@
         {% endfor %}
          
         {% block body %}
-
         {% endblock %}
 
     </body>
-</html>
 
+</html>

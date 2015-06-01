@@ -99,7 +99,7 @@ def user_detail(user_id):
 
     triggers = [trigger.possible_trigger_name for trigger in triggers]
     triggers_count = Counter(triggers)
-    print triggers_count
+    # print triggers_count
 
     # narrowing down the triggers
     for k, v in triggers_count.items():
@@ -108,7 +108,7 @@ def user_detail(user_id):
 
     data = []
     for trigger in triggers_count:
-        data.append({"label": trigger, "value": triggers_count[trigger]})
+        data.append([ trigger, triggers_count[trigger]])
     print data
 
     attacks = Attack.query.filter_by(user_id=session.get("user_id")).all()
@@ -117,7 +117,7 @@ def user_detail(user_id):
     for attack in attacks:
         attack_month = int(attack.attack_date[5:7])
         attack_count[attack_month-1] += 1
-    print attack_count
+    # print attack_count
 
     return render_template("user_detail.html", user=user,
                                              attacks=attacks,
