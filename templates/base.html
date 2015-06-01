@@ -5,14 +5,13 @@
         <meta charset="utf-8">
 
         <title>Every Breath of the Way</title>
+             
 
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstra
-        <p.min.css" rel="stylesheet"> <!-- link href="/static/project.css" -->
-        <rel="stylesheet">
-
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/breathe.css" rel="stylesheet">
+         
         {% block head %}
         {% endblock %}
-
 
         <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
@@ -20,18 +19,12 @@
         <script src="/static/js/maps.js"></script>
 
 
-        <style>
-          html, body, #map-canvas {
-            height: 60%;
-            margin: 0px;
-            padding: 50px
-          }
-        </style>
-
     </head>
 
     <body>
-        <div id="map-canvas"></div> 
+        <div class="container-fluid"> close this div right before the end of body
+            navbar above the map
+        <div id="map-canvas"></div>
             <div>
                 
                 {% if "user_id" in session %}
@@ -45,14 +38,15 @@
                 {% endif %}
             </div>
         <hr>
-
+        div row around flash 
         {% for flash in get_flashed_messages() %}
           {{ flash }}
         {% endfor %}
          
         {% block body %}
         {% endblock %}
-
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </body>
     </body>
 
 </html>

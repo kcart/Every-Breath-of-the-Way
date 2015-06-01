@@ -123,7 +123,6 @@ def user_detail(user_id):
 
     return render_template("user_detail.html", user=user,
                                              attacks=attacks,
-                                            data=data,
                                             attack_count=attack_count)
 
 
