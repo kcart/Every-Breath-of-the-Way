@@ -1,35 +1,43 @@
 {% extends 'base.html' %}
 {% block body %}
 
-<h2> Your cumulative attack results: <h2>
+<div class="row">
+    <h2> Your cumulative attack results: <h2>
+</div>
 
-<canvas id="canvas" height="600" width="750" data-attackcounts="{{ attack_count }}"></canvas>
+<div class="row">
+    <canvas id="canvas" height="600" width="750" data-attackcounts="{{ attack_count }}"></canvas>
 
-<form action="/attack", methods0=["POST"]>
-	<input type="Submit" value="Log another attack">
-</form>
+    <script>
 
-<form action="/user/{{user_id}}" method="GET">
-    <input type="submit" value="Return to your profile">
-</form>
+    var canvas = document.getElementById("canvas");
 
-<script>
+    var LineChart = {
+        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"],
+        datasets: [{
+            fillColor: "rgba(151,249,190,0.5)",
+            strokeColor: "rgba(255,255,255,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            data: JSON.parse(canvas.dataset.attackcounts)
+        }]
+    }
 
-var canvas = document.getElementById("canvas");
+    var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
 
-var LineChart = {
-    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"],
-    datasets: [{
-        fillColor: "rgba(151,249,190,0.5)",
-        strokeColor: "rgba(255,255,255,1)",
-        pointColor: "rgba(220,220,220,1)",
-        pointStrokeColor: "#fff",
-        data: JSON.parse(canvas.dataset.attackcounts)
-    }]
-}
+    </script>
+</div>
 
-var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
+<div class="row">
+    <form action="/attack", methods0=["POST"]>
+    	<input type="Submit" value="Log another attack">
+    </form>
+</div>
 
-</script>
+<div class="row">
+    <form action="/user/{{user_id}}" method="GET">
+        <input type="submit" value="Return to your profile">
+    </form>
+</div>
 
 {% endblock %}

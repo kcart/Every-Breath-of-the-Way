@@ -1,49 +1,53 @@
 {% extends 'base.html' %}
 {% block body %}
 
-<h1> {{user.first_name}}'s Log </h1>
+<div class="row">
+    <h1> {{user.first_name}}'s Log </h1>
+</div>
 
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkIdo-iCXlnfp1EIWlcJRajxdKk9jIB1waEnl1nuorXWDG5A2phw">
+<div class="row">
+    {% for attack in attacks%}
+        <ul>
+            <p>
+                <a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a> : Number of Symptoms in attack: <b>{{attack.symptom|count}}</b>,   Number of Triggers in attack: <b>{{attack.possible_trigger|count}} </b>
+            </p>
+        </ul>  
+    {% endfor %} 
+</div>
 
-<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=%40BreatheBetter" data-widget-id="605075275345371136">Tweets about @BreatheBetter</a>
+<div class="row">
+    <canvas id="canvas" height="600" width="750" data-attackcounts="{{ attack_count }}"></canvas>
 
+    <script>
 
-{% for attack in attacks%}
-    <ul>
-        <p>
-            <a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a> : Number of Symptoms in attack: <b>{{attack.symptom|count}}</b>,   Number of Triggers in attack: <b>{{attack.possible_trigger|count}} </b>
-        </p>
-    </ul>  
-{% endfor %} 
+    var canvas = document.getElementById("canvas");
 
-<canvas id="canvas" height="600" width="750" data-attackcounts="{{ attack_count }}"></canvas>
+    var LineChart = {
+        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"],
+        datasets: [{
+            fillColor: "rgba(151,249,190,0.5)",
+            strokeColor: "rgba(255,255,255,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            data: JSON.parse(canvas.dataset.attackcounts)
+        }]
+    }
 
-<script>
+    var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
 
-var canvas = document.getElementById("canvas");
+    </script>
+</div>
 
-var LineChart = {
-    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"],
-    datasets: [{
-        fillColor: "rgba(151,249,190,0.5)",
-        strokeColor: "rgba(255,255,255,1)",
-        pointColor: "rgba(220,220,220,1)",
-        pointStrokeColor: "#fff",
-        data: JSON.parse(canvas.dataset.attackcounts)
-    }]
-}
+<div class= "row">
+    <form action="/attack" method="GET">
+        <input type="submit" value="Please Log an attack">
+    </form>
+</div>
 
-var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
+<div class="row">
+    <form action="/" method="GET">
+            <input type="submit" value="Homepage">
+    </form>
+</div>
 
-</script>
-
-
-<form action="/attack" method="GET">
-    <input type="submit" value="Please Log an attack">
-</form>
-<form action="/" method="GET">
-        <input type="submit" value="Homepage">
-</form>
-
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> 
 {% endblock %}

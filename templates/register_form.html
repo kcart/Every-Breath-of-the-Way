@@ -2,46 +2,40 @@
 
 <h1>Join Breathe today.</h1>
 
+<div class="row">
+    <form action="/register" method="post">
+        <div class="form-group">
+            <label><input class="form-control" name="email" placeholder=
+            "Email*" type="email"></label>
+        </div>
 
-<form action="/register" method="post">
-    <div class="form-group">
-        <label><input class="form-control" name="email" placeholder=
-        "Email*" type="email"></label>
-    </div>
+        <div class="form-group">
+            <label><input class="form-control" name="first" placeholder=
+            "First Name*" type="text"></label>
+        </div>
 
+        <div class="form-group">
+            <label><input class="form-control" name="last" placeholder=
+            "Last Name*" type="text"></label>
+        </div>
 
-    <div class="form-group">
-        <label><input class="form-control" name="first" placeholder=
-        "First Name*" type="text"></label>
-    </div>
+        <div class="form-group">
+            <label><input class="form-control" name="password" placeholder=
+            "Password*" type="password"></label>
+        </div>
 
+        <div class="form-group">
+            <label><input class="form-control" name="age" placeholder="Age*"
+            type="number"></label>
+        </div>
 
-    <div class="form-group">
-        <label><input class="form-control" name="last" placeholder=
-        "Last Name*" type="text"></label>
-    </div>
-
-
-    <div class="form-group">
-        <label><input class="form-control" name="password" placeholder=
-        "Password*" type="password"></label>
-    </div>
-
-
-    <div class="form-group">
-        <label><input class="form-control" name="age" placeholder="Age*"
-        type="number"></label>
-    </div>
-
-
-    <div class="form-group">
-        <input class="btn btn-register" type="submit" value="Sign up">
-    </div>
-
-    
-</form>
+        <div class="form-group">
+            <input class="btn btn-register" type="submit" value="Sign up">
+        </div>
+        <h6>All fields(*) required.</h6>
+    </form>
+</div>
 
 
-<h6>All fields(*) required.</h6>
 
 {% endblock %}
