@@ -1,24 +1,38 @@
 {% extends 'base.html' %}
 {% block body %}
-<script src="Chart.js"></script>
 
 <div class="row">
     <h1> {{user.first_name}}'s Log </h1>
 </div>
 
 <div class="row">
-    {% for attack in attacks%}
-        <ul>
-            <p>
-                <a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a> : Number of Symptoms in attack: <b>{{attack.symptom|count}}</b>,   Number of Triggers in attack: <b>{{attack.possible_trigger|count}} </b>
-            </p>
-        </ul>  
-    {% endfor %} 
-</div>
+
+    <h6> Dates, and short summary of your incidents: </h6>
+
+        {% for attack in attacks%} 
+            <table  id="summary" class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Date of Attack:</th>
+                         <th>Number of Symptoms in attack:</th>
+                         <th>Number of Triggers in attack:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> <a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a> </td>
+                        <td> {{attack.symptom|count}} </td>
+                        <td> {{attack.possible_trigger|count}}</td>
+                    </tr>
+                </tbody>
+            </table>  
+        {% endfor %} 
+</div>    
+
 
 <div class="row" id="user-attack-chart">
     <canvas id="canvas" height="600" width="750" data-attackcounts="{{ attack_count }}"></canvas>
-
+    <h6> Your cumulative attacks by month </h6>
         <script>
 
         var canvas = document.getElementById("canvas");
@@ -39,12 +53,10 @@
         </script>
 </div>
 
- <!-- trying the dougnut chart -->
-
 <div class="row" id="user-trigger-count">
 
         <canvas id="triggerChart" width="400" height="400"></canvas>
-
+               <h6> Your cumulative triggers by type </h6>
             <script>
 
             var doughnutData = {{ data | tojson | safe }}; 
@@ -58,8 +70,6 @@
             </script>
 
     </div>
-
-    <!-- end -->
 
 <div class= "row">
     <form action="/attack" method="GET">
