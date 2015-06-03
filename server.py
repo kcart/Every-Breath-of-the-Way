@@ -88,18 +88,31 @@ def login_process():
 def user_detail(user_id):
     """Show info about user."""
 
+    colors_dict = {"Changes in the Weather": {"color": "#F7464A", "highlight": "#FF5A5E"},
+                    "Physical Exertion": {"color": "#46BFBD", "highlight": "#5AD3D1"},
+                    "Dust Mites": {"color": "#FDB45C", "highlight": "#FFC870"},
+                    "Stress": {"color": "#a3f746", "highlight": "#46f79a"},
+                    "Pollen": {"color": "#c28ffa", "highlight": "#9a46f7"},
+                    "Smoke": {"color": "#464bf7", "highlight": "#46a3f7"},
+                    "Seasonal Cold": {"color": "#695elf", "highlight": "#819f70"},
+                    "Medication": {"color": "#a7aeb8", "highlight": "#b9cce3"},
+                    "Emotional Exertion": {"color": "#a73955", "highlight": "#b44359"},
+                    "Strong Odors": {"color": "#b9e9ba", "highlight": "#c5edbb"}
+                    }
+
     user = User.query.get(user_id)
     attacks = Attack.query.filter_by(user_id=session.get("user_id"))\
                                                     .order_by(Attack.attack_date)\
                                                     .all()
 
-    triggers = []
+    triggers_list= []
     for attack in attacks:
-        triggers.extend(attack.possible_trigger)
+        triggers_list.extend(attack.possible_trigger)
 
-    triggers = [trigger.possible_trigger_name for trigger in triggers]
+    triggers = [trigger.possible_trigger_name for trigger in triggers_list]
+    print "Triggers after list comp", triggers
     triggers_count = Counter(triggers)
-    # print triggers_count
+    print "triggers_count", triggers_count
 
     # narrowing down the triggers
     # my_list = []
@@ -108,10 +121,15 @@ def user_detail(user_id):
     #     m =  [k,v]
     #     my_list.append(m)
 
-    # data = []
-    # for trigger in triggers_count:
-    #     data.append(triggers_count[trigger])
-    # print data
+    data = []
+    for trigger in triggers_count:
+        d = {}
+        d['value'] = triggers_count[trigger]
+        d['highlight'] = colors_dict[trigger]["highlight"]
+        d['color'] = colors_dict[trigger]["color"]
+        d["label"] = trigger
+        data.append(d)
+    print data
 
     attacks = Attack.query.filter_by(user_id=session.get("user_id")).all()
 
@@ -123,7 +141,8 @@ def user_detail(user_id):
 
     return render_template("user_detail.html", user=user,
                                              attacks=attacks,
-                                            attack_count=attack_count)
+                                            attack_count=attack_count,
+                                            data=data)
 
 
 @app.route("/attack", methods=["GET"])
@@ -214,7 +233,6 @@ def logout():
     del session["user_id"]
     flash("You have successfully logged out.")
     return redirect("/login")
-
 
 if __name__ == "__main__":
     app.debug = True

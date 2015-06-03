@@ -1,12 +1,19 @@
 #map-canvas {
             height: 80%;
-            margin: 0px;
-            padding: 76px
+            margin: -15px;
+            padding: 76px;
           }
 
-body {
-    margin: 15px;
+#body-text {
+    margin: 45px;
 }
-row {
+.disqus-widget {
+    background-color: white;
+}
+#weather-forecast {
+    margin: 45px;
+}
+
+#flash-block {
     margin: 15px;
 }
