@@ -7,9 +7,14 @@
 
 <div class="row">
 
-    <h6> Dates, and short summary of your incidents: </h6>
-
-        {% for attack in attacks%} 
+    <h6> Dates, and short summary of your incidents:  </h6>
+    <h6> Click on the attack date for more information about the specific attack</h6>
+        <script>
+        $(document).ready(function() {
+        $('#summary').dataTable();
+        } );
+        </script>
+        
             <table  id="summary" class="table table-condensed">
                 <thead>
                     <tr>
@@ -19,14 +24,16 @@
                     </tr>
                 </thead>
                 <tbody>
+            {% for attack in attacks%} 
                     <tr>
                         <td> <a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a> </td>
                         <td> {{attack.symptom|count}} </td>
                         <td> {{attack.possible_trigger|count}}</td>
                     </tr>
+            {% endfor %}        
                 </tbody>
             </table>  
-        {% endfor %} 
+         
 </div>    
 
 

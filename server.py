@@ -84,7 +84,7 @@ def login_process():
     return redirect("/user/%s" % user.user_id)
 
 
-@app.route("/user/<int:user_id>")
+@app.route("/user/<int:user_id>", methods=['GET'])
 def user_detail(user_id):
     """Show info about user."""
 
@@ -160,6 +160,7 @@ def attack_process():
     """Process the User's new attack."""
 
     attack_date = request.form["date"]
+    print attack_date
     attack_location = request.form["location"]
     user_info = User.query.get(session["user_id"])
     user_id = user_info.user_id
