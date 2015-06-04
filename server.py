@@ -81,11 +81,11 @@ def login_process():
     session["user_id"] = user.user_id
 
     flash("%s, you are logged in." % user.first_name)
-    return redirect("/user/%s" % user.user_id)
+    return redirect("/user")
 
 
-@app.route("/user/<int:user_id>", methods=['GET'])
-def user_detail(user_id):
+@app.route("/user", methods=['GET'])
+def user_detail():
     """Show info about user."""
 
     colors_dict = {"Changes in the Weather": {"color": "#F7464A", "highlight": "#FF5A5E"},
@@ -99,50 +99,55 @@ def user_detail(user_id):
                     "Emotional Exertion": {"color": "#a73955", "highlight": "#b44359"},
                     "Strong Odors": {"color": "#b9e9ba", "highlight": "#c5edbb"}
                     }
+    if "user_id" in session:
 
-    user = User.query.get(user_id)
-    attacks = Attack.query.filter_by(user_id=session.get("user_id"))\
-                                                    .order_by(Attack.attack_date)\
-                                                    .all()
+        user = User.query.get(session.get("user_id"))
 
-    triggers_list= []
-    for attack in attacks:
-        triggers_list.extend(attack.possible_trigger)
+        attacks = Attack.query.filter_by(user_id=session.get("user_id"))\
+                                                        .order_by(Attack.attack_date)\
+                                                        .all()
 
-    triggers = [trigger.possible_trigger_name for trigger in triggers_list]
-    print "Triggers after list comp", triggers
-    triggers_count = Counter(triggers)
-    print "triggers_count", triggers_count
+        triggers_list= []
+        for attack in attacks:
+            triggers_list.extend(attack.possible_trigger)
 
-    # narrowing down the triggers
-    # my_list = []
+        triggers = [trigger.possible_trigger_name for trigger in triggers_list]
+        print "Triggers after list comp", triggers
+        triggers_count = Counter(triggers)
+        print "triggers_count", triggers_count
 
-    # for k, v in triggers_count.items():
-    #     m =  [k,v]
-    #     my_list.append(m)
+        # narrowing down the triggers
+        # my_list = []
 
-    data = []
-    for trigger in triggers_count:
-        d = {}
-        d['value'] = triggers_count[trigger]
-        d['highlight'] = colors_dict[trigger]["highlight"]
-        d['color'] = colors_dict[trigger]["color"]
-        d["label"] = trigger
-        data.append(d)
-    print data
+        # for k, v in triggers_count.items():
+        #     m =  [k,v]
+        #     my_list.append(m)
 
-    attacks = Attack.query.filter_by(user_id=session.get("user_id")).all()
+        data = []
+        for trigger in triggers_count:
+            d = {}
+            d['value'] = triggers_count[trigger]
+            d['highlight'] = colors_dict[trigger]["highlight"]
+            d['color'] = colors_dict[trigger]["color"]
+            d["label"] = trigger
+            data.append(d)
+        print data
 
-    attack_count = [0]*12
-    for attack in attacks:
-        attack_month = int(attack.attack_date[5:7])
-        attack_count[attack_month-1] += 1
-    # print attack_count
+        attacks = Attack.query.filter_by(user_id=session.get("user_id")).all()
 
-    return render_template("user_detail.html", user=user,
-                                             attacks=attacks,
-                                            attack_count=attack_count,
-                                            data=data)
+        attack_count = [0]*12
+        for attack in attacks:
+            attack_month = int(attack.attack_date[5:7])
+            attack_count[attack_month-1] += 1
+        # print attack_count
+
+        return render_template("user_detail.html", user=user,
+                                                 attacks=attacks,
+                                                attack_count=attack_count,
+                                                data=data)
+    else:
+
+        return redirect('/')
 
 
 @app.route("/attack", methods=["GET"])

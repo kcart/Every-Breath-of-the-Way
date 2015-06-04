@@ -18,7 +18,6 @@
         <script src="/static/bootstrap/js//bootstrap.min.js"></script>
 
         <!--  charts -->
-        // <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script> -->
         <script src="/static/js/Chart.js"></script>
         <!-- google maps -->
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
@@ -64,7 +63,7 @@
                         {% if "user_id" in session %}
                             <li class="active"><a href="/">Home</a></li>
                             <li><a href="/attack">Log an Incident</a></li>
-                            <li><a href="/user/{{ session['user_id'] }}">Your Incident Log</a></li>
+                            <li><a href="/user">Your Incident Log</a></li>
                             <li><a href="/logout">Log Out</a></li>
                          {% else %}
                             <li><a href="/login">Log In</a></li>
