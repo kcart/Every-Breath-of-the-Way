@@ -99,6 +99,7 @@ def user_detail():
                     "Emotional Exertion": {"color": "#a73955", "highlight": "#b44359"},
                     "Strong Odors": {"color": "#b9e9ba", "highlight": "#c5edbb"}
                     }
+
     if "user_id" in session:
 
         user = User.query.get(session.get("user_id"))

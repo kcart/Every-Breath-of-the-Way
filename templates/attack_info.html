@@ -30,14 +30,14 @@
 </div>
 
 <div class="row">
-    <form action="/attack", methods0=["POST"]>
-    	<input type="Submit" value="Log another attack">
+    <form action="/attack", methods="POST">
+    	<input type="Submit" class="btn btn-default" value="Log another attack">
     </form>
 </div>
 
 <div class="row">
-    <form action="/user/{{user_id}}" method="GET">
-        <input type="submit" value="Return to your profile">
+    <form action="/user" method="GET">
+        <input type="submit" class="btn btn-default" value="Return to your profile">
     </form>
 </div>
 
