@@ -5,51 +5,51 @@
 </div>
 
 <div class="row" id="charts">
-      <div class="col-xs-4 col-md-6">
-        <canvas id="canvas" height="370" width="370" data-attackcounts="{{ attack_count }}"></canvas>
-        <h6> Your cumulative attacks by month </h6>
-            <script>
+      <div class="col-xs-2 col-md-6">
+            <canvas id="canvas" height="370" width="370" data-attackcounts="{{ attack_count }}"></canvas>
+                <h6> Your cumulative attacks by month </h6>
+                    <script>
 
-            var canvas = document.getElementById("canvas");
+                    var canvas = document.getElementById("canvas");
 
-            var LineChart = {
-                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"],
-                datasets: [{
-                    fillColor: "rgba(151,249,190,0.5)",
-                    strokeColor: "rgba(255,255,255,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    data: JSON.parse(canvas.dataset.attackcounts)
-                }]
-            }
+                    var LineChart = {
+                        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"],
+                        datasets: [{
+                            fillColor: "rgba(151,249,190,0.5)",
+                            strokeColor: "rgba(255,255,255,1)",
+                            pointColor: "rgba(220,220,220,1)",
+                            pointStrokeColor: "#fff",
+                            data: JSON.parse(canvas.dataset.attackcounts)
+                        }]
+                    }
 
-            var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
-            </script>
+                    var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
+                    </script>
         </div>
-         <div class="col-xs-4 col-md-6">
+         <div class="col-xs-2 col-md-6">
             <canvas id="triggerChart" width="300" height="300"></canvas>
-                   <h6> Your cumulative triggers by type </h6>
-                <script>
+                <h6> Your cumulative triggers by type </h6>
+                    <script>
 
-                var doughnutData = {{ data | tojson | safe }}; 
+                    var doughnutData = {{ data | tojson | safe }}; 
 
-                console.log(doughnutData);
-                var context = document.getElementById('triggerChart').getContext('2d');
-                var triggersChart = new Chart(context).Doughnut(doughnutData, {
-        animateScale: true
-    });
-                </script>
+                    console.log(doughnutData);
+                    var context = document.getElementById('triggerChart').getContext('2d');
+                    var triggersChart = new Chart(context).Doughnut(doughnutData, {
+            animateScale: true
+        });
+                    </script>
         </div>        
 </div>
 
 <div class="row">
+
     <h6> Click on the attack date for more information about the specific attack</h6>
         <script>
         $(document).ready(function() {
         $('#summary').DataTable();
         } );
         </script>
-        
             <table  id="summary" class="table table-condensed">
                 <thead>
                     <tr>
@@ -68,17 +68,11 @@
             {% endfor %}        
                 </tbody>
             </table>  
-         
 </div>    
-
 <div class= "row">
     <form action="/attack" method="GET">
         <input type="submit"  class="btn btn-success btn-block" value="Log an attack">
     </form>
 </div>
-
-
-
-
 
 {% endblock %}

@@ -1,68 +1,57 @@
 {% extends 'base.html' %}
 {% block body %}
 
-<!-- I want to have little icons associated with each row of attack-detail information -->
-
+<div class="row" id= "date-specific-attack">
+	<div class="col-xs-4 col-md-6">
+		<h1>Attack Details: </h1>
+			<table  id="summary" class="table table-condensed">
+		                <thead>
+		                    <tr>
+		                        <th>Date of Attack:</th>
+		                         <th>Symptoms in your attack:</th>
+		                         <th>Triggers in your attack:</th>
+		                         <th> Attack location </th>
+		                    </tr>
+		                </thead>
+		                <tbody>
+		                    <tr>
+		                        <td> {{attack.attack_date}} </td>
+		                        {% for s in attack.symptom %}
+		                        	<td> {{s.symptom_name}} </td>
+		                        {% endfor %}
+		                        {% for a in attack.possible_trigger %}
+		                        	<td> {{a.possible_trigger_name}} </td>
+		                        {% endfor %}
+		                        <td> {{attack.attack_location}} </td>
+		                    </tr>      
+		                </tbody>
+		            </table>  
+	</div>	            
+</div>
 <div class="row">
-	<h1>Attack Details: </h1>
+	<div class="col-xs-4 col-md-6">
+		<p>Personal attack frequency:</p>
+		<canvas id="canvas" height="300" width="350" data-attackcounts="{{ attack_count }}">
+		</canvas>
+			<script>
+			var canvas = document.getElementById("canvas");
+			var LineChart = {
+			    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"],
+			    datasets: [{
+			        fillColor: "rgba(151,249,190,0.5)",
+			        strokeColor: "rgba(255,255,255,1)",
+			        pointColor: "rgba(220,220,220,1)",
+			        pointStrokeColor: "#fff",
+			        data: JSON.parse(canvas.dataset.attackcounts)
+			    }]
+			}
+			var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
+			</script>
+	</div>
 </div>
-
-<div class="row">
-	<p> <b>Attack Date:</b> {{attack.attack_date}}</p>
-</div>
-
-<div class="row">	
-	<p> <b>Attack Location:</b> {{attack.attack_location}} </p>
-</div>
-
-<div class="row">	
-	<p><b> Attack Symptoms:</b></p>
-
-	{% for s in attack.symptom %}
-		<p> {{s.symptom_name}}  </p>
-	{% endfor %}
-</div>
-
-<div class"row">
-	<p><b> Attack Triggers:</b></p>
-
-	{% for a in attack.possible_trigger %}
-		<p> {{a.possible_trigger_name}} : {{a.possible_trigger_type}} </p>
-	{% endfor %}	
-</div>
-
-
-
-
-<div class="row">
-	<p>Personal attack frequency:</p>
-
-	<canvas id="canvas" height="300" width="350" data-attackcounts="{{ attack_count }}">
-	</canvas>
-
-	<script>
-
-	var canvas = document.getElementById("canvas");
-
-	var LineChart = {
-	    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"],
-	    datasets: [{
-	        fillColor: "rgba(151,249,190,0.5)",
-	        strokeColor: "rgba(255,255,255,1)",
-	        pointColor: "rgba(220,220,220,1)",
-	        pointStrokeColor: "#fff",
-	        data: JSON.parse(canvas.dataset.attackcounts)
-	    }]
-	}
-
-	var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
-
-	</script>
-</div>
-
 <div class="row">
 	<form action="/user" method="GET">
-	    <input type="submit" class="btn btn-default" value="Go Back">
+	    <input type="submit" class="btn btn-info" value="Go Back">
 	</form>
 </div>
 
