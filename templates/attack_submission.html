@@ -7,28 +7,31 @@
  <br>
 <div class="row">
 	<div class="form-group">
-		<div class="col-xs-2 col-md-6">
+		<div class="col-xs-2 col-md-12">
 			<form action="/attack", method="POST">
 			     <label for="userInputAttack"> Attack Date:</label>
 			     	<br>
-			       <input type="text" class="form-control input-sm" id="datepicker" placeholder="yyyy/mm/dd">
+			       <input type="text" name="date" id="datepicker">
 			       <!-- trying to get datepicker to work  -->
-			       		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-					  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-					  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-					  <link rel="stylesheet" href="/resources/demos/style.css">
-						 <script>
-					       $(function() {
-           						$( "#datepicker" ).datepicker({
-             						dateFormat:"yy-mm-dd"               
-         						});
-        					}); 
-        				</script>				
+			       	    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+					    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+					    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+					    <link rel="stylesheet" href="/resources/demos/style.css">
+							 <script>
+						       $(function() {
+	           						$( "#datepicker" ).datepicker({
+	             						dateFormat:"yy-mm-dd"               
+	         						});
+	        					}); 
+	        				</script>				
 		</div>
 
 	</div>
-
-	<div class ="form-group">		
+			<br>
+			<br>
+	<div class ="form-group">
+			<br>
+			<br>
 		<label for="userInputLocation">Attack Location:</label>
 			<input type="radio" name="location" value="Home">Home
 			<input type="radio" name="location" value="Outdoors">Outdoors
@@ -36,8 +39,6 @@
 			<input type="radio" name="location" value="Indoor">Indoors
 			<input type="radio" name="location" value="Work">Work
 	</div>	
-			<br>
-			<br>
 			<label>Triggers:</label>
 				<div class ="form-group">
 					<input type="checkbox" name="trigger" value="1">Changes in the Weather
