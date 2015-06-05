@@ -61,7 +61,7 @@
                 <tbody>
             {% for attack in attacks%} 
                     <tr>
-                        <td> <button type="button"><a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a></button> </td>
+                        <td> <button type="button" class="btn btn-default"><a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a></button> </td>
                         <td> {{attack.symptom|count}} </td>
                         <td> {{attack.possible_trigger|count}}</td>
                     </tr>
@@ -73,7 +73,7 @@
 
 <div class= "row">
     <form action="/attack" method="GET">
-        <input type="submit"  class="btn btn-default" value="Log an attack">
+        <input type="submit"  class="btn btn-success btn-block" value="Log an attack">
     </form>
 </div>
 

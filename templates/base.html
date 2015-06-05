@@ -63,7 +63,7 @@
                         {% if "user_id" in session %}
                             <li class="active"><a href="/">Home</a></li>
                             <li><a href="/attack">Log an Incident</a></li>
-                            <li><a href="/user">Your Attack Dashboard</a></li>
+                            <li><a href="/user">Your Incident Dashboard</a></li>
                             <li><a href="/logout">Log Out</a></li>
                          {% else %}
                             <li><a href="/login">Log In</a></li>
@@ -80,13 +80,11 @@
                   </div>
                 {% endfor %}  
             </div>
-
             <div class="row" id="body-text">
                 <script src="static/jquery-2.1.4.min.js"></script> 
                 {% block body %}
                 {% endblock %}
-            </div>
-                
+            </div>      
             <footer><p class="text-muted" align="center">Copyright Every Breath of the Way | Kathleen Eve's HB Final Project 2015 | All Rights Reserved</p></footer>    
                     <!-- datatables -->
         <link href="/static/js/DataTable/media/css/jquery.dataTables.min.css" rel="stylesheet">

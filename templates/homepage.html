@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 {% block body %}
-
+<div class="row">
+    <div class="jumbotron">
+  <h1>Hello, Asthma Warriors!</h1>
+  <p>  You can suffer from Asthma, or you can start to have it under control. Scientific studies show that the health problems faced by asthma sufferers can be almost completely brought under control with careful maintanence. We are here to help! 
+    Every Breath of the Way is a personalized tool for you to gain greater insight into your asthma. We provide you with an online up-to-date log of your health with your own dashboard of information regarding attacks.</p>
+  <p><a class="btn btn-primary btn-lg" href="/register" role="button">Join Us</a></p>
+</div>
+</div>
 <h1 class="homepage-title"> Every Breath of the Way</h1>
-
-
-
+<br>
 <div class="row">
     <div class="col-xs-4 col-md-6">
         <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=%40BreatheBetter" data-widget-id="605075275345371136">Tweets about @BreatheBetter</a>
@@ -28,12 +33,6 @@
             <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
             </div>
     </div>
-</div>
-
-<div class="row">
-    <form action="/attack", methods="POST">
-        <input type="Submit" class="btn btn-default" value="Log another attack">
-    </form>
 </div>
 
 
