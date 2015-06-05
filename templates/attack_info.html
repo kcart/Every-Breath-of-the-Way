@@ -2,31 +2,33 @@
 {% block body %}
 
 <div class="row">
-    <h2> Your cumulative attack results: <h2>
+    <h2> Your cumulative incident results: <h2>
 </div>
 
 
 <div class="row">
-    <canvas id="canvas" height="300" width="350" data-attackcounts="{{ attack_count }}"></canvas>
+    <div class="col-xs-4 col-md-6">
+        <canvas id="canvas" height="300" width="350" data-attackcounts="{{ attack_count }}"></canvas>
 
-    <script>
+            <script>
 
-    var canvas = document.getElementById("canvas");
+                var canvas = document.getElementById("canvas");
 
-    var LineChart = {
-        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"],
-        datasets: [{
-            fillColor: "rgba(151,249,190,0.5)",
-            strokeColor: "rgba(255,255,255,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            data: JSON.parse(canvas.dataset.attackcounts)
-        }]
-    }
+                var LineChart = {
+                    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"],
+                    datasets: [{
+                        fillColor: "rgba(151,249,190,0.5)",
+                        strokeColor: "rgba(255,255,255,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        data: JSON.parse(canvas.dataset.attackcounts)
+                    }]
+                }
 
-    var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
+                var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
 
-    </script>
+            </script>
+        </div>
 </div>
 
 <div class="row">

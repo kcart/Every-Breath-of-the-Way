@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
 <div class="row">
-    <h1> {{user.first_name}}'s Attack Dashboard: </h1>
+    <h1> {{user.first_name}}'s Incident Dashboard: </h1>
 </div>
 
 <div class="row" id="charts">
@@ -61,7 +61,7 @@
                 <tbody>
             {% for attack in attacks%} 
                     <tr>
-                        <td> <a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a> </td>
+                        <td> <button type="button"><a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a></button> </td>
                         <td> {{attack.symptom|count}} </td>
                         <td> {{attack.possible_trigger|count}}</td>
                     </tr>
@@ -70,9 +70,6 @@
             </table>  
          
 </div>    
-
-<!-- make the dates into a button with the button type
- -->
 
 <div class= "row">
     <form action="/attack" method="GET">

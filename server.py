@@ -40,7 +40,6 @@ def register_process():
     clear_password = request.form["password"]
 
     password = SHA256.new(clear_password).hexdigest()
-    print password
 
     age = int(request.form["age"])
 
@@ -77,7 +76,6 @@ def login_process():
     user = User.query.filter_by(email=email).first()
 
     def check_password(password, hash_password):
-        print password, hash_password
         return SHA256.new(password).hexdigest() == hash_password
 
     if not user:
@@ -235,7 +233,6 @@ def show_info_about_attack(attack_id):
     for attack in attacks:
         attack_month = int(attack.attack_date[5:7])
         attack_count[attack_month-1] += 1
-    print attack_count
 
 
     return render_template("attack_detail.html", attack=attack,
@@ -252,7 +249,7 @@ def logout():
     return redirect("/")
 
 if __name__ == "__main__":
-    app.debug = False
+    app.debug = True
 
     connect_to_db(app)
 
