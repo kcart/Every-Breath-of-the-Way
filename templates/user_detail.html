@@ -1,13 +1,48 @@
 {% extends 'base.html' %}
 {% block body %}
-
 <div class="row">
-    <h1> {{user.first_name}}'s Log </h1>
+    <h1> {{user.first_name}}'s Attack Dashboard: </h1>
+</div>
+
+<div class="row" id="charts">
+      <div class="col-xs-4 col-md-6">
+        <canvas id="canvas" height="370" width="370" data-attackcounts="{{ attack_count }}"></canvas>
+        <h6> Your cumulative attacks by month </h6>
+            <script>
+
+            var canvas = document.getElementById("canvas");
+
+            var LineChart = {
+                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"],
+                datasets: [{
+                    fillColor: "rgba(151,249,190,0.5)",
+                    strokeColor: "rgba(255,255,255,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    data: JSON.parse(canvas.dataset.attackcounts)
+                }]
+            }
+
+            var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
+            </script>
+        </div>
+         <div class="col-xs-4 col-md-6">
+            <canvas id="triggerChart" width="300" height="300"></canvas>
+                   <h6> Your cumulative triggers by type </h6>
+                <script>
+
+                var doughnutData = {{ data | tojson | safe }}; 
+
+                console.log(doughnutData);
+                var context = document.getElementById('triggerChart').getContext('2d');
+                var triggersChart = new Chart(context).Doughnut(doughnutData, {
+        animateScale: true
+    });
+                </script>
+        </div>        
 </div>
 
 <div class="row">
-
-    <h6> Dates, and short summary of your incidents:  </h6>
     <h6> Click on the attack date for more information about the specific attack</h6>
         <script>
         $(document).ready(function() {
@@ -36,47 +71,8 @@
          
 </div>    
 
-
-<div class="row" id="user-attack-chart">
-    <canvas id="canvas" height="600" width="750" data-attackcounts="{{ attack_count }}"></canvas>
-    <h6> Your cumulative attacks by month </h6>
-        <script>
-
-        var canvas = document.getElementById("canvas");
-
-        var LineChart = {
-            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"],
-            datasets: [{
-                fillColor: "rgba(151,249,190,0.5)",
-                strokeColor: "rgba(255,255,255,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                data: JSON.parse(canvas.dataset.attackcounts)
-            }]
-        }
-
-        var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
-
-        </script>
-</div>
-
-<div class="row" id="user-trigger-count">
-
-        <canvas id="triggerChart" width="400" height="400"></canvas>
-               <h6> Your cumulative triggers by type </h6>
-            <script>
-
-            var doughnutData = {{ data | tojson | safe }}; 
-
-            console.log(doughnutData);
-            var context = document.getElementById('triggerChart').getContext('2d');
-            var triggersChart = new Chart(context).Doughnut(doughnutData, {
-    animateScale: true
-});
-
-            </script>
-
-    </div>
+<!-- make the dates into a button with the button type
+ -->
 
 <div class= "row">
     <form action="/attack" method="GET">

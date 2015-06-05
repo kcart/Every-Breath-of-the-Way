@@ -6,6 +6,8 @@ from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, Attack, AttackSymptom, AttackTrigger
 from collections import Counter
+from Crypto.Hash import SHA256
+
 app = Flask(__name__)
 
 app.jinja_env.undefined = StrictUndefined
@@ -35,7 +37,11 @@ def register_process():
     email = unprocessed_email.lower()
     first_name = request.form["first"]
     last_name = request.form["last"]
-    password = request.form["password"]
+    clear_password = request.form["password"]
+
+    password = SHA256.new(clear_password).hexdigest()
+    print password
+
     age = int(request.form["age"])
 
     if User.query.filter_by(email=email).first():
@@ -70,11 +76,15 @@ def login_process():
 
     user = User.query.filter_by(email=email).first()
 
+    def check_password(password, hash_password):
+        print password, hash_password
+        return SHA256.new(password).hexdigest() == hash_password
+
     if not user:
         flash("Password not found. Please Register.")
         return redirect("/login")
 
-    if user.password != password:
+    if check_password(password, user.password) is False:
         flash("Incorrect password")
         return redirect("/login")
 
@@ -239,7 +249,7 @@ def logout():
 
     del session["user_id"]
     flash("You have successfully logged out.")
-    return redirect("/login")
+    return redirect("/")
 
 if __name__ == "__main__":
     app.debug = True
