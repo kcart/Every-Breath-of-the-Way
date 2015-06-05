@@ -11,14 +11,21 @@
 			<form action="/attack", method="POST">
 			     <label for="userInputAttack"> Attack Date:</label>
 			     	<br>
-			       <input type="datepicker" class="form-control input-sm" name="date" id="datepicker" placeholder="yyyy/mm/dd">
-			       <script>
-			       $('.datepicker').datepicker({
-	    			format: 'yyyy/mm/dd',
-	    			startDate: '-3d'
-					})
-			       	</script>
+			       <input type="text" class="form-control input-sm" id="datepicker" placeholder="yyyy/mm/dd">
+			       <!-- trying to get datepicker to work  -->
+			       		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+					  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+					  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+					  <link rel="stylesheet" href="/resources/demos/style.css">
+						 <script>
+					       $(function() {
+           						$( "#datepicker" ).datepicker({
+             						dateFormat:"yy-mm-dd"               
+         						});
+        					}); 
+        				</script>				
 		</div>
+
 	</div>
 
 	<div class ="form-group">		
