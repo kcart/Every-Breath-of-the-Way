@@ -4,14 +4,12 @@
 <div class="row">
 	<h1>Log your attack:</h1>
 </div>
-
+ <br>
 <div class="row">
 	<div class="form-group">
 		<form action="/attack", method="POST">
-
-
-
-		     <label> Attack Date:
+		     <label for="userInputAttack"> Attack Date:</label>
+		     	<br>
 		       <input type="datepicker" class="form-control" name="date" id="datepicker" placeholder="yyyy/mm/dd">
 		       <script>
 		       $('.datepicker').datepicker({
@@ -19,17 +17,15 @@
     			startDate: '-3d'
 				})
 		       	</script>
-
-			<br>
-			<br>
-			<label>Attack Location:</label>
-				<div class ="form-group">
-					<input type="radio" name="location" value="Home">Home
-					<input type="radio" name="location" value="Outdoors">Outdoors
-					<input type="radio" name="location" value="School">School
-					<input type="radio" name="location" value="Indoor">Indoors
-					<input type="radio" name="location" value="Work">Work
-				</div>	
+	</div>
+	<div class ="form-group">		
+		<label for="userInputLocation">Attack Location:</label>
+			<input type="radio" name="location" value="Home">Home
+			<input type="radio" name="location" value="Outdoors">Outdoors
+			<input type="radio" name="location" value="School">School
+			<input type="radio" name="location" value="Indoor">Indoors
+			<input type="radio" name="location" value="Work">Work
+	</div>	
 			<br>
 			<br>
 			<label>Triggers:</label>
@@ -66,12 +62,5 @@
 		</form>
    </div>
 </div>
-
-<div class="row">
-	<form action="/user" method="GET">
-	    	<input type="submit" class="btn btn-default" value="Return to your profile">
-	</form>
-</div>
-
 
 {% endblock %}
