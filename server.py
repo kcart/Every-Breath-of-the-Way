@@ -102,7 +102,7 @@ def user_detail():
                     "Stress": {"color": "#a3f746", "highlight": "#46f79a"},
                     "Pollen": {"color": "#c28ffa", "highlight": "#9a46f7"},
                     "Smoke": {"color": "#464bf7", "highlight": "#46a3f7"},
-                    "Seasonal Cold": {"color": "#695elf", "highlight": "#819f70"},
+                    "Seasonal Cold": {"color": "#000000", "highlight": "#819f70"},
                     "Medication": {"color": "#a7aeb8", "highlight": "#b9cce3"},
                     "Emotional Exertion": {"color": "#a73955", "highlight": "#b44359"},
                     "Strong Odors": {"color": "#b9e9ba", "highlight": "#c5edbb"}

@@ -10,13 +10,9 @@
 .disqus-widget {
     background-color: white;
 }
-#weather-forecast {
-    margin: 45px;
-}
-
 #flash-block {
     margin: 15px;
 }
-#jumbotron {
-    padding:-10px;
+#page-header {
+    margin: -10px;
 }
