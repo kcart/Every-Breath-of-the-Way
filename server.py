@@ -139,6 +139,7 @@ def user_detail():
             attack_month = int(attack.attack_date[5:7])
             attack_count[attack_month-1] += 1
 
+
         return render_template("user_detail.html", user=user,
                                                  attacks=attacks,
                                                 attack_count=attack_count,

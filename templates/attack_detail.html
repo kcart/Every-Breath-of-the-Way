@@ -17,7 +17,9 @@
 		                    <tr>
 		                        <td> {{attack.attack_date}} </td>
 		                        {% for s in attack.symptom %}
-		                        	<td> {{s.symptom_name}} </td>
+		                        	 {{ for s.symptom_name}} 
+		                        	 	<td></td>
+		                        	 {{% endfor %}}
 		                        {% endfor %}
 		                        {% for a in attack.possible_trigger %}
 		                        	<td> {{a.possible_trigger_name}} </td>
