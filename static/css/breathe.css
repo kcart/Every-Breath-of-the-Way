@@ -20,3 +20,19 @@
     padding: 50px;
     margin: 20px;
 }
+#warrior {
+    padding: 24px;
+}
+#jumbojoin {
+    margin:24px;
+}
+
+
+#attacklocation, #attackdate, #attacktriggers, #attacksymptoms1, #attacksymptoms2{
+    padding: 10px;
+    margin:5px;
+}
+
+#symptom {
+    margin: 5px;
+}

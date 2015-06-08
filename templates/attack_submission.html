@@ -6,12 +6,13 @@
   <h2> Log an incident. <small> Track important details about the attack: </small></h2>
     </div>
  <br>
+
 <div class="row">
-	<div class="form-group">
-		<div class="col-xs-2 col-md-2">
-			<form action="/attack", method="POST">
-			     <!-- <label for="userInputAttack"> Attack Date:</label> -->
-			     	<br>
+	<div class="well well-lg" id="attack-form">
+
+		<form action="/attack", method="POST">       	
+			<div id="attackdate">  
+				<label>Attack Date:</label>   	
 			       <input type="text" name="date" id="datepicker" placeholder="Attack Date">
 			       <!-- datepicker  -->
 			       	    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -26,18 +27,15 @@
 	        					}); 
 	        				</script>				
 		</div>
-</div>
-<div class="row">
-	<div class= "col-md-8">
-		<div>
-			<label for="userInputLocation">Attack Location:</label>
+		<div id="attacklocation">
+			<label>Attack Location:</label>
 				<input type="radio" name="location" value="Home">Home
 				<input type="radio" name="location" value="Outdoors">Outdoors
 				<input type="radio" name="location" value="School">School
 				<input type="radio" name="location" value="Indoor">Indoors
 				<input type="radio" name="location" value="Work">Work
 		</div>		
-		<div>
+		<div id="attacktriggers">
 			<label>Triggers:</label>
 				<input type="checkbox" name="trigger" value="1">Changes in the Weather
 				<input type="checkbox" name="trigger" value="2">Emotional Exertion
@@ -49,21 +47,33 @@
 				<input type="checkbox" name="trigger" value="8">Medication
 				<input type="checkbox" name="trigger" value="9">Dust Mites
 				<input type="checkbox" name="trigger" value="10">Stress
-		</div>		
-		<div>
+		</div>	
+		<div id="symptom">
 			<label>Symptoms:</label>
-				<input type= "checkbox" name="symptom" value="1">Loss of Breath
-				<input type= "checkbox" name="symptom" value="2">Lower Peak Flow
-				<input type= "checkbox" name="symptom" value="3">Whistling While Breathing
-				<input type= "checkbox" name="symptom" value="4">Tightness in Chest
+		</div>
+		<div class="row" id="attacksymptoms1">
+			 <div class="col-xs-4 col-md-6">			
+					<div class="checkbox">
+						<input type= "checkbox" name="symptom" value="1">Loss of Breath
+					</div>
+					<div class="checkbox">
+						<input type= "checkbox" name="symptom" value="2">Lower Peak Flow
+					</div>
+					<input type= "checkbox" name="symptom" value="3">Whistling While Breathing
+					<input type= "checkbox" name="symptom" value="4">Tightness in Chest
+
+			</div>
+		
+
+			 <div class="col-xs-4 col-md-6">
 				<input type= "checkbox" name="symptom" value="5">Panic
 				<input type= "checkbox" name="symptom" value="6">Pale Sweaty Face
 				<input type= "checkbox" name="symptom" value="7">Coughing
 				<input type= "checkbox" name="symptom" value="8">Trouble Walking, or Moving
+			</div>
 		</div>			
-   </div>
-</div>
-<div class="row">
+ 
+
 			<form action="/attack", method="POST">		
 				<input type="submit" class="btn btn-danger" value="submit">
 			</form>	
