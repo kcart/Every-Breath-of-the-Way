@@ -220,8 +220,8 @@ def show_info_about_attack(attack_id):
     attacks = Attack.query.filter_by(user_id=session.get("user_id")).all()
 
     attack_count = [0]*12
-    for attack in attacks:
-        attack_month = int(attack.attack_date[5:7])
+    for a in attacks:
+        attack_month = int(a.attack_date[5:7])
         attack_count[attack_month-1] += 1
 
 
