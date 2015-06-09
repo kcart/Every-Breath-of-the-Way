@@ -1,78 +1,74 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class="row">
-    <div class="page-header">
-  <h2>{{user.first_name}}'s Dashboard: <small> personalized information about your incident:</small></h2>
-    </div>
-<div class="row" id="charts">
-      <div class="col-xs-2 col-md-6">
-            <canvas id="canvas" height="370" width="570" data-attackcounts="{{ attack_count }}"></canvas>
-                <h6> Your cumulative incidents by month </h6>
-                    <script>
-
-                    var canvas = document.getElementById("canvas");
-
-                    var LineChart = {
-                        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"],
-                        datasets: [{
-                            fillColor: "#A4C7ED",
-                            strokeColor: "rgba(255,255,255,1)",
-                            pointColor: "rgba(220,220,220,1)",
-                            pointStrokeColor: "#fff",
-                            data: JSON.parse(canvas.dataset.attackcounts)
-                        }]
-                    }
-
-                    var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
-                    </script>
+<div id="fullpage">
+    <div class="row">
+        <div class="page-header">
+      <h2>{{user.first_name}}'s Dashboard: <small> personalized information about your incident:</small></h2>
         </div>
-         <div class="col-xs-2 col-md-6">
-            <canvas id="triggerChart" width="300" height="330"></canvas>
-                <h6> Your cumulative triggers by type </h6>
-                    <script>
+    <div class="row" id="charts">
+          <div class="col-xs-2 col-md-6">
+                <canvas id="canvas" height="370" width="570" data-attackcounts="{{ attack_count }}"></canvas>
+                    <h6> Your cumulative incidents by month </h6>
+                        <script>
 
-                    var doughnutData = {{ data | tojson | safe }}; 
+                        var canvas = document.getElementById("canvas");
 
-                    console.log(doughnutData);
-                    var context = document.getElementById('triggerChart').getContext('2d');
-                    var triggersChart = new Chart(context).Doughnut(doughnutData, {
-            animateScale: true
-        });
-                    </script>
+                        var LineChart = {
+                            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"],
+                            datasets: [{
+                                fillColor: "#A4C7ED",
+                                strokeColor: "rgba(255,255,255,1)",
+                                pointColor: "rgba(220,220,220,1)",
+                                pointStrokeColor: "#fff",
+                                data: JSON.parse(canvas.dataset.attackcounts)
+                            }]
+                        }
+
+                        var myLineChart = new Chart(canvas.getContext("2d")).Line(LineChart, {scaleFontSize : 13, scaleFontColor : "#ffa45e"});
+                        </script>
+            </div>
+             <div class="col-xs-2 col-md-6">
+                <canvas id="triggerChart" width="570" height="370"></canvas>
+                    <h6> Your cumulative triggers by type </h6>
+                        <script>
+
+                        var doughnutData = {{ data | tojson | safe }}; 
+
+                        console.log(doughnutData);
+                        var context = document.getElementById('triggerChart').getContext('2d');
+                        var triggersChart = new Chart(context).Doughnut(doughnutData, {
+                animateScale: true
+            });
+                        </script>
+            </div>        
+    </div>
+<hr>
+        <div id="fulltable">
+            <script>
+            $(document).ready(function() {
+            $('#summary').DataTable();
+            } );
+            </script>
+                <table  id="summary" class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Date of Incident:</th>
+                             <th>Number of Symptoms in incident:</th>
+                             <th>Number of Triggers in incident:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                {% for attack in attacks%} 
+                        <tr>
+                            <td> <button type="button" class="btn btn-default"><a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a></button> </td>
+                            <td> {{attack.symptom|count}} </td>
+                            <td> {{attack.possible_trigger|count}}</td>
+                        </tr>
+                {% endfor %}        
+                    </tbody>
+                </table>  
         </div>        
-</div>
-
-<div class="row">
-
-    <h6> Click on the incident date for more information about the specific incident</h6>
-        <script>
-        $(document).ready(function() {
-        $('#summary').DataTable();
-        } );
-        </script>
-            <table  id="summary" class="table table-condensed">
-                <thead>
-                    <tr>
-                        <th>Date of Incident:</th>
-                         <th>Number of Symptoms in incident:</th>
-                         <th>Number of Triggers in incident:</th>
-                    </tr>
-                </thead>
-                <tbody>
-            {% for attack in attacks%} 
-                    <tr>
-                        <td> <button type="button" class="btn btn-default"><a href="/info/{{ attack.attack_id }}">{{ attack.attack_date }}</a></button> </td>
-                        <td> {{attack.symptom|count}} </td>
-                        <td> {{attack.possible_trigger|count}}</td>
-                    </tr>
-            {% endfor %}        
-                </tbody>
-            </table>  
-</div>    
-<div class= "row">
-    <form action="/attack" method="GET">
-        <input type="submit"  class="btn btn-success btn-block" value="Log an incident">
-    </form>
+    </div>    
 </div>
 
 {% endblock %}
