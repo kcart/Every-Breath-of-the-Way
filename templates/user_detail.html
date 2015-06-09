@@ -2,12 +2,12 @@
 {% block body %}
 <div class="row">
     <div class="page-header">
-  <h2>{{user.first_name}}'s Dashboard: <small> personalized information about your attacks:</small></h2>
+  <h2>{{user.first_name}}'s Dashboard: <small> personalized information about your incident:</small></h2>
     </div>
 <div class="row" id="charts">
       <div class="col-xs-2 col-md-6">
             <canvas id="canvas" height="370" width="570" data-attackcounts="{{ attack_count }}"></canvas>
-                <h6> Your cumulative attacks by month </h6>
+                <h6> Your cumulative incidents by month </h6>
                     <script>
 
                     var canvas = document.getElementById("canvas");
@@ -44,7 +44,7 @@
 
 <div class="row">
 
-    <h6> Click on the attack date for more information about the specific attack</h6>
+    <h6> Click on the incident date for more information about the specific incident</h6>
         <script>
         $(document).ready(function() {
         $('#summary').DataTable();
@@ -53,9 +53,9 @@
             <table  id="summary" class="table table-condensed">
                 <thead>
                     <tr>
-                        <th>Date of Attack:</th>
-                         <th>Number of Symptoms in attack:</th>
-                         <th>Number of Triggers in attack:</th>
+                        <th>Date of Incident:</th>
+                         <th>Number of Symptoms in incident:</th>
+                         <th>Number of Triggers in incident:</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,7 +71,7 @@
 </div>    
 <div class= "row">
     <form action="/attack" method="GET">
-        <input type="submit"  class="btn btn-success btn-block" value="Log an attack">
+        <input type="submit"  class="btn btn-success btn-block" value="Log an incident">
     </form>
 </div>
 

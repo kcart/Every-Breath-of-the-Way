@@ -16,7 +16,7 @@
 #page-header {
     margin: -10px;
 }
-#location, #triggers, #symptoms {
+#location{
     padding: 50px;
     margin: 20px;
 }
@@ -28,11 +28,17 @@
 }
 
 
-#attacklocation, #attackdate, #attacktriggers, #attacksymptoms1, #attacksymptoms2{
+#attacklocation, #attackdate, #attacktriggers1, #attacktriggers2, #attacksymptoms1, #attacksymptoms2{
     padding: 10px;
     margin:5px;
 }
 
 #symptom {
     margin: 5px;
+}
+#triggers {
+    margin: 5px;
+}
+#triggers1 {
+    align: right;
 }

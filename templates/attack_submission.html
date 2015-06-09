@@ -3,16 +3,15 @@
 
 <div class="row">
     <div class="page-header">
-  <h2> Log an incident. <small> Track important details about the attack: </small></h2>
+  <h2> Log an Incident. <small> Track important details about the incident: </small></h2>
     </div>
  <br>
-
 <div class="row">
-	<div class="well well-lg" id="attack-form">
+	<div class="well" id="attack-form">
 
 		<form action="/attack", method="POST">       	
 			<div id="attackdate">  
-				<label>Attack Date:</label>   	
+				<label>Incident Date:</label>   	
 			       <input type="text" name="date" id="datepicker" placeholder="Attack Date">
 			       <!-- datepicker  -->
 			       	    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -27,27 +26,71 @@
 	        					}); 
 	        				</script>				
 		</div>
+		<hr>
 		<div id="attacklocation">
-			<label>Attack Location:</label>
-				<input type="radio" name="location" value="Home">Home
-				<input type="radio" name="location" value="Outdoors">Outdoors
-				<input type="radio" name="location" value="School">School
-				<input type="radio" name="location" value="Indoor">Indoors
-				<input type="radio" name="location" value="Work">Work
+			<label>Attack Incident:</label>
+
+				<div class="radio">
+					<input type="radio" name="location" value="Home">Home
+				</div>
+				<div class="radio">	
+					<input type="radio" name="location" value="Outdoors">Outdoors
+				</div>
+				<div class="radio">
+					<input type="radio" name="location" value="School">School
+				</div>
+				<div class="radio">	
+					<input type="radio" name="location" value="Indoor">Indoors
+				</div>
+				<div class="radio">
+					<input type="radio" name="location" value="Work">Work
+				</div>
 		</div>		
-		<div id="attacktriggers">
+		<hr>
+		<div id="triggers">
 			<label>Triggers:</label>
-				<input type="checkbox" name="trigger" value="1">Changes in the Weather
-				<input type="checkbox" name="trigger" value="2">Emotional Exertion
-				<input type="checkbox" name="trigger" value="3">Physical Exertion
-				<input type="checkbox" name="trigger" value="4">Strong Odors
-				<input type="checkbox" name="trigger" value="5">Pollen
-				<input type="checkbox" name="trigger" value="6">Smoke
-				<input type="checkbox" name="trigger" value="7"> Seasonal Cold
-				<input type="checkbox" name="trigger" value="8">Medication
-				<input type="checkbox" name="trigger" value="9">Dust Mites
-				<input type="checkbox" name="trigger" value="10">Stress
+		</div>
+
+		<div class="row" id="attacktriggers1">
+			 <div class="col-xs-4 col-md-6">
+			 	<div id="triggers1">
+				 	<div class="checkbox">
+						<input type="checkbox" name="trigger" value="1">Changes in the Weather
+					</div>
+					<div class="checkbox">	
+						<input type="checkbox" name="trigger" value="2">Emotional Exertion
+					</div>
+					<div class="checkbox">
+						<input type="checkbox" name="trigger" value="3">Physical Exertion
+					</div>
+					<div class="checkbox">
+						<input type="checkbox" name="trigger" value="4">Strong Odors
+					</div>
+					<div class="checkbox">
+						<input type="checkbox" name="trigger" value="5">Pollen
+					</div>
+				</div>
+			</div>	
+
+			<div class="col-xs-4 col-md-6-offset-3">
+				<div class="checkbox">
+					<input type="checkbox" name="trigger" value="6">Smoke
+				</div>
+				<div class="checkbox">
+					<input type="checkbox" name="trigger" value="7"> Seasonal Cold
+				</div>
+				<div class="checkbox">
+					<input type="checkbox" name="trigger" value="8">Medication
+				</div>
+				<div class="checkbox">
+					<input type="checkbox" name="trigger" value="9">Dust Mites
+				</div>
+				<div class="checkbox">
+					<input type="checkbox" name="trigger" value="10">Stress
+				</div>
+			</div>	
 		</div>	
+		<hr>
 		<div id="symptom">
 			<label>Symptoms:</label>
 		</div>
@@ -59,17 +102,29 @@
 					<div class="checkbox">
 						<input type= "checkbox" name="symptom" value="2">Lower Peak Flow
 					</div>
-					<input type= "checkbox" name="symptom" value="3">Whistling While Breathing
-					<input type= "checkbox" name="symptom" value="4">Tightness in Chest
+					<div class="checkbox">
+						<input type= "checkbox" name="symptom" value="3">Whistling While Breathing
+					</div>
+					<div class="checkbox">
+						<input type= "checkbox" name="symptom" value="4">Tightness in Chest
+					</div>
 
 			</div>
 		
 
 			 <div class="col-xs-4 col-md-6">
-				<input type= "checkbox" name="symptom" value="5">Panic
-				<input type= "checkbox" name="symptom" value="6">Pale Sweaty Face
-				<input type= "checkbox" name="symptom" value="7">Coughing
-				<input type= "checkbox" name="symptom" value="8">Trouble Walking, or Moving
+			 	<div class="checkbox">
+					<input type= "checkbox" name="symptom" value="5">Panic
+				</div>
+				<div class="checkbox">
+					<input type= "checkbox" name="symptom" value="6">Pale Sweaty Face
+				</div>
+				<div class="checkbox">
+					<input type= "checkbox" name="symptom" value="7">Coughing
+				</div>
+				<div class="checkbox">
+					<input type= "checkbox" name="symptom" value="8">Trouble Walking, or Moving
+				</div>
 			</div>
 		</div>			
  

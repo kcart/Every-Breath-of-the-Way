@@ -203,7 +203,7 @@ def attack_process():
         attack_count[attack_month-1] += 1
     print attack_count
 
-    flash("Your attack has been added to your log.")
+    flash("Your incident has been added to your log.")
     return render_template("attack_info.html", user_id=user_id, attack=attack,
                                             attack_count=attack_count)
 
