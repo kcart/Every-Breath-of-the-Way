@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 {% block body %}
+<div  id="cumulog">
+        <form action="/attack", methods="POST">
+            <input type="Submit" class="btn btn-success" value="Log another attack">
+        </form>
+        </div>
 
 <div class="row">
-    <h2> Your cumulative incident results: <h2>
+    <h2>  A preview of your incident Results: <h2>
 </div>
-
+<hr>
 
 <div class="row">
     <div class="col-xs-4 col-md-6">
@@ -31,14 +36,10 @@
         </div>
 </div>
 
-<div class="row">
-    <form action="/attack", methods="POST">
-    	<input type="Submit" class="btn btn-success" value="Log another attack">
-    </form>
-</div>
-<div class="row">
+<hr>
+<div class="row" id="cumureturn">
     <form action="/user", methods="POST">
-        <input type="Submit" class="btn btn-danger" value="return to your incident dashboard">
+        <input type="Submit" class="btn btn-info" value="return to your incident dashboard">
     </form>
 </div>
 

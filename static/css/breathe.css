@@ -7,22 +7,28 @@
 #body-text {
     margin: 45px;
 }
+
 .disqus-widget {
     background-color: white;
 }
+
 #flash-block {
     margin: 15px;
 }
+
 #page-header {
     margin: -10px;
 }
+
 #location{
     padding: 50px;
     margin: 20px;
 }
+
 #warrior {
     padding: 24px;
 }
+
 #jumbojoin {
     margin:24px;
 }
@@ -36,12 +42,41 @@
 #symptom {
     margin: 5px;
 }
+
 #triggers {
     margin: 5px;
 }
+
 #fullpage {
     margin: 50px;
 }
+
 #fulltable {
     padding: 20px;
+}
+
+#summbutton {
+    float: right;
+    padding: 10px;
+}
+
+#dashbutton {
+    float: right;
+    margin-bottom: 10px;
+    margin-right: 22px;
+
+}
+
+ #cumulog {
+    float: right;  
+    margin-right: 20px;
+    
+}
+
+.form {
+    font-weight: bold;
+}
+
+#submissionsubmit {
+    margin: 15px;
 }
