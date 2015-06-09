@@ -60,10 +60,12 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         {% if "user_id" in session %}
-                            <li class="active"><a href="/">Home</a></li>
+                            {% block tabs %}
+                            <li><a href="/">Home</a></li>
                             <li><a href="/attack">Log an Incident</a></li>
                             <li><a href="/user">Your Incident Dashboard</a></li>
                             <li><a href="/logout">Log Out</a></li>
+                            {% endblock %}
                          {% else %}
                             <li><a href="/login">Log In</a></li>
                             <li><a href="/register">Register</a></li>               

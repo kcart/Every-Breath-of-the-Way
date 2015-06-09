@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
+
+{% block tabs %}
+<li class="active"><a href="/">Home</a></li>
+<li><a href="/attack">Log an Incident</a></li>
+<li><a href="/user">Your Incident Dashboard</a></li>
+<li><a href="/logout">Log Out</a></li>
+{% endblock %}
+
 {% block body %}
 <div class="row">
     <div class="jumbotron">
