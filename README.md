@@ -1,4 +1,4 @@
-# Every-Breath-of-the-Way
+# Every Breath of the Way
 
 ## The Project:
 
