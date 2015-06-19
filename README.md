@@ -7,7 +7,7 @@ into their Asthma. Ever Breath of the Way is built in Python with a Flask framew
 and integrates  Charts.js, Google Maps Api, Twitter, and DISQUS.
 
 Scientific studies show that the health problems face by asthma sufferers can be almost completely
-brought under control with careful maintanence. Every Breath of the Way allows users to track their asthma attacks with ease- 
+brought under control with careful maintenance. Every Breath of the Way allows users to track their asthma attacks with ease- 
 providing users an online up-to-date log of their health. Through the asthma dashboard users can unveil trends regarding frequency, common triggers, and symptoms of attacks. Users can share attackin formation with their primary physician, providing the physician a platform from which to make more informed decisions on how to best manage their patients asthma. Users can also share invaluable tips about controlling asthma through the DISQUS forum, by monitoring the live Tweets of the American Lung Association and learn about current Asthma, and lung information.
 
 
