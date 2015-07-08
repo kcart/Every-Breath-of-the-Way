@@ -7,13 +7,9 @@ into their Asthma. Ever Breath of the Way is built in Python with a Flask framew
 and integrates  Charts.js, Google Maps Api, Twitter, and DISQUS.
 
 Scientific studies show that the health problems face by asthma sufferers can be almost completely
-brought under control with careful maintanence.
+brought under control with careful maintenance. Every Breath of the Way allows users to track their asthma attacks with ease- 
+providing users an online up-to-date log of their health. Through the asthma dashboard users can unveil trends regarding frequency, common triggers, and symptoms of attacks. Users can share attackin formation with their primary physician, providing the physician a platform from which to make more informed decisions on how to best manage their patients asthma. Users can also share invaluable tips about controlling asthma through the DISQUS forum, by monitoring the live Tweets of the American Lung Association and learn about current Asthma, and lung information.
 
-Every Breath of the Way allows users to track their asthma attacks with ease- 
-providing users an online up-to-date log of their health. Through the asthma dashboard users can 
-unveil trends regarding frequency, common triggers, and symptoms of attacks. 
-Users can share attackinformation with their primary physician, providing the physician a platform from which to make more 
-informed decisions on how to best manage their patients asthma. Users can also share invaluable tips about controlling asthma through the DISQUS forum, and learn about current asthma, and lung information by monitoring the live Tweets of the American Lung Association.
 
 #### Table of Contents
 - [Technologies](#technologies)
@@ -37,31 +33,31 @@ Charts.js, Javascript, HTML, CSS, Bootstrap, DataTable.js
 ##Project Details
 ####The Database
 The Sqlite database uses SQLAlchemy as its ORM and contains table user, attack, attack syptoms, symptoms, attrack triggger,   and possible triggers.
-To seed the attack triggers, and attack symptoms tables, I used the Lung Association most common Asthma attack triggers, and symptoms, and wrote that data into two separate files u.triggers, and u.symptoms. The data was cleaned using the script seed.py
+I used the Lung Association's most common Asthma attack triggers and symptoms to seed the attack triggers, and attack symptoms tables. I then wrote that data into two separate files u.triggers, and u.symptoms. The data was cleaned using the script seed.py
   
 ####Password Encryption
-Upon reviewing my database queries for each user, I noticed that I was storing user's passwords in the database in plain text which poses a security risk. I was able to significantly improve password security by using Crypto.Hash SHA256 to hash the passwords, generating a number value from their plain text value, and storing the hashed version in the database.
+Upon reviewing my database queries for each user, I noticed that storing users' passwords in the database in plain text posed a security risk. I was able to significantly improve password security by using Crypto.Hash SHA256 to hash the passwords, generating a number value from their plain text value, and storing the hashed version in the database.
 
 ####Twitter and DISQUS
-Every Breath of the Way  is also a place to share, and gather information to become an Asthma Warrior,
-someone who is in control of their asthma. The DISQUS widget allows user to share, and gather information
+Every Breath of the Way  is also a place to share and gather information in order to become an Asthma Warrior --
+someone who is in control of their asthma. The DISQUS widget allows users to share, and gather information
 in an open community forum. 
-Users can also see live tweets from the American Lung Association which provide up-to-date information about air-quality, seasonal precautions and actives, etc. 
+Users can also see live tweets from the American Lung Association, which provides up-to-date information about air-quality, seasonal precautions,  activities, etc. 
 
 ####Charts and DataTables
 ######Charts.js
 The dashboard of the app allows users to visualize multiple components of their Asthma 
 attacks( for a month by month, and trigger by trigger comparison with real-time updates). 
 It uses charts.js, an open-source nimble charting library, to display the data. The line graph displays the frequency of
-the users asthma attacks over time, and the doughnut chart allows for comparison of the possible triggers present in the 
+the user's asthma attacks over time, and the doughnut chart compares the possible triggers present in the 
 user's attack. 
 
 Both charts contain real-time information about the user’s attack. The chart data is derived from 
-querying the database base on the user id in session, and attacks assocaited with that id. Then through and effective use of backrefs relationships in my database I manipulated returned data- utilizing for-loops aggregrate the data and convert the response into JSON to display on the front-end charts.
+querying the database base on the user id in session, and attacks assocaited with that id. I manipulated the data through the backrefs relationships in my database in order to convert the aggregrated  data into JSON; I used this data to display the front-end charts.
 
 ######DataTables.js
-With the help of the DataTables.js., a user can interface with the table to get a brief summary
-of the number of symptoms, and triggers in each attack by by date. The information is style using Jinja  and standard table formatting. The user also has the ability to dive deeper into their attacks by accessing specific details of the attack through the date hyperlink situated on the jquery created table.
+With the help of  DataTables.js., a user can interface with their personalized attack summary table, which consists 
+of the number of symptoms and triggers in each attack by date. The information is styled using Jinja and standard table formatting. The user also has the ability to dive deeper into their attacks by accessing specific details of the attack through the date hyperlinks situated on the jquery created table.
 
 ##Project Structure
 
