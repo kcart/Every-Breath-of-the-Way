@@ -1,7 +1,7 @@
 # Every Breath of the Way
 
 ## The Project:
-
+![image](/shots/WarriorWelcome.png)
 Every Breath of the Way, is a personalized monitoring tool for users to gain greater insight 
 into their Asthma. Ever Breath of the Way is built in Python with a Flask framework, uses a SQLite database,
 and integrates  Charts.js, Google Maps Api, Twitter, and DISQUS.
@@ -39,6 +39,7 @@ I used the Lung Association's most common Asthma attack triggers and symptoms to
 Upon reviewing my database queries for each user, I noticed that storing users' passwords in the database in plain text posed a security risk. I was able to significantly improve password security by using Crypto.Hash SHA256 to hash the passwords, generating a number value from their plain text value, and storing the hashed version in the database.
 
 ####Twitter and DISQUS
+![image](/shots/share.png)
 Every Breath of the Way  is also a place to share and gather information in order to become an Asthma Warrior --
 someone who is in control of their asthma. The DISQUS widget allows users to share, and gather information
 in an open community forum. 
@@ -46,6 +47,7 @@ Users can also see live tweets from the American Lung Association, which provide
 
 ####Charts and DataTables
 ######Charts.js
+![image](/shots/Dashboard.png)
 The dashboard of the app allows users to visualize multiple components of their Asthma 
 attacks( for a month by month, and trigger by trigger comparison with real-time updates). 
 It uses charts.js, an open-source nimble charting library, to display the data. The line graph displays the frequency of
