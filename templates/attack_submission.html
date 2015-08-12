@@ -9,6 +9,16 @@
 {% endblock %}
 
 {% block body %}
+<script>
+	function showDate() {
+		var dateTimeDiv = document.getElementById("date")
+		dateTimeDiv.innerHTML = Date() ;
+	}
+</script>
+<script type="text/javascript">
+	alert("Please log your incident")
+	var name
+</script>
 
 <div class="row">
     <div class="page-header">
@@ -140,6 +150,12 @@
 					<form action="/attack", method="POST">		
 						<input type="submit" class="btn btn-danger" value="submit">
 					</form>	
+				</div>
+
+
+				 <div class="col-xs-4 col-md-6">
+				 	<input type= "button" value="Show time" onclick="showDate()">
+				 	<span id="date" style="border: 1px solid black; width 180px"</span>
 				</div>
 		</div>
 </div>
