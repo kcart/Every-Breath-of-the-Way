@@ -1,38 +1,20 @@
 """ Every Breath of the Way """
 
+import os
 from jinja2 import StrictUndefined
-
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, Attack, AttackSymptom, AttackTrigger
 from collections import Counter
 from Crypto.Hash import SHA256
 
-import os
-import psycopg2
-import urlparse
-
 app = Flask(__name__)
 
 app.jinja_env.undefined = StrictUndefined
 
-app.secret_key = "wheeze89798ew7hjyas98798798sdhui7987s987bhghjg987r"
-
-# <<<<<<< HEAD
-# =======
-# urlparse.uses_netloc.append("postgres")
-# url = urlparse.urlparse(os.environ["DATABASE_URL"])
-
-# conn = psycopg2.connect(
-#     database=url.path[1:],
-#     user=url.username,
-#     password=url.password,
-#     host=url.hostname,
-#     port=url.port
-# )
+app.secret_key = os.urandom(24)
 
 
-# >>>>>>> 138cbbead93d2c2b7ef4f19ff93b705af6245591
 @app.route('/')
 def index():
     """Site Homepage."""
@@ -134,7 +116,7 @@ def user_detail():
                                                         .order_by(Attack.attack_date)\
                                                         .all()
 
-        triggers_list= []
+        triggers_list = []
         for attack in attacks:
             triggers_list.extend(attack.possible_trigger)
 
@@ -156,8 +138,6 @@ def user_detail():
         for attack in attacks:
             attack_month = int(attack.attack_date[5:7])
             attack_count[attack_month-1] += 1
-
-
         return render_template("user_detail.html", user=user,
                                                  attacks=attacks,
                                                 attack_count=attack_count,
@@ -258,9 +238,5 @@ def logout():
 
 if __name__ == "__main__":
     app.debug = False
-
     connect_to_db(app)
-
-    # DebugToolbarExtension(app)
-
     app.run()
