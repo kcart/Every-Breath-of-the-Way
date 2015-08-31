@@ -18,21 +18,21 @@ app.jinja_env.undefined = StrictUndefined
 
 app.secret_key = "wheeze89798ew7hjyas98798798sdhui7987s987bhghjg987r"
 
-<<<<<<< HEAD
-=======
-urlparse.uses_netloc.append("postgres")
-url = urlparse.urlparse(os.environ["DATABASE_URL"])
+# <<<<<<< HEAD
+# =======
+# urlparse.uses_netloc.append("postgres")
+# url = urlparse.urlparse(os.environ["DATABASE_URL"])
 
-conn = psycopg2.connect(
-    database=url.path[1:],
-    user=url.username,
-    password=url.password,
-    host=url.hostname,
-    port=url.port
-)
+# conn = psycopg2.connect(
+#     database=url.path[1:],
+#     user=url.username,
+#     password=url.password,
+#     host=url.hostname,
+#     port=url.port
+# )
 
 
->>>>>>> 138cbbead93d2c2b7ef4f19ff93b705af6245591
+# >>>>>>> 138cbbead93d2c2b7ef4f19ff93b705af6245591
 @app.route('/')
 def index():
     """Site Homepage."""
