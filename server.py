@@ -7,8 +7,11 @@ from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, Attack, AttackSymptom, AttackTrigger
 from collections import Counter
 from Crypto.Hash import SHA256
+from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config.from_pyfile(config.py)
+db = SQLAlchemy(app)
 
 app.jinja_env.undefined = StrictUndefined
 
