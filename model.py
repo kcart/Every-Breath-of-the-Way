@@ -9,16 +9,6 @@ DATABASE_URL = os.environ['DATABASE_URL']
 
 db = SQLAlchemy()
 
-def make_tables():
-    """ This function intended for use when seeding the DB after making a schema change;
-    it's hardcoded to the local DB for this reason."""
-
-
-    # double check if this is the right
-    ENGINE = create_engine('postgresql://localhost:5432/df1tlq4p7evqvm', echo=False)
-    Base.metadata.create_all(ENGINE)
-
-
 class User(db.Model):
     """ User of Every Breath of the Way website."""
 
