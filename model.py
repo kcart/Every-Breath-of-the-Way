@@ -2,19 +2,6 @@
 
 from flask_sqlalchemy import SQLAlchemy
 import os
-import psycopg2
-import urlparse
-
-urlparse.uses_netloc.append("postgres")
-url = urlparse.urlparse(os.environ["DATABASE_URL"])
-
-conn = psycopg2.connect(
-    database=url.path[1:],
-    user=url.username,
-    password=url.password,
-    host=url.hostname,
-    port=url.port
-)
 
 db = SQLAlchemy()
 
@@ -135,8 +122,8 @@ class PossibleTrigger(db.Model):
 ####################################################################
 def connect_to_db(app):
     """Connect the database to my Flask app."""
-
-    DATABASE_URL = os.environ.get("DATABASE_URL", )
+    DATABASE_URL = os.environ.get("DATABASE_URL",
+                              "postgresql:///Hackbright")
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
     db.app = app
     db.init_app(app)
