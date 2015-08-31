@@ -2,19 +2,6 @@
 
 from flask_sqlalchemy import SQLAlchemy
 import os
-import pyscopg2
-import urlparse
-
-urlparse.uses_netloc.append("postgres")
-url = urlparse.urlparse(os.environ["DATABASE_URL"])
-
-conn = psycopg2.connect(
-    database=url.path[1:],
-    user=url.username,
-    password=url.password,
-    host=url.hostname,
-    port=url.port
-)
 
 Engine = None
 Session = None
@@ -151,8 +138,8 @@ def connect_to_db(app):
     """Connect the database to my Flask app."""
 
     # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///breathe.db'
-    # db.app = app
-    # db.init_app(app)
+    db.app = app
+    db.init_app(app)
 
 
 # Change this
