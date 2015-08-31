@@ -9,27 +9,18 @@ from collections import Counter
 from Crypto.Hash import SHA256
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.heroku import Heroku
-import urlparse
+
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/breathepostgres'
-heroku = Heroku(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/breathepostgres'
+# heroku = Heroku(app)
 db = SQLAlchemy(app)
 
 app.jinja_env.undefined = StrictUndefined
 
 app.secret_key = os.urandom(24)
 
-urlparse.uses_netloc.append("postgres")
-url = urlparse.urlparse(os.environ["DATABASE_URL"])
 
-conn = psycopg2.connect(
-    database=url.path[1:],
-    user=url.username,
-    password=url.password,
-    host=url.hostname,
-    port=url.port
-)
 ##########################################################################
 
 class User(db.Model):
