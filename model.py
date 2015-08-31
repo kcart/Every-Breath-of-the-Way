@@ -1,11 +1,20 @@
-""" Models and database function for Every Breath of the Way Project"""
+""" ORM - Models and database function for Every Breath of the Way Project"""
 
 from flask_sqlalchemy import SQLAlchemy
 import os
+import psycopg2
+import urlparse
 
-Engine = None
-Session = None
-DATABASE_URL = os.environ['DATABASE_URL']
+urlparse.uses_netloc.append("postgres")
+url = urlparse.urlparse(os.environ["DATABASE_URL"])
+
+conn = psycopg2.connect(
+    database=url.path[1:],
+    user=url.username,
+    password=url.password,
+    host=url.hostname,
+    port=url.port
+)
 
 db = SQLAlchemy()
 
@@ -127,19 +136,11 @@ class PossibleTrigger(db.Model):
 def connect_to_db(app):
     """Connect the database to my Flask app."""
 
-    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///breathe.db'
+    DATABASE_URL = os.environ.get("DATABASE_URL", )
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
     db.app = app
     db.init_app(app)
 
-
-# Change this
-    global ENGINE
-    global Session
-
-    ENGINE = create_engine(DATABASE_URL, echo=False)
-    Session = sessionmaker(bind=ENGINE, autocommit=False, autoflush=False)
-
-    return Session()
 
 if __name__ == "__main__":
 
