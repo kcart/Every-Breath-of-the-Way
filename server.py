@@ -8,9 +8,11 @@ from flask_debugtoolbar import DebugToolbarExtension
 from collections import Counter
 from Crypto.Hash import SHA256
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.heroku import Heroku
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/breathepostgres'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/breathepostgres'
+heroku = Heroku(app)
 db = SQLAlchemy(app)
 
 app.jinja_env.undefined = StrictUndefined
