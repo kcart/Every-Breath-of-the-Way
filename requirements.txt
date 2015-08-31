@@ -6,6 +6,7 @@ flake==0.1.9
 flake8==2.4.0
 Flask==0.10.1
 Flask-DebugToolbar==0.10.0
+flask-heroku==0.1.9
 Flask-SQLAlchemy==2.0
 gunicorn==19.3.0
 idna==2.0
