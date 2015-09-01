@@ -10,6 +10,7 @@ from Crypto.Hash import SHA256
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.heroku import Heroku
 import urlparse
+import psycopg2  
 
 urlparse.uses_netloc.append("postgres")
 url = urlparse.urlparse(os.environ["DATABASE_URL"])
