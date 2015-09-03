@@ -26,7 +26,7 @@ conn = psycopg2.connect(
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/breathepostgres'
-# heroku = Heroku(app)
+heroku = Heroku(app)
 db = SQLAlchemy(app)
 
 app.jinja_env.undefined = StrictUndefined
