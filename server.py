@@ -9,23 +9,9 @@ from collections import Counter
 from Crypto.Hash import SHA256
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.heroku import Heroku
-import urlparse
-import psycopg2  
-
-# urlparse.uses_netloc.append("postgres")
-# url = urlparse.urlparse(os.environ["DATABASE_URL"])
-
-# conn = psycopg2.connect(
-#     database=url.path[1:],
-#     user=url.username,
-#     password=url.password,
-#     host=url.hostname,
-#     port=url.port
-# )
-
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/breathepostgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/kathleeneveKat'
 # heroku = Heroku(app)
 db = SQLAlchemy(app)
 
@@ -374,6 +360,5 @@ def logout():
     return redirect("/")
 
 if __name__ == "__main__":
-    app.debug = False
-    # connect_to_db(app)
+    app.debug = True
     app.run()
