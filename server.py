@@ -5,7 +5,7 @@ import psycopg2
 from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
-from model import connect_to_db, db, User, Attack, AttackSymptom, AttackTrigger
+# from model import connect_to_db, db, User, Attack, AttackSymptom, AttackTrigger
 from collections import Counter
 from Crypto.Hash import SHA256
 from flask.ext.sqlalchemy import SQLAlchemy
